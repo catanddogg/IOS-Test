@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout	
+		xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:local="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/gray">
+	<include        
+        layout="@layout/toolbarlisttaskview"/>
+	<MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout
+		android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+		local:MvxBind = "Refreshing RefreshTaskCollection; RefreshCommand RefreshTaskCommand">
+<mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
+			android:id="@+id/RecyclerView"  
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:scrollbars="vertical"
+			local:MvxItemTemplate="@layout/listitemview"
+			local:MvxBind="ItemsSource Items; ItemClick TaskCreateCommand"/>	
+		</MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout>
+</LinearLayout>  

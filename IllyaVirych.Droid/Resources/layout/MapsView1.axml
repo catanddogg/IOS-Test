@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id = "@+id/ff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+	<include        
+        layout="@layout/toolbarmapview"/>
+<LinearLayout
+	android:orientation ="vertical"
+	android:fitsSystemWindows="true"
+    android:layout_marginTop ="32dp"
+	android:layout_width="match_parent"
+    android:layout_height="match_parent">
+          <com.google.android.gms.maps.MapView
+          android:id="@+id/map"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+		  class="com.google.android.gms.maps.MapFragment"
+		  android:apiKey ="AIzaSyBE3jSgIe8SZDAH8gr2zVygiwoYf0F8i4c"/>
+		</LinearLayout>
+</FrameLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2c3e50</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#3498db</color>
+    <color name="green">#008000</color>
+    <color name="darkgreen">#FF006400</color>
+    <color name="gray">#212121</color>
+    <color name="light_gray">#272a2c</color>
+    <color name="hint_light_gray">#424242</color>
+    <color name="white">#FFFFFF</color>
+  <color name="instagram">#e4405f</color>
+</resources>

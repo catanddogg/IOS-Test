@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"	
+    xmlns:local="http://schemas.android.com/apk/res-auto"  
+    android:orientation="vertical"
+	android:id = "@+id/test_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:background = "@color/gray">
+	<include        
+        layout="@layout/toolbartaskview"/>
+<EditText 
+      android:id = "@+id/name_text" 
+      android:layout_width = "match_parent" 
+      android:layout_height = "wrap_content" 
+      android:hint = "@string/edit_text_name_hint" 
+	  android:textColorHint = "@color/hint_light_gray"      
+      android:textColor = "@android:color/background_dark"   
+	  android:background = "@drawable/edittextround"	
+	  android:textSize = "25dp"	
+	  android:padding = "7dp"
+	  android:layout_marginBottom = "10dp"
+      android:layout_marginTop = "10dp"
+	  android:lines = "1"
+	  local:MvxBind = "Text NameTask;Enabled EnableStatusNameTask"/>
+<EditText 
+      android:id = "@+id/task_text" 
+      android:layout_width = "match_parent" 
+      android:layout_height = "wrap_content"	  
+	  android:background = "@drawable/edittextround"	
+      android:hint = "@string/edit_text_task_hint"		  
+	  android:padding = "7dp"
+	  android:lines = "8"
+	  android:layout_marginBottom = "10dp"
+	  android:textSize = "25dp"
+      android:textColorHint = "@color/hint_light_gray"   
+      android:textColor = "@android:color/background_dark"
+	  local:MvxBind = "Text DescriptionTask"/>
+<LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+	  android:layout_marginTop = "10dp"
+      android:layout_marginBottom = "30dp" >
+      <ToggleButton
+	  android:id = "@+id/togglebutton" 
+      android:layout_width = "120dp" 
+      android:layout_height = "wrap_content"
+	  android:background = "@drawable/buttonround"
+	  android:textOn = "Done Task"
+	  android:textOff = "Not Done Task"
+	  android:layout_marginLeft="5dp"             
+      android:layout_marginRight="5dp"       
+      android:textColor = "@android:color/white"
+	  local:MvxBind = "Checked StatusTask"/>	
+</LinearLayout>
+	<GridLayout      
+        android:layout_width="match_parent"	  
+        android:layout_height="wrap_content"
+		android:columnCount = "2">
+	    <Button
+	    android:layout_columnWeight = "1"		      
+        android:text = "Google Map"
+		android:background = "@drawable/buttonround"
+		android:layout_marginLeft="10dp"               
+        android:layout_marginRight="10dp"         
+		local:MvxBind = "Click GoogleMapCommand"/>
+		<Button
+		android:layout_columnWeight = "1"	               
+        android:text = "Clear GM"	
+		android:background = "@drawable/buttonround"
+		android:layout_marginLeft="10dp"              
+        android:layout_marginRight="10dp"
+		local:MvxBind = "Click DeleteMarkerGoogleMapCommand"
+		/>			
+     </GridLayout>
+<GridLayout      
+        android:layout_width="match_parent"	  
+        android:layout_height="wrap_content"
+		android:columnCount = "2">
+	    <Button
+	    android:layout_columnWeight = "1"
+		android:id = "@+id/Savetask"       
+        android:text="@string/save_task"
+		android:background = "@drawable/buttonround"
+		android:textSize = "13dp"
+		android:layout_marginLeft="10dp"    
+        android:layout_marginTop="10dp"        
+        android:layout_marginRight="10dp"        
+        android:layout_marginBottom="10dp"
+		local:MvxBind = "Click SaveTaskCommand"/>
+		<Button
+		android:layout_columnWeight = "1"
+	    android:id = "@+id/Deletetask"	           
+        android:text="@string/delete_task"	
+		android:background = "@drawable/buttonround"
+			android:textSize = "13dp"
+		android:layout_marginLeft="10dp"    
+        android:layout_marginTop="10dp"        
+        android:layout_marginRight="10dp"        
+        android:layout_marginBottom="10dp"
+		local:MvxBind = "Click DeleteTaskCommand"/>			
+     </GridLayout>
+</LinearLayout>
