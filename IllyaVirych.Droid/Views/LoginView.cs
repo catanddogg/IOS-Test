@@ -43,8 +43,7 @@ namespace IllyaVirych.Droid.ViewModels
         }
         
         public void InstagramLogin()
-        {
-            ViewModel.LoginCommand.Execute();
+        {            
             StartActivity(ViewModel.Authhenticator.GetUI(this.Context));            
         }          
     }

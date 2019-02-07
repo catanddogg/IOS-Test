@@ -11,13 +11,14 @@ using UIKit;
 
 namespace IllyaVirych.IOS.Views
 {
-    [MvxModalPresentation(WrapInNavigationController = true/*, ModalTransitionStyle = UIModalTransitionStyle.CrossDissolve*/)]
+    [MvxModalPresentation(WrapInNavigationController = true)]
     public partial class ListTaskView : MvxViewController<ListTaskViewModel>
     {        
         private UIButton _buttonMenu, _buttonAdd;       
         private UIButton _createTaskButton, _aboutTaskButton, _logoutTaskButton;
         private UIImageView _imageViewMenu;
         private UIView _menuView, _navigationView;
+        private bool _statusMenuView;
 
         public ListTaskView () : base (nameof(ListTaskView), null)
         {          
@@ -31,11 +32,16 @@ namespace IllyaVirych.IOS.Views
             var source = new TaskListCollectionViewSource(TaskListCollectionView, ListTaskNameCell.Key );
             TaskListCollectionView.Source = source;
 
+            var layout = new UICollectionViewFlowLayout();
+            layout.ItemSize = new CGSize(45, 50);
+            layout.MinimumInteritemSpacing = 8;
+            layout.MinimumLineSpacing = 8;
+            layout.HeaderReferenceSize = new CGSize(0, 40);
+            layout.SectionInset = new UIEdgeInsets(5, 5, 5, 5);
+            TaskListCollectionView.CollectionViewLayout = layout;
+
             Title = "TaskyDrop";
-
-            //_buttonAdd = new UIBarButtonItem(UIBarButtonSystemItem.Add, null);
-            //NavigationItem.SetRightBarButtonItem(_buttonAdd, false);
-
+            
             _buttonAdd = new UIButton(UIButtonType.Custom);
             _buttonAdd.Frame = new CGRect(0, 0, 40, 40);
             _buttonAdd.SetImage(UIImage.FromBundle("icons8-plus-math-filled-30.png"), UIControlState.Normal);
@@ -48,6 +54,7 @@ namespace IllyaVirych.IOS.Views
 
             _buttonMenu.TouchUpInside += (sender, e) =>
             {
+                _statusMenuView = true;
                 MenuViewController();
             };
 
@@ -60,19 +67,33 @@ namespace IllyaVirych.IOS.Views
             TaskListCollectionView.ReloadData();
         }
 
+        public override void ViewWillTransitionToSize(CGSize toSize, IUIViewControllerTransitionCoordinator coordinator)
+        {
+            base.ViewWillTransitionToSize(toSize, coordinator);
+            if(_statusMenuView == true)
+            {
+                if(toSize.Width > toSize.Height || toSize.Width < toSize.Height)
+                {
+                    _menuView.Frame = new CGRect(0, 0, 75 * toSize.Width/100, 736);
+                    _navigationView.Frame = new CGRect(75 * toSize.Width / 100, 0, 25 * toSize.Width / 100, 736);
+                    _imageViewMenu.Frame = new CGRect(0, 0, 75 * toSize.Width / 100, 200);
+                }                
+            }
+        }
+
         private void MenuViewController()
         {
             _menuView = new UIView();
             _menuView.BackgroundColor = UIColor.DarkGray;
-            _menuView.Frame = new CGRect(0, 0, 300, 736);
+            _menuView.Frame = new CGRect(0, 0, 75 * UIScreen.MainScreen.Bounds.Width/100, 736);
 
             _navigationView = new UIView();
             _navigationView.BackgroundColor = UIColor.FromWhiteAlpha(1, 0.75F);
-            _navigationView.Frame = new CGRect(300, 0, 115, 736);
+            _navigationView.Frame = new CGRect(75 * UIScreen.MainScreen.Bounds.Width/100, 0, 25 * UIScreen.MainScreen.Bounds.Width/100, 736);
 
             _imageViewMenu = new UIImageView();
             _imageViewMenu.Image = UIImage.FromBundle("mqse9xro.jpg");
-            _imageViewMenu.Frame = new CGRect(0, 0, 300, 200);
+            _imageViewMenu.Frame = new CGRect(0, 0, 75 * UIScreen.MainScreen.Bounds.Width/100, 200);
 
             _createTaskButton = new UIButton();
             _createTaskButton.SetTitle("Create Task", UIControlState.Normal);
@@ -97,6 +118,7 @@ namespace IllyaVirych.IOS.Views
 
             UITapGestureRecognizer tapGestureRecognizer = new UITapGestureRecognizer(() =>
             {
+                _statusMenuView = false;
                 _menuView.RemoveFromSuperview();
                 _imageViewMenu.RemoveFromSuperview();
                 _navigationView.RemoveFromSuperview();
