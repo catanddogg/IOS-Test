@@ -10,12 +10,12 @@ using System.CodeDom.Compiler;
 
 namespace IllyaVirych.IOS
 {
-    [Register ("TestLoginView")]
-    partial class TestLoginView
+    [Register ("LoginWebView")]
+    partial class LoginWebView
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        WebKit.WKWebView LoginWebView { get; set; }
+        WebKit.WKWebView LoginInstagramWebView { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -23,9 +23,9 @@ namespace IllyaVirych.IOS
 
         void ReleaseDesignerOutlets ()
         {
-            if (LoginWebView != null) {
-                LoginWebView.Dispose ();
-                LoginWebView = null;
+            if (LoginInstagramWebView != null) {
+                LoginInstagramWebView.Dispose ();
+                LoginInstagramWebView = null;
             }
 
             if (TestLoginViewController != null) {

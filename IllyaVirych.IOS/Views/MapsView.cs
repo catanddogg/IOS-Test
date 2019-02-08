@@ -127,25 +127,25 @@ namespace IllyaVirych.IOS.Views
             return annotationView;
         }
 
-        //private void OnChangedDragState(object sender, MKMapViewDragStateEventArgs e)
-        //{
-        //    if(e.NewState == MKAnnotationViewDragState.Starting)
-        //    {
-        //        _isDragging = true;
-        //    }
-        //    _lalitude = e.AnnotationView.Annotation.Coordinate.Latitude;
-        //    _longitude = e.AnnotationView.Annotation.Coordinate.Longitude;
+        private void OnChangedDragState(object sender, MKMapViewDragStateEventArgs e)
+        {
+            if (e.NewState == MKAnnotationViewDragState.Starting)
+            {
+                _isDragging = true;
+            }
+            _lalitude = e.AnnotationView.Annotation.Coordinate.Latitude;
+            _longitude = e.AnnotationView.Annotation.Coordinate.Longitude;
 
-        //}
+        }
 
-        //public virtual void OnDidSelectAnnotationView(object sender, MKAnnotationViewEventArgs e)
-        //{
-        //    _lalitude = e.View.Annotation.Coordinate.Latitude;
-        //    _longitude = e.View.Annotation.Coordinate.Longitude;
-        //    MapViewIOS.AddAnnotations(new MKPointAnnotation()
-        //    {
-        //        Coordinate = new CLLocationCoordinate2D(_lalitude, _longitude)
-        //    });
-        //}          
+        public virtual void OnDidSelectAnnotationView(object sender, MKAnnotationViewEventArgs e)
+        {
+            _lalitude = e.View.Annotation.Coordinate.Latitude;
+            _longitude = e.View.Annotation.Coordinate.Longitude;
+            MapViewIOS.AddAnnotations(new MKPointAnnotation()
+            {
+                Coordinate = new CLLocationCoordinate2D(_lalitude, _longitude)
+            });
+        }
     }
 }

@@ -71,10 +71,12 @@ namespace IllyaVirych.Core.ViewModels
                 RaisePropertyChanged(() => Items);
             }
         }
+
         private async Task TaskCreate(TaskItem task)
         {
             var result = await _navigationService.Navigate<TaskViewModel, TaskItem>(task);
         }
+
         public void RefreshTask()
         {
             RefreshTaskCollection = true;

@@ -65,12 +65,13 @@
     <AppExtensionDebugBundleId />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Helpers\Settings.cs" />
-    <Compile Include="MapKit\MKAnnotationClass.cs" />
-    <Compile Include="Views\TestLoginView.cs" />
-    <Compile Include="Views\TestLoginView.designer.cs">
-      <DependentUpon>TestLoginView.cs</DependentUpon>
+    <Compile Include="Views\LoginWebView.cs" />
+    <Compile Include="Views\LoginWebView.designer.cs">
+      <DependentUpon>LoginWebView.cs</DependentUpon>
     </Compile>
+    <Compile Include="MapKit\MKAnnotationClass.cs" />
+    <Compile Include="Services\LoginService.cs" />
+    <Compile Include="Services\MapService.cs" />
     <Compile Include="Views\MapsView.cs" />
     <Compile Include="Views\MapsView.designer.cs">
       <DependentUpon>MapsView.cs</DependentUpon>
@@ -140,7 +141,7 @@
     <InterfaceDefinition Include="Views\MapsView.xib">
       <SubType>Designer</SubType>
     </InterfaceDefinition>
-    <InterfaceDefinition Include="Views\TestLoginView.xib">
+    <InterfaceDefinition Include="Views\LoginWebView.xib">
       <SubType>Designer</SubType>
     </InterfaceDefinition>
   </ItemGroup>

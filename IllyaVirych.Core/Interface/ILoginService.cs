@@ -10,7 +10,7 @@ namespace IllyaVirych.Core.Interface
         void LoginInstagram();
         OAuth2Authenticator Authhenticator();
         Action OnLoggedInHandler { get; set; }
-        void LogoutInstagram();
+        void LogoutInstagram();       
         Account FindAccount { get; }
     }
 }

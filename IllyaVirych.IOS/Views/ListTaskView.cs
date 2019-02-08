@@ -18,7 +18,8 @@ namespace IllyaVirych.IOS.Views
         private UIButton _createTaskButton, _aboutTaskButton, _logoutTaskButton;
         private UIImageView _imageViewMenu;
         private UIView _menuView, _navigationView;
-        private bool _statusMenuView;
+        private bool _statusMenuView;        
+        private UICollectionViewFlowLayout _listTaskCollectionViewFlowLayout;
 
         public ListTaskView () : base (nameof(ListTaskView), null)
         {          
@@ -32,13 +33,14 @@ namespace IllyaVirych.IOS.Views
             var source = new TaskListCollectionViewSource(TaskListCollectionView, ListTaskNameCell.Key );
             TaskListCollectionView.Source = source;
 
-            var layout = new UICollectionViewFlowLayout();
-            layout.ItemSize = new CGSize(45, 50);
-            layout.MinimumInteritemSpacing = 8;
-            layout.MinimumLineSpacing = 8;
-            layout.HeaderReferenceSize = new CGSize(0, 40);
-            layout.SectionInset = new UIEdgeInsets(5, 5, 5, 5);
-            TaskListCollectionView.CollectionViewLayout = layout;
+            _listTaskCollectionViewFlowLayout = new UICollectionViewFlowLayout();
+            _listTaskCollectionViewFlowLayout.ItemSize = new CGSize(47 * UIScreen.MainScreen.Bounds.Width / 100, 47 * UIScreen.MainScreen.Bounds.Width / 100);
+            _listTaskCollectionViewFlowLayout.MinimumInteritemSpacing = 8;
+            _listTaskCollectionViewFlowLayout.MinimumLineSpacing = 8;
+            _listTaskCollectionViewFlowLayout.HeaderReferenceSize = new CGSize(0, 0);
+            _listTaskCollectionViewFlowLayout.SectionInset = new UIEdgeInsets(5, 5, 5, 5);
+                      
+            TaskListCollectionView.CollectionViewLayout = _listTaskCollectionViewFlowLayout;
 
             Title = "TaskyDrop";
             
@@ -70,7 +72,8 @@ namespace IllyaVirych.IOS.Views
         public override void ViewWillTransitionToSize(CGSize toSize, IUIViewControllerTransitionCoordinator coordinator)
         {
             base.ViewWillTransitionToSize(toSize, coordinator);
-            if(_statusMenuView == true)
+            _listTaskCollectionViewFlowLayout.ItemSize = new CGSize(47 * toSize.Width / 100, 47 * toSize.Width / 100);
+            if (_statusMenuView == true)
             {
                 if(toSize.Width > toSize.Height || toSize.Width < toSize.Height)
                 {
@@ -80,7 +83,7 @@ namespace IllyaVirych.IOS.Views
                 }                
             }
         }
-        //gfds
+        
         private void MenuViewController()
         {
             _menuView = new UIView();

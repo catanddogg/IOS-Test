@@ -19,7 +19,6 @@ using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xamarin.Auth;
-using static IllyaVirych.Core.Services.LoginService;
 
 namespace IllyaVirych.Droid.ViewModels
 {
@@ -43,7 +42,8 @@ namespace IllyaVirych.Droid.ViewModels
         }
         
         public void InstagramLogin()
-        {            
+        {
+            ViewModel.LoginCommand.Execute();
             StartActivity(ViewModel.Authhenticator.GetUI(this.Context));            
         }          
     }

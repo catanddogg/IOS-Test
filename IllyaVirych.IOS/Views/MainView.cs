@@ -31,7 +31,7 @@ namespace IllyaVirych.IOS.Views
             if (_firstTimePresented)
             {
                 _firstTimePresented = false;                
-                ViewModel.TestIOSCommand.Execute(null);
+                ViewModel.CurrentMainViewCommand.Execute(null);
             }
         }
 

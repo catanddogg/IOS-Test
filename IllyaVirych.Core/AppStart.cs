@@ -27,7 +27,7 @@ namespace IllyaVirych.Core
             //if (_iLoginSrvice.FindAccount != null)
             //{
             //    CurrentInstagramUser.CurrentInstagramUserId = _iLoginSrvice.FindAccount.Properties["id"];
-            //    NavigationService.Navigate<MainViewModel>();                
+            //    NavigationService.Navigate<MainViewModel>();
             //    return _navigationService.Navigate<ListTaskViewModel>();
             //}
             //NavigationService.Navigate<MainViewModel>();
