@@ -156,8 +156,8 @@
             </subviews>
             <constraints>
                 <constraint id="42731" firstItem="42730" firstAttribute="top" secondItem="2" secondAttribute="top"/>
-                <constraint id="42732" firstItem="42730" firstAttribute="leading" secondItem="2" secondAttribute="leading"/>
-                <constraint id="42733" firstAttribute="trailing" secondItem="42730" secondAttribute="trailing"/>
+                <constraint id="42732" firstItem="42730" firstAttribute="leadingMargin" secondItem="2" secondAttribute="leadingMargin"/>
+                <constraint id="42733" firstAttribute="trailingMargin" secondItem="42730" secondAttribute="trailingMargin"/>
                 <constraint id="42734" firstItem="42730" firstAttribute="height" secondItem="2" secondAttribute="height"/>
             </constraints>
         </view>

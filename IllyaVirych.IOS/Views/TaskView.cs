@@ -1,5 +1,4 @@
 using CoreGraphics;
-using Foundation;
 using IllyaVirych.Core.ViewModels;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
@@ -22,16 +21,19 @@ namespace IllyaVirych.IOS.Views
         {
             base.ViewDidLoad();
 
-            //_buttonBack = new UIBarButtonItem(UIBarButtonSystemItem.Reply, null);
-            //NavigationItem.SetLeftBarButtonItem(_buttonBack, false);
+            NavigationController.NavigationBar.BarTintColor = UIColor.FromRGB(0, 127, 70);
+            NavigationController.NavigationBar.TitleTextAttributes = new UIStringAttributes() { ForegroundColor = UIColor.Black };
 
             _buttonBack = new UIButton(UIButtonType.Custom);
             _buttonBack.Frame = new CGRect(0, 0, 40, 40);
-            _buttonBack.SetImage(UIImage.FromBundle("icons8-back-filled-30.png"), UIControlState.Normal);
+            _buttonBack.SetImage(UIImage.FromBundle("BackIcon"), UIControlState.Normal);
             this.NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem(_buttonBack), false);          
 
             var hideKeybord = new UITapGestureRecognizer(() => View.EndEditing(true));
             View.AddGestureRecognizer(hideKeybord);
+
+            DeleteMarkerButton.TouchUpInside += ButtonDeleteMarkerClick;
+            SaveTaskButton.TouchUpInside += ButtonSaveTaskClick;
 
             var set = this.CreateBindingSet<TaskView, TaskViewModel>();
             set.Bind(NameTask).To(vm => vm.NameTask);            
@@ -39,10 +41,36 @@ namespace IllyaVirych.IOS.Views
             set.Bind(DescriptionTask).To(vm => vm.DescriptionTask);
             set.Bind(SaveTaskButton).To(vm => vm.SaveTaskCommand);
             set.Bind(DeleteTaskButton).To(vm => vm.DeleteTaskCommand);
-            set.Bind(MapButton).To(vm => vm.GoogleMapCommand);
-            set.Bind(DeleteMarkerButton).To(vm => vm.DeleteMarkerGoogleMapCommand);
+            set.Bind(MapButton).To(vm => vm.MapCommand);
+            set.Bind(DeleteMarkerButton).To(vm => vm.DeleteMarkerMapCommand);
             set.Bind(_buttonBack).To(vm => vm.BackTaskCommand);
             set.Apply();
-        }            
+        }
+
+        private void ButtonDeleteMarkerClick(object sender, EventArgs e)
+        {
+            var LalitudeMarker = this.ViewModel.LalitudeMarkerResult;
+            if (LalitudeMarker == 0)
+            {
+                var AllertDeleteMarker_1 = UIAlertController.Create("", "Task have not marker!", UIAlertControllerStyle.Alert);
+                AllertDeleteMarker_1.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                PresentViewController(AllertDeleteMarker_1, true, null);
+                return;
+            }
+            var AllertDeleteMarker_2 = UIAlertController.Create("", "Task marker has been deleted!", UIAlertControllerStyle.Alert);
+            AllertDeleteMarker_2.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+            PresentViewController(AllertDeleteMarker_2, true, null);
+        }
+
+        private void ButtonSaveTaskClick(object sender, EventArgs e)
+        {
+            var NameTask = this.ViewModel.NameTask;
+            if (NameTask == null)
+            {
+                var AllertSave = UIAlertController.Create("", "Enter name task!", UIAlertControllerStyle.Alert);
+                AllertSave.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                PresentViewController(AllertSave, true, null);
+            }
+        }
     }
 }

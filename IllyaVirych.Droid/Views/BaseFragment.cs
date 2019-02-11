@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Util;
+﻿using Android.OS;
 using Android.Views;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Support.V7.AppCompat;
@@ -61,11 +52,11 @@ namespace IllyaVirych.Droid.ViewModels
         }       
         public void EnableDrawerLayout()
         {
-            if (FragmentId == Resource.Layout.LoginView || FragmentId == Resource.Layout.MapsView1)
+            if (FragmentId == Resource.Layout.LoginView || FragmentId == Resource.Layout.MapsView)
             {
                 _enabledDrawerLayout = false;
             }
-            if (FragmentId != Resource.Layout.LoginView & FragmentId != Resource.Layout.MapsView1)
+            if (FragmentId != Resource.Layout.LoginView & FragmentId != Resource.Layout.MapsView)
             {
                 _enabledDrawerLayout = true;
             }

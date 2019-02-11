@@ -18,33 +18,30 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2692" translatesAutoresizingMaskIntoConstraints="NO">
-                    <rect key="frame" x="99" y="146" width="200" height="178"/>
+                    <rect key="frame" x="100" y="145" width="200" height="178"/>
                     <connections/>
-                    <constraints>
-                        <constraint id="7225" firstAttribute="height" constant="178"/>
-                    </constraints>
                     <state key="normal" backgroundImage="Instagram"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Application!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5684" translatesAutoresizingMaskIntoConstraints="NO">
-                    <rect key="frame" x="36" y="69" width="328" height="21"/>
+                    <rect key="frame" x="36" y="69" width="328" height="38"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                     <constraints>
-                        <constraint id="6277" firstAttribute="height" constant="21"/>
+                        <constraint id="6277" firstAttribute="height" constant="38"/>
+                        <constraint id="8717" firstAttribute="width" constant="328"/>
                     </constraints>
                 </label>
             </subviews>
             <point key="canvasLocation" x="12" y="-1"/>
             <constraints>
                 <constraint id="6105" firstItem="5684" firstAttribute="top" secondItem="2" secondAttribute="top" constant="69"/>
-                <constraint id="6148" firstAttribute="bottom" secondItem="5684" secondAttribute="bottom" constant="646"/>
                 <constraint id="6191" firstAttribute="trailing" secondItem="5684" secondAttribute="trailing" constant="50"/>
                 <constraint id="6234" firstItem="5684" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="36"/>
-                <constraint id="7227" firstItem="2692" firstAttribute="top" secondItem="2" secondAttribute="top" constant="146"/>
-                <constraint id="7228" firstItem="2692" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="99"/>
-                <constraint id="7229" firstAttribute="trailing" secondItem="2692" secondAttribute="trailing" constant="115"/>
-                <constraint id="7230" firstAttribute="bottom" secondItem="2692" secondAttribute="bottom" constant="412"/>
+                <constraint id="7228" firstItem="2692" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="100"/>
+                <constraint id="7229" firstAttribute="trailing" secondItem="2692" secondAttribute="trailing" constant="114"/>
+                <constraint id="7230" firstAttribute="bottom" secondItem="2692" secondAttribute="bottom" constant="413"/>
+                <constraint id="9439" firstItem="2692" firstAttribute="top" secondItem="5684" secondAttribute="bottom" constant="38"/>
             </constraints>
         </view>
     </objects>

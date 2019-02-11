@@ -2,9 +2,7 @@
 using IllyaVirych.Core.Models;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace IllyaVirych.Core.ViewModels

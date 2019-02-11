@@ -4,7 +4,6 @@ using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Xamarin.Auth;
 
 namespace IllyaVirych.Core.ViewModels

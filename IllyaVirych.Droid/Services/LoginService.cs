@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using IllyaVirych.Core.Interface;
 using IllyaVirych.Core.Models;
 using Newtonsoft.Json.Linq;
+using Plugin.Settings;
 using Xamarin.Auth;
 
 namespace IllyaVirych.Droid.Services
@@ -36,11 +27,10 @@ namespace IllyaVirych.Droid.Services
         }
 
         public void LogoutInstagram()
-        {
-            var data = AccountStore.Create().FindAccountsForService("InstagramUser").FirstOrDefault();
-            if (data != null)
+        {            
+            if (CrossSettings.Current.Contains("id") == true)
             {
-                AccountStore.Create().Delete(data, "InstagramUser");
+                CrossSettings.Current.Clear();                
                 CurrentInstagramUser.CurrentInstagramUserId = null;
             }
         }       
@@ -58,21 +48,12 @@ namespace IllyaVirych.Droid.Services
                 var json = response.GetResponseText();
                 var jobject = JObject.Parse(json);
                 var id_user = jobject["data"]["id"]?.ToString();
-                loggedInAccount.Properties.Add("id", id_user);
                 CurrentInstagramUser.CurrentInstagramUserId = id_user;
-                AccountStore.Create().Save(loggedInAccount, "InstagramUser");
+                CrossSettings.Current.AddOrUpdateValue("id", id_user);
                 OnLoggedInHandler();
             }
-        }
-
-        public Account FindAccount
-        {
-            get
-            {
-                return _findaccountforservice = AccountStore.Create().FindAccountsForService("InstagramUser").FirstOrDefault();
-            }
-        }
-
+        }       
+        
         public OAuth2Authenticator Authhenticator()
         {
             return _auth;

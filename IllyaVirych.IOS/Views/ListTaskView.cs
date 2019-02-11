@@ -1,12 +1,8 @@
 using CoreGraphics;
-using Foundation;
-using IllyaVirych.Core.Services;
 using IllyaVirych.Core.ViewModels;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platforms.Ios.Binding.Views;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
-using System;
 using UIKit;
 
 namespace IllyaVirych.IOS.Views
@@ -29,32 +25,33 @@ namespace IllyaVirych.IOS.Views
         {
             base.ViewDidLoad();
 
+            Title = "TaskyDrop";
+            NavigationController.NavigationBar.BarTintColor = UIColor.FromRGB(0, 127, 70);
+            NavigationController.NavigationBar.TitleTextAttributes = new UIStringAttributes() { ForegroundColor = UIColor.Black };
+
             TaskListCollectionView.RegisterNibForCell(ListTaskNameCell.Nib, ListTaskNameCell.Key);
             var source = new TaskListCollectionViewSource(TaskListCollectionView, ListTaskNameCell.Key );
             TaskListCollectionView.Source = source;
-
             _listTaskCollectionViewFlowLayout = new UICollectionViewFlowLayout();
             _listTaskCollectionViewFlowLayout.ItemSize = new CGSize(47 * UIScreen.MainScreen.Bounds.Width / 100, 47 * UIScreen.MainScreen.Bounds.Width / 100);
             _listTaskCollectionViewFlowLayout.MinimumInteritemSpacing = 8;
             _listTaskCollectionViewFlowLayout.MinimumLineSpacing = 8;
             _listTaskCollectionViewFlowLayout.HeaderReferenceSize = new CGSize(0, 0);
-            _listTaskCollectionViewFlowLayout.SectionInset = new UIEdgeInsets(5, 5, 5, 5);
-                      
+            _listTaskCollectionViewFlowLayout.SectionInset = new UIEdgeInsets(5, 5, 5, 5);                      
             TaskListCollectionView.CollectionViewLayout = _listTaskCollectionViewFlowLayout;
 
-            Title = "TaskyDrop";
-            
+
             _buttonAdd = new UIButton(UIButtonType.Custom);
             _buttonAdd.Frame = new CGRect(0, 0, 40, 40);
-            _buttonAdd.SetImage(UIImage.FromBundle("icons8-plus-math-filled-30.png"), UIControlState.Normal);
+            _buttonAdd.SetImage(UIImage.FromBundle("AddTaskIcon"), UIControlState.Normal);
             this.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(_buttonAdd), false);
 
             _buttonMenu = new UIButton(UIButtonType.Custom);
             _buttonMenu.Frame = new CGRect(0, 0, 40, 40);
-            _buttonMenu.SetImage(UIImage.FromBundle("icons8-menu-filled-30.png"), UIControlState.Normal);
+            _buttonMenu.SetImage(UIImage.FromBundle("MenuIcon"), UIControlState.Normal);
             this.NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem(_buttonMenu), false);             
 
-            _buttonMenu.TouchUpInside += (sender, e) =>
+            _buttonMenu.TouchUpInside += delegate
             {
                 _statusMenuView = true;
                 MenuViewController();
@@ -95,26 +92,26 @@ namespace IllyaVirych.IOS.Views
             _navigationView.Frame = new CGRect(75 * UIScreen.MainScreen.Bounds.Width/100, 0, 25 * UIScreen.MainScreen.Bounds.Width/100, 736);
 
             _imageViewMenu = new UIImageView();
-            _imageViewMenu.Image = UIImage.FromBundle("mqse9xro.jpg");
-            _imageViewMenu.Frame = new CGRect(0, 0, 75 * UIScreen.MainScreen.Bounds.Width/100, 200);
+            _imageViewMenu.Image = UIImage.FromBundle("MenuTitleIcon");
+            _imageViewMenu.Frame = new CGRect(0, 0, 75 * UIScreen.MainScreen.Bounds.Width/100, 170);
 
             _createTaskButton = new UIButton();
             _createTaskButton.SetTitle("Create Task", UIControlState.Normal);
             _createTaskButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Left;
             _createTaskButton.LayoutIfNeeded();
-            _createTaskButton.Frame = new CGRect(10, 220, 290, 30);
+            _createTaskButton.Frame = new CGRect(10, 200, 290, 30);
 
             _aboutTaskButton = new UIButton();
             _aboutTaskButton.SetTitle("About Task", UIControlState.Normal);
             _aboutTaskButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Left;
             _aboutTaskButton.LayoutIfNeeded();
-            _aboutTaskButton.Frame = new CGRect(10, 260, 290, 30);
+            _aboutTaskButton.Frame = new CGRect(10, 240, 290, 30);
 
             _logoutTaskButton = new UIButton();
             _logoutTaskButton.SetTitle("Logout", UIControlState.Normal);
             _logoutTaskButton.HorizontalAlignment = UIControlContentHorizontalAlignment.Left;
             _logoutTaskButton.LayoutIfNeeded();
-            _logoutTaskButton.Frame = new CGRect(10, 300, 290, 30);
+            _logoutTaskButton.Frame = new CGRect(10, 280, 290, 30);
 
             this.View.Window.AddSubviews(_menuView, _imageViewMenu, _navigationView, _createTaskButton,
                 _aboutTaskButton, _logoutTaskButton);

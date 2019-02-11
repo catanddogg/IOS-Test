@@ -1,9 +1,6 @@
-﻿using Android.Graphics;
-using Android.OS;
-using Android.Runtime;
+﻿using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
-using Android.Widget;
 using IllyaVirych.Core.ViewModels;
 using IllyaVirych.Droid.ViewAdapter;
 using MvvmCross.Droid.Support.V7.RecyclerView;

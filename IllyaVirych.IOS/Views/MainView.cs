@@ -1,12 +1,6 @@
-﻿using System;
-using System.Drawing;
-
-using CoreGraphics;
-using Foundation;
-using IllyaVirych.Core.ViewModels;
+﻿using IllyaVirych.Core.ViewModels;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
-using UIKit;
 
 namespace IllyaVirych.IOS.Views
 {     
@@ -17,7 +11,6 @@ namespace IllyaVirych.IOS.Views
 
         public MainView()
         {
-
         }
 
         public override void ViewDidLoad()

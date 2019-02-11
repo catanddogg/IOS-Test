@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.Design.Widget;
-using Android.Support.Graphics.Drawable;
-using Android.Support.V7.Widget;
 using Android.Views;
 using IllyaVirych.Core.ViewModels;
 using MvvmCross.Droid.Support.V4;
-using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 

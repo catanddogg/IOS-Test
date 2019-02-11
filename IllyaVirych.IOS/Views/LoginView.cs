@@ -1,9 +1,7 @@
-using Foundation;
 using IllyaVirych.Core.ViewModels;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
-using System;
 
 namespace IllyaVirych.IOS.Views
 {
@@ -16,7 +14,8 @@ namespace IllyaVirych.IOS.Views
 
         public override void ViewDidLoad()
         {
-            base.ViewDidLoad();        
+            base.ViewDidLoad();
+            NavigationController.SetNavigationBarHidden(true, false);
 
             var set = this.CreateBindingSet<LoginView, LoginViewModel>();
             set.Bind(LoginButton).To(vm => vm.LoginWebViewCommand);

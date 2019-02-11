@@ -3,9 +3,6 @@ using IllyaVirych.Core.Models;
 using IllyaVirych.Core.ViewModels;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace IllyaVirych.Core
@@ -24,16 +21,7 @@ namespace IllyaVirych.Core
 
         protected override Task NavigateToFirstViewModel(object hint = null)
         {
-            //if (_iLoginSrvice.FindAccount != null)
-            //{
-            //    CurrentInstagramUser.CurrentInstagramUserId = _iLoginSrvice.FindAccount.Properties["id"];
-            //    NavigationService.Navigate<MainViewModel>();
-            //    return _navigationService.Navigate<ListTaskViewModel>();
-            //}
-            //NavigationService.Navigate<MainViewModel>();
-            //return _navigationService.Navigate<LoginViewModel>();
             return NavigationService.Navigate<MainViewModel>();
-            //return _navigationService.Navigate<LoginViewModel>();
         }
     }
 }

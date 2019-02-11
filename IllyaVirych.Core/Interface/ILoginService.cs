@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Auth;
 
 namespace IllyaVirych.Core.Interface
@@ -11,6 +9,5 @@ namespace IllyaVirych.Core.Interface
         OAuth2Authenticator Authhenticator();
         Action OnLoggedInHandler { get; set; }
         void LogoutInstagram();       
-        Account FindAccount { get; }
     }
 }

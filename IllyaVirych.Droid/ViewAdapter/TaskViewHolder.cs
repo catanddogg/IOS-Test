@@ -1,5 +1,4 @@
 ﻿using Android.App;
-using Android.Content.Res;
 using Android.Graphics;
 using Android.Views;
 using Android.Widget;
@@ -7,7 +6,6 @@ using IllyaVirych.Core.Services;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
-using System.Runtime.Remoting.Contexts;
 
 namespace IllyaVirych.Droid.ViewAdapter
 {    

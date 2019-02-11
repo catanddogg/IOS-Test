@@ -1,10 +1,8 @@
 ﻿using IllyaVirych.Core.Interface;
+using IllyaVirych.Core.Models;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
-using MvvmCross.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Plugin.Settings;
 using System.Threading.Tasks;
 
 namespace IllyaVirych.Core.ViewModels
@@ -21,7 +19,7 @@ namespace IllyaVirych.Core.ViewModels
         {
             _navigationService = navigationService;
             _iLoginService = iLoginService;
-            
+            //CurrentInstagramUser.CurrentInstagramUserId = _iLoginService.FindAccount.Properties[].Values;
             CurrentMainViewCommand = new MvxAsyncCommand(CurrentMainView);
             TestIOSCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<LoginViewModel>());
             MenuViewCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ListTaskViewModel>());
@@ -29,15 +27,13 @@ namespace IllyaVirych.Core.ViewModels
 
         private async Task CurrentMainView()
         {
-            if (_iLoginService.FindAccount == null)
+            if (CrossSettings.Current.Contains("id") == true)
             {
-                await _navigationService.Navigate<LoginViewModel>();
+                CurrentInstagramUser.CurrentInstagramUserId = CrossSettings.Current.GetValueOrDefault("id", string.Empty).ToString();                
+                await _navigationService.Navigate<ListTaskViewModel>();
+                return;
             }
-            if(_iLoginService.FindAccount != null)
-            {
-                await _navigationService.Navigate<ListTaskViewModel>();                
-            }
-        }     
-   
+            await _navigationService.Navigate<LoginViewModel>();
+        }        
     }
 }

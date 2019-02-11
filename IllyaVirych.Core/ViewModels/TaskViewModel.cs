@@ -5,10 +5,6 @@ using IllyaVirych.Core.Services;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin.Messenger;
-using MvvmCross.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace IllyaVirych.Core.ViewModels
@@ -21,63 +17,63 @@ namespace IllyaVirych.Core.ViewModels
         public IMvxCommand SaveTaskCommand { get; set; }
         public IMvxCommand DeleteTaskCommand { get; set; }
         public IMvxCommand BackTaskCommand { get; set; }
-        public IMvxCommand DeleteMarkerGoogleMapCommand { get; set; }
-        public IMvxCommand GoogleMapCommand { get; set; }
+        public IMvxCommand DeleteMarkerMapCommand { get; set; }
+        public IMvxCommand MapCommand { get; set; }
         private int _idTask;
         private string _nameTask;
         private string _descriptionTask;
         private bool _statusTask;
         private bool _enableStatusNameTask;
         private string _userId;
-        private double _lalitudeGoogleMarkerResult;
-        private double _longitudeGoogleMarkerResult;       
-        private MvxSubscriptionToken _token;
+        private double _lalitudeMarkerResult;
+        private double _longitudeMarkerResult;       
+        private readonly MvxSubscriptionToken _token;
 
         public TaskViewModel(IMvxNavigationService navigationService, ITaskService iTaskService, IMvxMessenger messenger)
         {            
             _navigationService = navigationService;
             _iTaskService = iTaskService;
             _messenger = messenger;
-            _token = messenger.Subscribe<GoogleMapMessenger>(OnLocationMessage);
+            _token = messenger.Subscribe<MapMessenger>(OnLocationMessage);
             SaveTaskCommand = new MvxAsyncCommand(SaveTask);
             DeleteTaskCommand = new MvxAsyncCommand(DeleteTask);
             BackTaskCommand = new MvxAsyncCommand(BackTask);
-            DeleteMarkerGoogleMapCommand = new MvxCommand(DeleteMarkerGoogleMap);
-            GoogleMapCommand = new MvxAsyncCommand(CreateMarkerGoogleMap);
+            DeleteMarkerMapCommand = new MvxCommand(DeleteMarkerMap);
+            MapCommand = new MvxAsyncCommand(CreateMarkerMap);
         }
 
-        private void OnLocationMessage(GoogleMapMessenger googleMap)
+        private void OnLocationMessage(MapMessenger mapMesseger)
         {
-            IdTask = googleMap.IdTask;
-            LalitudeGoogleMarkerResult = googleMap.LalitudeGoogleMarkerResult;
-            LongitudeGoogleMarkerResult = googleMap.LongitudeGoogleMarkerResult;
-            NameTask = googleMap.NameTaskResult;
-            DescriptionTask = googleMap.DescriptionTaskResult;
-            StatusTask = googleMap.StatusTaskResult;
+            IdTask = mapMesseger.IdTask;
+            LalitudeMarkerResult = mapMesseger.LalitudeMarkerResult;
+            LongitudeMarkerResult = mapMesseger.LongitudeMarkerResult;
+            NameTask = mapMesseger.NameTaskResult;
+            DescriptionTask = mapMesseger.DescriptionTaskResult;
+            StatusTask = mapMesseger.StatusTaskResult;
             EnableStatusNameTask = true;
         }
 
-        private void DeleteMarkerGoogleMap()
+        private void DeleteMarkerMap()
         {
-            LalitudeGoogleMarkerResult = 0;
-            LongitudeGoogleMarkerResult = 0;
+            LalitudeMarkerResult = 0;
+            LongitudeMarkerResult = 0;
         }
 
-        private async Task CreateMarkerGoogleMap()
+        private async Task CreateMarkerMap()
         {           
             await _navigationService.Navigate<MapsViewModel>();
 
-            var message = new GoogleMapMessenger(this, 
+            var message = new MapMessenger(this, 
                 IdTask,
-                LalitudeGoogleMarkerResult,
-                LongitudeGoogleMarkerResult,
+                LalitudeMarkerResult,
+                LongitudeMarkerResult,
                 NameTask,
                 DescriptionTask,
                 StatusTask                 
                   );
             UserId = CurrentInstagramUser.CurrentInstagramUserId;
             _messenger.Publish(message);
-            _messenger.Unsubscribe<GoogleMapMessenger>(_token);
+            _messenger.Unsubscribe<MapMessenger>(_token);
         }       
 
         private async Task BackTask()
@@ -100,7 +96,7 @@ namespace IllyaVirych.Core.ViewModels
             if (NameTask != null & NameTask != string.Empty)
             {
                 UserId = CurrentInstagramUser.CurrentInstagramUserId;
-                TaskItem taskItem = new TaskItem(IdTask, NameTask, DescriptionTask, StatusTask,UserId, LalitudeGoogleMarkerResult, LongitudeGoogleMarkerResult);
+                TaskItem taskItem = new TaskItem(IdTask, NameTask, DescriptionTask, StatusTask,UserId, LalitudeMarkerResult, LongitudeMarkerResult);
                 _iTaskService.InsertTask(taskItem);               
             }
             await _navigationService.Navigate<ListTaskViewModel>();
@@ -122,37 +118,37 @@ namespace IllyaVirych.Core.ViewModels
                 UserId = CurrentInstagramUser.CurrentInstagramUserId;
                 DescriptionTask = parameter.DescriptionTask;
                 StatusTask = parameter.StatusTask;
-                LalitudeGoogleMarkerResult = parameter.LalitudeGoogleMarker;
-                LongitudeGoogleMarkerResult = parameter.LongitudeGoogleMarker;
+                LalitudeMarkerResult = parameter.LalitudeMarker;
+                LongitudeMarkerResult = parameter.LongitudeMarker;
                 return;
             }
             _userId = CurrentInstagramUser.CurrentInstagramUserId;
             EnableStatusNameTask = true;
         }
               
-        public double LalitudeGoogleMarkerResult
+        public double LalitudeMarkerResult
         {
             get
             {
-                return _lalitudeGoogleMarkerResult;
+                return _lalitudeMarkerResult;
             }
             set
             {
-                _lalitudeGoogleMarkerResult = value;
-                RaisePropertyChanged(() => LalitudeGoogleMarkerResult);
+                _lalitudeMarkerResult = value;
+                RaisePropertyChanged(() => LalitudeMarkerResult);
             }
         }
 
-        public double LongitudeGoogleMarkerResult
+        public double LongitudeMarkerResult
         {
             get
             {
-                return _longitudeGoogleMarkerResult;
+                return _longitudeMarkerResult;
             }
             set
             {
-                _longitudeGoogleMarkerResult = value;
-                RaisePropertyChanged(() => LongitudeGoogleMarkerResult);
+                _longitudeMarkerResult = value;
+                RaisePropertyChanged(() => LongitudeMarkerResult);
             }
 
         }

@@ -63,14 +63,14 @@
 		android:background = "@drawable/buttonround"
 		android:layout_marginLeft="10dp"               
         android:layout_marginRight="10dp"         
-		local:MvxBind = "Click GoogleMapCommand"/>
+		local:MvxBind = "Click MapCommand"/>
 		<Button
 		android:layout_columnWeight = "1"	               
         android:text = "Clear GM"	
 		android:background = "@drawable/buttonround"
 		android:layout_marginLeft="10dp"              
         android:layout_marginRight="10dp"
-		local:MvxBind = "Click DeleteMarkerGoogleMapCommand"
+		local:MvxBind = "Click DeleteMarkerMapCommand"
 		/>			
      </GridLayout>
 <GridLayout      

@@ -7625,7 +7625,7 @@ namespace IllyaVirych.Droid
 			public const int MainView = 2130968621;
 			
 			// aapt resource value: 0x7f04002e
-			public const int MapsView1 = 2130968622;
+			public const int MapsView = 2130968622;
 			
 			// aapt resource value: 0x7f04002f
 			public const int MenuView = 2130968623;

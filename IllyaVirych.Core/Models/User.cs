@@ -1,7 +1,4 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace IllyaVirych.Core.Models
 {
@@ -17,7 +14,6 @@ namespace IllyaVirych.Core.Models
         }
         public User()
         {
-
         }
     }
 }

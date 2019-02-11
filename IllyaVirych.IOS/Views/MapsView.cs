@@ -1,6 +1,5 @@
 using CoreGraphics;
 using CoreLocation;
-using Foundation;
 using IllyaVirych.Core.ViewModels;
 using IllyaVirych.IOS.MapKit;
 using MapKit;
@@ -16,8 +15,7 @@ namespace IllyaVirych.IOS.Views
     public partial class MapsView : MvxViewController<MapsViewModel>, IMKMapViewDelegate
     {
         private UIButton _buttonBack, _buttonSavePin;
-        private double _lalitude;
-        private double _longitude;
+        private double _lalitude, _longitude;       
         private bool _isDragging;
 
         const string AnnotationIdentifierDefaultClusterPin = "TKDefaultClusterPin";
@@ -30,51 +28,74 @@ namespace IllyaVirych.IOS.Views
         {
             base.ViewDidLoad();
             Title = "Map";
+            NavigationController.NavigationBar.BarTintColor = UIColor.FromRGB(0, 127, 70);
+            NavigationController.NavigationBar.TitleTextAttributes = new UIStringAttributes() { ForegroundColor = UIColor.Black };
 
             _buttonBack = new UIButton(UIButtonType.Custom);
             _buttonBack.Frame = new CGRect(0, 0, 40, 40);
-            _buttonBack.SetImage(UIImage.FromBundle("icons8-back-filled-30.png"), UIControlState.Normal);
+            _buttonBack.SetImage(UIImage.FromBundle("BackIcon"), UIControlState.Normal);
             this.NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem(_buttonBack), false);
 
             _buttonSavePin = new UIButton(UIButtonType.Custom);
             _buttonSavePin.Frame = new CGRect(0, 0, 40, 40);
-            _buttonSavePin.SetImage(UIImage.FromBundle("baseline_add_location_black_48dp.png"), UIControlState.Normal);
+            _buttonSavePin.SetImage(UIImage.FromBundle("AddLocationIcon"), UIControlState.Normal);
             this.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(_buttonSavePin), false);
             _buttonSavePin.TouchUpInside += ButtonGoogleMarkerSaveClick;
 
+            SetUpMapView();
+
+            var set = this.CreateBindingSet<MapsView, MapsViewModel>();
+            set.Bind(_buttonBack).To(vm => vm.BackTaskCommand);
+            set.Bind(_buttonSavePin).To(vm => vm.SaveMapPointCommand);
+            set.Apply();           
+        }
+
+        private void SetUpMapView()
+        {
             MapViewIOS = new MKMapView();
             View = MapViewIOS;
             MapViewIOS.ZoomEnabled = true;
             MapViewIOS.ScrollEnabled = true;
             CLLocationManager locationManager = new CLLocationManager();
             locationManager.RequestWhenInUseAuthorization();
-            MapViewIOS.ShowsUserLocation = true;            
+            MapViewIOS.ShowsUserLocation = true;
 
-            var longGesture = new UILongPressGestureRecognizer(LongPress);            
-            longGesture.MinimumPressDuration = 1.5;
+            MapViewIOS.DidUpdateUserLocation += delegate
+            {
+                if (MapViewIOS.UserLocation != null)
+                {
+                    CLLocationCoordinate2D coordinateUser = MapViewIOS.UserLocation.Coordinate;
+                    MKCoordinateSpan coordinateSpanUser = new MKCoordinateSpan(0.02, 0.02);
+                    MapViewIOS.Region = new MKCoordinateRegion(coordinateUser, coordinateSpanUser);
+                }
+            };
+            if (!MapViewIOS.UserLocationVisible)
+            {
+                CLLocationCoordinate2D coords = new CLLocationCoordinate2D(49.99181, 36.23572);
+                MKCoordinateSpan span = new MKCoordinateSpan(0.05, 0.05);
+                MapViewIOS.Region = new MKCoordinateRegion(coords, span);
+            }
+
+            var longGesture = new UILongPressGestureRecognizer(LongPress);
+            longGesture.MinimumPressDuration = 0.5;
             MapViewIOS.AddGestureRecognizer(longGesture);
 
             MapViewIOS.GetViewForAnnotation += GetViewForAnnotation;
 
-            if (ViewModel.LalitudeGoogleMarker != 0)
+            if (ViewModel.LalitudeMarker != 0)
             {
-                _lalitude = this.ViewModel.LalitudeGoogleMarker;
-                _longitude = this.ViewModel.LongitudeGoogleMarker;
+                _lalitude = this.ViewModel.LalitudeMarker;
+                _longitude = this.ViewModel.LongitudeMarker;
                 MapViewIOS.AddAnnotations(new MKPointAnnotation()
                 {
                     Coordinate = new CLLocationCoordinate2D(_lalitude, _longitude)
                 });
-            }      
-
-            var set = this.CreateBindingSet<MapsView, MapsViewModel>();
-            set.Bind(_buttonBack).To(vm => vm.BackTaskCommand);
-            set.Bind(_buttonSavePin).To(vm => vm.SaveGoogleMapPointCommand);
-            set.Apply();           
+            }
         }
 
         private void ButtonGoogleMarkerSaveClick(object sender, EventArgs e)
         {
-            var lalitudeGoogleMarker = this.ViewModel.LalitudeGoogleMarker;
+            var lalitudeGoogleMarker = this.ViewModel.LalitudeMarker;
             if (lalitudeGoogleMarker == 0)
             {
                 var AllertSave = UIAlertController.Create("", "Put marker in google map!", UIAlertControllerStyle.Alert);
@@ -93,8 +114,8 @@ namespace IllyaVirych.IOS.Views
             annotation.Coordinate2D = touchMapCoordinate;
             _lalitude = annotation.Coordinate2D.Latitude;
             _longitude = annotation.Coordinate2D.Longitude;
-            ViewModel.LalitudeGoogleMarker = _lalitude;
-            ViewModel.LongitudeGoogleMarker = _longitude;
+            ViewModel.LalitudeMarker = _lalitude;
+            ViewModel.LongitudeMarker = _longitude;
             MapViewIOS.AddAnnotation(annotation);            
 
             MapViewIOS.AddAnnotations(new MKPointAnnotation()
@@ -125,27 +146,6 @@ namespace IllyaVirych.IOS.Views
             annotationView.Draggable = true;
             
             return annotationView;
-        }
-
-        private void OnChangedDragState(object sender, MKMapViewDragStateEventArgs e)
-        {
-            if (e.NewState == MKAnnotationViewDragState.Starting)
-            {
-                _isDragging = true;
-            }
-            _lalitude = e.AnnotationView.Annotation.Coordinate.Latitude;
-            _longitude = e.AnnotationView.Annotation.Coordinate.Longitude;
-
-        }
-
-        public virtual void OnDidSelectAnnotationView(object sender, MKAnnotationViewEventArgs e)
-        {
-            _lalitude = e.View.Annotation.Coordinate.Latitude;
-            _longitude = e.View.Annotation.Coordinate.Longitude;
-            MapViewIOS.AddAnnotations(new MKPointAnnotation()
-            {
-                Coordinate = new CLLocationCoordinate2D(_lalitude, _longitude)
-            });
         }
     }
 }

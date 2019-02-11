@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Blank.MvxBinding;
-using Foundation;
-using IllyaVirych.Core;
-using IllyaVirych.Core.Interface;
-using IllyaVirych.Core.Services;
+﻿using IllyaVirych.Core;
 using MvvmCross;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.IoC;
 using MvvmCross.Platforms.Ios.Core;
 using MvvmCross.ViewModels;
-using UIKit;
 
 namespace IllyaVirych.IOS
 {
@@ -26,9 +17,7 @@ namespace IllyaVirych.IOS
         protected override void InitializeLastChance()
         {
             base.InitializeLastChance();
-
-            var registry = Mvx.Resolve<IMvxTargetBindingFactoryRegistry>();
-            registry.RegisterFactory(new MvxCustomBindingFactory<UIViewController>("NetworkIndicator", (viewController) => new NetworkIndicatorTargetBinding(viewController)));
+            var registry = Mvx.Resolve<IMvxTargetBindingFactoryRegistry>();            
         }
 
         protected override IMvxIocOptions CreateIocOptions()

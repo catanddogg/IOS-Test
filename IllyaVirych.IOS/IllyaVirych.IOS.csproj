@@ -71,7 +71,6 @@
     </Compile>
     <Compile Include="MapKit\MKAnnotationClass.cs" />
     <Compile Include="Services\LoginService.cs" />
-    <Compile Include="Services\MapService.cs" />
     <Compile Include="Views\MapsView.cs" />
     <Compile Include="Views\MapsView.designer.cs">
       <DependentUpon>MapsView.cs</DependentUpon>
@@ -90,10 +89,6 @@
     <Compile Include="Views\ListTaskView.designer.cs">
       <DependentUpon>ListTaskView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\MenuView.cs" />
-    <Compile Include="Views\MenuView.designer.cs">
-      <DependentUpon>MenuView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Cell\TaskListCollectionViewSource.cs" />
     <Compile Include="Views\TaskView.cs" />
     <Compile Include="Views\TaskView.designer.cs">
@@ -106,15 +101,8 @@
     </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="MvxBinding\NetworkIndicatorTargetBinding.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Views\MainView.cs" />
-    <BundleResource Include="Resources\icons8-menu-filled-30.png" />
-    <BundleResource Include="Resources\iconsdelete48.png" />
-    <BundleResource Include="Resources\mqse9xro.jpg" />
-    <BundleResource Include="Resources\icons8-back-filled-30.png" />
-    <BundleResource Include="Resources\icons8-plus-math-filled-30.png" />
-    <BundleResource Include="Resources\baseline_add_location_black_48dp.png" />
     <InterfaceDefinition Include="Cell\ListTaskNameCell.xib" />
     <None Include="Info.plist">
       <SubType>Designer</SubType>
@@ -130,9 +118,6 @@
       <SubType>Designer</SubType>
     </InterfaceDefinition>
     <InterfaceDefinition Include="Views\TaskView.xib">
-      <SubType>Designer</SubType>
-    </InterfaceDefinition>
-    <InterfaceDefinition Include="Views\MenuView.xib">
       <SubType>Designer</SubType>
     </InterfaceDefinition>
     <InterfaceDefinition Include="Views\AboutView.xib">
@@ -199,6 +184,24 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AddLocationIcon.imageset\baseline_add_location_black_48dp.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AddLocationIcon.imageset\baseline_add_location_black_48dp1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AddLocationIcon.imageset\baseline_add_location_black_48dp2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AddTaskIcon.imageset\icons8-plus-math-filled-50.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AddTaskIcon.imageset\icons8-plus-math-filled-501.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AddTaskIcon.imageset\icons8-plus-math-filled-502.png">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -241,6 +244,54 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\BackIcon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AddLocationIcon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AddTaskIcon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\BackIcon.imageset\icons8-back-50.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\BackIcon.imageset\icons8-back-501.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\BackIcon.imageset\icons8-back-502.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CancelIcon.imageset\iconsdelete48.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CancelIcon.imageset\iconsdelete481.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CancelIcon.imageset\iconsdelete482.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Images.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\MenuIcon.imageset\icons8-menu-filled-50.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\MenuIcon.imageset\icons8-menu-filled-501.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\MenuIcon.imageset\icons8-menu-filled-502.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\MenuTitleIcon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\MenuIcon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\CancelIcon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\Instagram.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -251,6 +302,15 @@
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\Instagram.imageset\instagram-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\MenuTitleIcon.imageset\mqse9xro.jpg">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\MenuTitleIcon.imageset\mqse9xro1.jpg">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\MenuTitleIcon.imageset\mqse9xro2.jpg">
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>

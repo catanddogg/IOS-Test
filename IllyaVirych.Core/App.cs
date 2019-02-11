@@ -1,12 +1,6 @@
-﻿using IllyaVirych.Core.Interface;
-using IllyaVirych.Core.Services;
-using IllyaVirych.Core.ViewModels;
-using MvvmCross;
-using MvvmCross.IoC;
+﻿using MvvmCross.IoC;
 using MvvmCross.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace IllyaVirych.Core
 {
@@ -18,9 +12,7 @@ namespace IllyaVirych.Core
                .EndingWith("Service")
                .AsInterfaces()
                .RegisterAsLazySingleton();
-
            
-            //RegisterAppStart<MainViewModel>();
             RegisterCustomAppStart<AppStart>();
         }
     }
