@@ -65,6 +65,7 @@
         android:layout_marginRight="10dp"         
 		local:MvxBind = "Click MapCommand"/>
 		<Button
+	    android:id = "@+id/DeleteMarker"
 		android:layout_columnWeight = "1"	               
         android:text = "Clear GM"	
 		android:background = "@drawable/buttonround"

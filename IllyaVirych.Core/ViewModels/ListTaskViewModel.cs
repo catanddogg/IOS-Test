@@ -20,12 +20,14 @@ namespace IllyaVirych.Core.ViewModels
         private bool _refreshTaskCollection;
         private MvxCommand _refreshTaskCommand;
         private ILoginService _iLoginService;
+        private IWebApiService _iWepApiService;
 
-        public ListTaskViewModel(IMvxNavigationService navigationService, ITaskService iTaskService, ILoginService iLoginService)
+        public ListTaskViewModel(IMvxNavigationService navigationService, ITaskService iTaskService, ILoginService iLoginService, IWebApiService iWepApiService) 
         {
             _iLoginService = iLoginService;
             _navigationService = navigationService;
             _iTaskService = iTaskService;
+            _iWepApiService = iWepApiService;
             Items = new MvxObservableCollection<TaskItem>();
             TaskCreateCommand = new MvxAsyncCommand<TaskItem>(TaskCreate);
             ShowAboutCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<AboutTaskViewModel>());
@@ -41,6 +43,7 @@ namespace IllyaVirych.Core.ViewModels
 
         public override void ViewAppearing()
         {
+            _iWepApiService.RefreshDataAsync();
             var list = _iTaskService.GetUserTasks(CurrentInstagramUser.CurrentInstagramUserId);
             Items = new MvxObservableCollection<TaskItem>(list);
             RaisePropertyChanged(() => Items);

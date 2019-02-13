@@ -25,6 +25,8 @@ namespace IllyaVirych.Droid.ViewModels
             _view = view;
             var buttonTextSaveTask = view.FindViewById<Button>(Resource.Id.Savetask);
             buttonTextSaveTask.Click += ButtonSaveTaskClick;
+            var buttonDeleteMarker = view.FindViewById<Button>(Resource.Id.DeleteMarker);
+            buttonDeleteMarker.Click += ButtonDeleteMarkerClick;
             _linearLayoutMain = view.FindViewById<LinearLayout>(Resource.Id.test_layout);
             _toolbar = view.FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar1);
             _linearLayoutMain.Click += delegate
@@ -42,6 +44,18 @@ namespace IllyaVirych.Droid.ViewModels
             txtNameTaskView.SetTypeface(tf, TypefaceStyle.Normal);
             return view;
         }
+
+        private void ButtonDeleteMarkerClick(object sender, EventArgs e)
+        {
+            var LalitudeMarker = this.ViewModel.LalitudeMarkerResult;
+            if (LalitudeMarker == 0)
+            {
+                Toast.MakeText(this.Context, "Task have not marker!", ToastLength.Short).Show();
+                return;
+            }
+            Toast.MakeText(this.Context, "Task marker has been deleted!", ToastLength.Short).Show();
+        }
+
         private void ButtonSaveTaskClick(object sender, EventArgs e)
         {
             var nameTask = this.ViewModel.NameTask;

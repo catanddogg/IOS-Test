@@ -15,8 +15,7 @@ namespace IllyaVirych.IOS.Views
     public partial class MapsView : MvxViewController<MapsViewModel>, IMKMapViewDelegate
     {
         private UIButton _buttonBack, _buttonSavePin;
-        private double _lalitude, _longitude;       
-        private bool _isDragging;
+        private double _lalitude, _longitude;      
 
         const string AnnotationIdentifierDefaultClusterPin = "TKDefaultClusterPin";
 

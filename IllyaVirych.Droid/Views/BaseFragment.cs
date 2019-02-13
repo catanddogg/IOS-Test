@@ -49,8 +49,9 @@ namespace IllyaVirych.Droid.ViewModels
             EnableDrawerLayout();
 
             return view;
-        }       
-        public void EnableDrawerLayout()
+        } 
+        
+        private  void EnableDrawerLayout()
         {
             if (FragmentId == Resource.Layout.LoginView || FragmentId == Resource.Layout.MapsView)
             {
@@ -63,6 +64,7 @@ namespace IllyaVirych.Droid.ViewModels
             int lockMode = _enabledDrawerLayout ? DrawerLayout.LockModeUnlocked : DrawerLayout.LockModeLockedClosed;
             ((MainView)Activity).DrawerLayout.SetDrawerLockMode(lockMode);
         }
+
         public override void OnConfigurationChanged(Configuration newConfig)
         {
             base.OnConfigurationChanged(newConfig);

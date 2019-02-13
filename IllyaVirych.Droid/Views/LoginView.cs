@@ -18,6 +18,7 @@ namespace IllyaVirych.Droid.ViewModels
             
             _imageButton = view.FindViewById<ImageButton>(Resource.Id.image_button);
             
+
             _imageButton.Click += delegate
             {
                 InstagramLogin();

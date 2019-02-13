@@ -11,7 +11,6 @@ namespace IllyaVirych.IOS
     {   
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-
             var result = base.FinishedLaunching(application, launchOptions);
             return result;
         }

@@ -76,8 +76,6 @@ namespace IllyaVirych.IOS
             progress.Progress = progress.Progress + 1;
         }
 
-      
-
         public void Include(UISwitch sw)
         {
             sw.On = !sw.On;
