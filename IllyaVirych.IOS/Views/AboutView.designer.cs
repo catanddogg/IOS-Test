@@ -17,11 +17,20 @@ namespace IllyaVirych.IOS.Views
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel AboutTaskLabel { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel LabelNetworkAccessAboutView { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
             if (AboutTaskLabel != null) {
                 AboutTaskLabel.Dispose ();
                 AboutTaskLabel = null;
+            }
+
+            if (LabelNetworkAccessAboutView != null) {
+                LabelNetworkAccessAboutView.Dispose ();
+                LabelNetworkAccessAboutView = null;
             }
         }
     }

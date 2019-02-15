@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MvvmCross.Converters;
+using System;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-
-using Foundation;
-using MvvmCross.Converters;
-using UIKit;
+using Xamarin.Essentials;
 
 namespace IllyaVirych.IOS.Converter
 {
-    public class StatusValueConverter : MvxValueConverter
+    public class StatusValueConverter : MvxValueConverter<NetworkAccess>
     {
-        public bool Convert(bool value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        protected override object Convert(NetworkAccess value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value ?  false :  true;
+            if (value == NetworkAccess.Internet)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

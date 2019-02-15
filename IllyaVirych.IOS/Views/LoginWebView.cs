@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using Plugin.Settings;
 using System.Net.Http;
 using WebKit;
+
 namespace IllyaVirych.IOS
 {
     [MvxModalPresentation(WrapInNavigationController = true)]

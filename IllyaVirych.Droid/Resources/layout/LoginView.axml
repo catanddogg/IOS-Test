@@ -30,7 +30,7 @@
     android:layout_alignParentBottom="true"
 	android:gravity="center"
     android:orientation="vertical"
-	android:background = "@color/white"
+	android:background = "@color/red"
     local:MvxBind="Visibility NetworkAccess">
 		<TextView
 	    android:layout_width="wrap_content"

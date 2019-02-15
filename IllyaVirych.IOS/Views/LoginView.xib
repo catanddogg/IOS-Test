@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,12 +36,14 @@
                         <constraint id="8717" firstAttribute="width" constant="328"/>
                     </constraints>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You do not have network access!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9733" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You do not have network access!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9733" translatesAutoresizingMaskIntoConstraints="NO">
                     <rect key="frame" x="0.0" y="707" width="414" height="29"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
+                    <constraints>
+                        <constraint id="10465" firstAttribute="height" constant="29"/>
+                    </constraints>
                 </label>
             </subviews>
             <point key="canvasLocation" x="12" y="-1"/>
@@ -50,6 +55,10 @@
                 <constraint id="7229" firstAttribute="trailing" secondItem="2692" secondAttribute="trailing" constant="114"/>
                 <constraint id="7230" firstAttribute="bottom" secondItem="2692" secondAttribute="bottom" constant="413"/>
                 <constraint id="9439" firstItem="2692" firstAttribute="top" secondItem="5684" secondAttribute="bottom" constant="38"/>
+                <constraint id="10461" firstItem="9733" firstAttribute="top" secondItem="2692" secondAttribute="bottom" constant="384"/>
+                <constraint id="10462" firstItem="9733" firstAttribute="trailing" secondItem="2" secondAttribute="trailing"/>
+                <constraint id="10463" firstItem="9733" firstAttribute="leading" secondItem="2" secondAttribute="leading"/>
+                <constraint id="10464" firstItem="9733" firstAttribute="bottom" secondItem="2" secondAttribute="bottom"/>
             </constraints>
         </view>
     </objects>

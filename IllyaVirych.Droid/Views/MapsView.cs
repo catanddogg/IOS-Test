@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using IllyaVirych.Core.ViewModels;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
+using Xamarin.Essentials;
 
 namespace IllyaVirych.Droid.ViewModels
 {
@@ -42,6 +43,12 @@ namespace IllyaVirych.Droid.ViewModels
 
         private void ButtonMarkerSaveClick(object sender, EventArgs e)
         {
+            var networkAccess = this.ViewModel.NetworkAccess;
+            if (networkAccess != NetworkAccess.Internet)
+            {
+                Toast.MakeText(this.Context, "You do not have network access!", ToastLength.Short).Show();
+                return;
+            }
             var lalitudeGoogleMarker = this.ViewModel.LalitudeMarker;
             if (lalitudeGoogleMarker == 0)
             {

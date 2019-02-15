@@ -4,6 +4,7 @@ using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin.Messenger;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace IllyaVirych.Core.ViewModels
 {
@@ -23,12 +24,13 @@ namespace IllyaVirych.Core.ViewModels
         private readonly MvxSubscriptionToken _token;
         private double _lalitudeMarkerBack;
         private double _longlitudeMarkerBack;
+        private NetworkAccess _networkAccess;
 
         public MapsViewModel(IMvxNavigationService navigationService, ITaskService iTaskService, IMvxMessenger messenger)
         {
             _navigationService = navigationService;
             _iTaskService = iTaskService;
-            _messenger = messenger;
+            _messenger = messenger;            
             _token = messenger.Subscribe<MapMessenger>(OnLosationMessage);          
             BackTaskCommand = new MvxAsyncCommand(BackMap);
             SaveMapPointCommand = new MvxAsyncCommand(SaveMapPoint);                 
@@ -66,26 +68,44 @@ namespace IllyaVirych.Core.ViewModels
 
         private async Task SaveMapPoint()
         {
-            if (LalitudeMarker == 0 & LongitudeMarker == 0)
+            await RaisePropertyChanged(() => NetworkAccess);
+            if (_networkAccess == NetworkAccess.Internet)
             {
-                return;
-            }
-            if (LalitudeMarker != 0 & LongitudeMarker != 0)
-            {             
-                await _navigationService.Navigate<TaskViewModel>();
+                if (LalitudeMarker == 0 & LongitudeMarker == 0)
+                {
+                    return;
+                }
+                if (LalitudeMarker != 0 & LongitudeMarker != 0)
+                {
+                    await _navigationService.Navigate<TaskViewModel>();
 
-                var message = new MapMessenger(this,
-                    _idTask,
-              LalitudeMarker,
-              LongitudeMarker,
-              _nameTaskBackResult,
-              _descriptionTaskBackResult,
-              _statusTaskBackResult
-                 );
-                _messenger.Publish(message);
-                _messenger.Unsubscribe<MapMessenger>(_token);
+                    var message = new MapMessenger(this,
+                        _idTask,
+                  LalitudeMarker,
+                  LongitudeMarker,
+                  _nameTaskBackResult,
+                  _descriptionTaskBackResult,
+                  _statusTaskBackResult
+                     );
+                    _messenger.Publish(message);
+                    _messenger.Unsubscribe<MapMessenger>(_token);
+                }
             }
-        }       
+        }
+
+        public NetworkAccess NetworkAccess
+        {
+            get
+            {
+                _networkAccess = Connectivity.NetworkAccess;
+                return _networkAccess;
+            }
+            set
+            {
+                _networkAccess = value;
+                RaisePropertyChanged(() => NetworkAccess);
+            }
+        }
 
         public double LalitudeMarker
         {
@@ -96,6 +116,7 @@ namespace IllyaVirych.Core.ViewModels
             set
             {
                 _lalitudeMarker = value;
+                RaisePropertyChanged(() => NetworkAccess);
                 RaisePropertyChanged(() => LalitudeMarker);
             }
         }
@@ -109,6 +130,7 @@ namespace IllyaVirych.Core.ViewModels
             set
             {
                 _longitudeMarker = value;
+                RaisePropertyChanged(() => NetworkAccess);
                 RaisePropertyChanged(() => LongitudeMarker);
             }
         }        

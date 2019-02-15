@@ -57,8 +57,6 @@ namespace IllyaVirych.IOS.Services
                 CurrentInstagramUser.CurrentInstagramUserId = null;
             }
         }
-
-
         //Not Use
         public OAuth2Authenticator Authhenticator()
         {

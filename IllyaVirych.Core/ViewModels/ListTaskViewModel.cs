@@ -31,8 +31,7 @@ namespace IllyaVirych.Core.ViewModels
             _iLoginService = iLoginService;
             _navigationService = navigationService;
             _iTaskService = iTaskService;
-            _iWepApiService = iWepApiService;
-            _networkAccess = Connectivity.NetworkAccess;
+            _iWepApiService = iWepApiService;            
             Items = new MvxObservableCollection<TaskItem>();
             TaskCreateCommand = new MvxAsyncCommand<TaskItem>(TaskCreate);
             TaskChangeCommand = new MvxAsyncCommand<TaskItem>(TaskChange);
@@ -54,7 +53,8 @@ namespace IllyaVirych.Core.ViewModels
         }
 
         public override void ViewAppearing()
-        {            
+        {
+            //LoadingListTask();
             if (_networkAccess == NetworkAccess.Internet)
             {
                 _iWepApiService.RefreshTasksAsync();
@@ -90,8 +90,21 @@ namespace IllyaVirych.Core.ViewModels
             }
         }
 
+        //private async Task LoadingListTask()
+        //{
+        //    RefreshTaskCollection = true;
+        //    await Task.Run(() => test());
+        //    RefreshTaskCollection = false;
+        //}
+
+        //private void test()
+        //{
+
+        //}
+
         private async Task TaskCreate(TaskItem task)
         {
+            await RaisePropertyChanged(() => NetworkAccess);
             if (_networkAccess == NetworkAccess.Internet)
             {
                 var result = await _navigationService.Navigate<TaskViewModel, TaskItem>(task);
@@ -106,8 +119,16 @@ namespace IllyaVirych.Core.ViewModels
         public void RefreshTask()
         {
             RefreshTaskCollection = true;
-            var list = _iTaskService.GetUserTasks(CurrentInstagramUser.CurrentInstagramUserId);
-            Items = new MvxObservableCollection<TaskItem>(list);
+            if (_networkAccess == NetworkAccess.Internet)
+            {
+                _iWepApiService.RefreshTasksAsync();
+            }
+            if (_networkAccess != NetworkAccess.Internet)
+            {
+                var list = _iTaskService.GetUserTasks(CurrentInstagramUser.CurrentInstagramUserId);
+                Items = new MvxObservableCollection<TaskItem>(list);
+                RaisePropertyChanged(() => Items);
+            }
             RefreshTaskCollection = false;
         }
 
@@ -115,6 +136,7 @@ namespace IllyaVirych.Core.ViewModels
         {
             get
             {
+                _networkAccess = Connectivity.NetworkAccess;
                 return _networkAccess;
             }
             set

@@ -13,8 +13,7 @@ namespace IllyaVirych.Core.ViewModels
 
         public AboutTaskViewModel(IMvxNavigationService navigationService)
         {
-            _navigationService = navigationService;
-            _networkAccess = Connectivity.NetworkAccess;
+            _navigationService = navigationService;            
             BackTaskCommand = new MvxAsyncCommand(BackTask);
         }
 
@@ -27,6 +26,7 @@ namespace IllyaVirych.Core.ViewModels
         {
             get
             {
+                _networkAccess = Connectivity.NetworkAccess;
                 return _networkAccess;
             }
             set

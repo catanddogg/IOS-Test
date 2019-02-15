@@ -18,6 +18,8 @@ namespace IllyaVirych.IOS.Views
         private UIView _menuView, _navigationView;
         private bool _statusMenuView;        
         private UICollectionViewFlowLayout _listTaskCollectionViewFlowLayout;
+        private TaskListCollectionViewSource _source;
+        private MvxUIRefreshControl _refreshListTaskControl;
 
         public ListTaskView () : base (nameof(ListTaskView), null)
         {          
@@ -27,19 +29,27 @@ namespace IllyaVirych.IOS.Views
         {
             base.ViewDidLoad();
 
+            SetUpListTaskView();
+        }
+
+        private void SetUpListTaskView()
+        {
             Title = "TaskyDrop";
             NavigationController.NavigationBar.BarTintColor = UIColor.FromRGB(0, 127, 70);
             NavigationController.NavigationBar.TitleTextAttributes = new UIStringAttributes() { ForegroundColor = UIColor.Black };
 
+            _refreshListTaskControl = new MvxUIRefreshControl();
+            TaskListCollectionView.AddSubview(_refreshListTaskControl);            
+
             TaskListCollectionView.RegisterNibForCell(ListTaskNameCell.Nib, ListTaskNameCell.Key);
-            var source = new TaskListCollectionViewSource(TaskListCollectionView, ListTaskNameCell.Key );
-            TaskListCollectionView.Source = source;
+            _source = new TaskListCollectionViewSource(TaskListCollectionView, ListTaskNameCell.Key);
+            TaskListCollectionView.Source = _source;
             _listTaskCollectionViewFlowLayout = new UICollectionViewFlowLayout();
             _listTaskCollectionViewFlowLayout.ItemSize = new CGSize(47 * UIScreen.MainScreen.Bounds.Width / 100, 47 * UIScreen.MainScreen.Bounds.Width / 100);
             _listTaskCollectionViewFlowLayout.MinimumInteritemSpacing = 8;
             _listTaskCollectionViewFlowLayout.MinimumLineSpacing = 8;
             _listTaskCollectionViewFlowLayout.HeaderReferenceSize = new CGSize(0, 0);
-            _listTaskCollectionViewFlowLayout.SectionInset = new UIEdgeInsets(5, 5, 5, 5);                      
+            _listTaskCollectionViewFlowLayout.SectionInset = new UIEdgeInsets(5, 5, 5, 5);
             TaskListCollectionView.CollectionViewLayout = _listTaskCollectionViewFlowLayout;
 
             _buttonAdd = new UIButton(UIButtonType.Custom);
@@ -51,7 +61,7 @@ namespace IllyaVirych.IOS.Views
             _buttonMenu = new UIButton(UIButtonType.Custom);
             _buttonMenu.Frame = new CGRect(0, 0, 40, 40);
             _buttonMenu.SetImage(UIImage.FromBundle("MenuIcon"), UIControlState.Normal);
-            this.NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem(_buttonMenu), false);             
+            this.NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem(_buttonMenu), false);
 
             _buttonMenu.TouchUpInside += delegate
             {
@@ -59,13 +69,17 @@ namespace IllyaVirych.IOS.Views
                 MenuViewController();
             };
 
-            var set = this.CreateBindingSet<ListTaskView, ListTaskViewModel>();
-            set.Bind(_buttonAdd).To(vm => vm.TaskCreateCommand);            
-            set.Bind(source).To(m => m.Items);
-            set.Bind(source).For(v => v.SelectionChangedCommand).To(vm => vm.TaskChangeCommand);            
-            set.Apply();       
-
+            LabelNetworkAccessListTask.BackgroundColor = UIColor.Red;
             TaskListCollectionView.ReloadData();
+
+            var set = this.CreateBindingSet<ListTaskView, ListTaskViewModel>();
+            set.Bind(_buttonAdd).To(vm => vm.TaskCreateCommand);
+            set.Bind(LabelNetworkAccessListTask).For(v => v.Hidden).To(vm => vm.NetworkAccess).WithConversion("Status");
+            set.Bind(_source).To(m => m.Items);
+            set.Bind(_source).For(v => v.SelectionChangedCommand).To(vm => vm.TaskChangeCommand);
+            set.Bind(_refreshListTaskControl).For(v => v.IsRefreshing).To(vm => vm.RefreshTaskCollection);
+            set.Bind(_refreshListTaskControl).For(v => v.RefreshCommand).To(vm => vm.RefreshTaskCommand);
+            set.Apply();
         }
 
         private void ButtonAddTaskClick(object sender, EventArgs e)

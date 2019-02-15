@@ -15,10 +15,19 @@ namespace IllyaVirych.IOS.Views
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel LabelNetworkAccessListTask { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UICollectionView TaskListCollectionView { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
+            if (LabelNetworkAccessListTask != null) {
+                LabelNetworkAccessListTask.Dispose ();
+                LabelNetworkAccessListTask = null;
+            }
+
             if (TaskListCollectionView != null) {
                 TaskListCollectionView.Dispose ();
                 TaskListCollectionView = null;

@@ -28,7 +28,10 @@ namespace IllyaVirych.IOS.Views
             _buttonBack.SetImage(UIImage.FromBundle("BackIcon"), UIControlState.Normal);
             this.NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem(_buttonBack), false);
 
+            LabelNetworkAccessAboutView.BackgroundColor = UIColor.Red;
+
             var set = this.CreateBindingSet<AboutView, AboutTaskViewModel>();
+            set.Bind(LabelNetworkAccessAboutView).For(v => v.Hidden).To(vm => vm.NetworkAccess).WithConversion("Status");
             set.Bind(_buttonBack).To(vm => vm.BackTaskCommand);
             set.Apply();
         }

@@ -8,6 +8,7 @@ using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using System;
 using UIKit;
+using Xamarin.Essentials;
 
 namespace IllyaVirych.IOS.Views
 {
@@ -79,7 +80,7 @@ namespace IllyaVirych.IOS.Views
             longGesture.MinimumPressDuration = 0.5;
             MapViewIOS.AddGestureRecognizer(longGesture);
 
-            MapViewIOS.GetViewForAnnotation += GetViewForAnnotation;
+            MapViewIOS.GetViewForAnnotation += GetViewForAnnotation;           
 
             if (ViewModel.LalitudeMarker != 0)
             {
@@ -94,6 +95,14 @@ namespace IllyaVirych.IOS.Views
 
         private void ButtonGoogleMarkerSaveClick(object sender, EventArgs e)
         {
+            var networkAccess = this.ViewModel.NetworkAccess;
+            if (networkAccess != NetworkAccess.Internet)
+            {
+                var AllertSave = UIAlertController.Create("", "You do not have network access!", UIAlertControllerStyle.Alert);
+                AllertSave.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                PresentViewController(AllertSave, true, null);
+                return;
+            }
             var lalitudeGoogleMarker = this.ViewModel.LalitudeMarker;
             if (lalitudeGoogleMarker == 0)
             {

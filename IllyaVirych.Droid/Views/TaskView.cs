@@ -46,22 +46,11 @@ namespace IllyaVirych.Droid.ViewModels
 
             var buttonDeleteTask = view.FindViewById<Button>(Resource.Id.Deletetask);
             buttonDeleteTask.Click += ButtonDeleteTaskClick;
-            var buttonAddMarkerInMap = view.FindViewById<Button>(Resource.Id.AddMarkerInMap);
-            buttonAddMarkerInMap.Click += ButtonAddMarkerInMapClick;
-
+            
             return view;
         }
 
-        private void ButtonAddMarkerInMapClick(object sender, EventArgs e)
-        {
-            var networkAccess = this.ViewModel.NetworkAccess;
-            if (networkAccess != NetworkAccess.Internet)
-            {
-                Toast.MakeText(this.Context, "You do not have network access!", ToastLength.Short).Show();
-            }
-        }
-
-
+        
         private void ButtonDeleteTaskClick(object sender, EventArgs e)
         {
             var networkAccess = this.ViewModel.NetworkAccess;

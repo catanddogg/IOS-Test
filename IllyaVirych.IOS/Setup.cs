@@ -9,17 +9,6 @@ namespace IllyaVirych.IOS
 {
     public class Setup : MvxIosSetup<App>
     {
-        //protected override void InitializeFirstChance()
-        //{
-        //    base.InitializeFirstChance();           
-        //}
-
-        //protected override void InitializeLastChance()
-        //{
-        //    base.InitializeLastChance();
-        //    var registry = Mvx.Resolve<IMvxTargetBindingFactoryRegistry>();            
-        //}
-
         protected override IMvxIocOptions CreateIocOptions()
         {
             return new MvxIocOptions

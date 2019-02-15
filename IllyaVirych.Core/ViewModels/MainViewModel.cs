@@ -19,7 +19,6 @@ namespace IllyaVirych.Core.ViewModels
         {
             _navigationService = navigationService;
             _iLoginService = iLoginService;
-            //CurrentInstagramUser.CurrentInstagramUserId = _iLoginService.FindAccount.Properties[].Values;
             CurrentMainViewCommand = new MvxAsyncCommand(CurrentMainView);
             TestIOSCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<LoginViewModel>());
             MenuViewCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ListTaskViewModel>());

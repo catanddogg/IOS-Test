@@ -24,13 +24,13 @@ namespace IllyaVirych.Core.ViewModels
         {            
             _iTaskService = iTaskService;
             _loginService = loginService;
-            _navigationService = navigationService;
-            _networkAccess = Connectivity.NetworkAccess;
+            _navigationService = navigationService;            
             LoginCommand = new MvxCommand(_loginService.LoginInstagram);
             ShowListTaskViewCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ListTaskViewModel>());
             LoginWebViewCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<LoginWebViewModel>());
             _loginService.OnLoggedInHandler = new Action(() =>
             {
+                RaisePropertyChanged(() => NetworkAccess);
                 CreateNewUser();
                 ShowListTaskViewCommand.Execute(null);
             });
@@ -79,6 +79,7 @@ namespace IllyaVirych.Core.ViewModels
         {
             get
             {
+                _networkAccess = Connectivity.NetworkAccess;
                 return _networkAccess;
             }
             set

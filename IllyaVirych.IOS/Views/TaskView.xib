@@ -18,6 +18,7 @@
                 <outlet property="DeleteTaskButton" destination="42976" id="name-outlet-42976"/>
                 <outlet property="MapButton" destination="42973" id="name-outlet-42973"/>
                 <outlet property="DeleteMarkerButton" destination="42975" id="name-outlet-42975"/>
+                <outlet property="LabelNetworkAccessTaskView" destination="43511" id="name-outlet-43511"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -153,12 +154,24 @@
                         <constraint id="42950" firstItem="42945" firstAttribute="width" secondItem="42730" secondAttribute="width"/>
                     </constraints>
                 </scrollView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You do not have network access!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="43511" translatesAutoresizingMaskIntoConstraints="NO">
+                    <rect key="frame" x="-20" y="707" width="455" height="29"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                    <constraints>
+                        <constraint id="44776" firstAttribute="height" constant="29"/>
+                    </constraints>
+                </label>
             </subviews>
             <constraints>
                 <constraint id="42731" firstItem="42730" firstAttribute="top" secondItem="2" secondAttribute="top"/>
                 <constraint id="42732" firstItem="42730" firstAttribute="leadingMargin" secondItem="2" secondAttribute="leadingMargin"/>
                 <constraint id="42733" firstAttribute="trailingMargin" secondItem="42730" secondAttribute="trailingMargin"/>
                 <constraint id="42734" firstItem="42730" firstAttribute="height" secondItem="2" secondAttribute="height"/>
+                <constraint id="44674" firstItem="43511" firstAttribute="bottom" secondItem="42730" secondAttribute="bottom"/>
+                <constraint id="44708" firstItem="43511" firstAttribute="trailing" secondItem="42730" secondAttribute="trailing" constant="21"/>
+                <constraint id="44742" firstItem="43511" firstAttribute="leading" secondItem="42730" secondAttribute="leading" constant="-20"/>
             </constraints>
         </view>
     </objects>

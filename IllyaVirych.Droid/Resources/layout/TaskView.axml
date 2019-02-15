@@ -7,6 +7,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 	android:background = "@color/gray">
+<ScrollView 
+    android:id="@+id/scroll" 
+    android:layout_width="match_parent" 
+    android:layout_height="match_parent"> 
 <LinearLayout
 		android:orientation="vertical"
 		android:layout_width="match_parent"
@@ -107,13 +111,14 @@
 		local:MvxBind = "Click DeleteTaskCommand"/>			
      </GridLayout>
 		</LinearLayout>
+		</ScrollView>
 	<LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"		
     android:layout_alignParentBottom="true"
 	android:gravity="center"
     android:orientation="vertical"
-	android:background = "@color/white"
+	android:background = "@color/red"
 	local:MvxBind="Visibility NetworkAccess">
 		<TextView
 	    android:layout_width="wrap_content"

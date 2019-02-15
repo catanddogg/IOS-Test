@@ -27,6 +27,10 @@ namespace IllyaVirych.IOS.Views
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel LabelNetworkAccessTaskView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton MapButton { get; set; }
 
         [Outlet]
@@ -56,6 +60,11 @@ namespace IllyaVirych.IOS.Views
             if (DescriptionTask != null) {
                 DescriptionTask.Dispose ();
                 DescriptionTask = null;
+            }
+
+            if (LabelNetworkAccessTaskView != null) {
+                LabelNetworkAccessTaskView.Dispose ();
+                LabelNetworkAccessTaskView = null;
             }
 
             if (MapButton != null) {

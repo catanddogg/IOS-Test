@@ -22,7 +22,7 @@ namespace IllyaVirych.IOS
             {
                 var set = this.CreateBindingSet<ListTaskNameCell, TaskItem>();
                 set.Bind(NameTaskLabel).To(vm => vm.NameTask);
-                set.Bind(this).For(vm => vm.BackgroundColor).To(vm => vm.StatusTask).WithConversion("Color");
+                set.Bind(this).For(v => v.BackgroundColor).To(vm => vm.StatusTask).WithConversion("Color");
                 set.Apply();                           
             });           
 

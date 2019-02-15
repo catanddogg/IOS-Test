@@ -37,13 +37,12 @@ namespace IllyaVirych.Core.ViewModels
             _navigationService = navigationService;
             _iTaskService = iTaskService;
             _iWebApiService = iWebApiService; 
-            _messenger = messenger;
-            _networkAccess = Connectivity.NetworkAccess;
+            _messenger = messenger;            
             _token = messenger.Subscribe<MapMessenger>(OnLocationMessage);
             SaveTaskCommand = new MvxAsyncCommand(SaveTask);
             DeleteTaskCommand = new MvxAsyncCommand(DeleteTask);
             BackTaskCommand = new MvxAsyncCommand(BackTask);
-            DeleteMarkerMapCommand = new MvxCommand(DeleteMarkerMap);
+            DeleteMarkerMapCommand = new MvxAsyncCommand(DeleteMarkerMap);
             MapCommand = new MvxAsyncCommand(CreateMarkerMap);
         }
 
@@ -58,8 +57,9 @@ namespace IllyaVirych.Core.ViewModels
             EnableStatusNameTask = true;
         }
 
-        private void DeleteMarkerMap()
+        private async Task DeleteMarkerMap()
         {
+            await RaisePropertyChanged(() => NetworkAccess);
             if (_networkAccess == NetworkAccess.Internet)
             {
                 LalitudeMarkerResult = 0;
@@ -69,8 +69,6 @@ namespace IllyaVirych.Core.ViewModels
 
         private async Task CreateMarkerMap()
         {
-            if (_networkAccess == NetworkAccess.Internet)
-            {
                 await _navigationService.Navigate<MapsViewModel>();
                 var message = new MapMessenger(this,
                     IdTask,
@@ -83,7 +81,6 @@ namespace IllyaVirych.Core.ViewModels
                 UserId = CurrentInstagramUser.CurrentInstagramUserId;
                 _messenger.Publish(message);
                 _messenger.Unsubscribe<MapMessenger>(_token);
-            }
         }
 
         private async Task BackTask()
@@ -93,6 +90,7 @@ namespace IllyaVirych.Core.ViewModels
 
         private async Task DeleteTask()
         {
+            await RaisePropertyChanged(() => NetworkAccess);
             if (_networkAccess == NetworkAccess.Internet)
             {
                 await _iWebApiService.DeleteTaskItem(IdTask);
@@ -102,6 +100,7 @@ namespace IllyaVirych.Core.ViewModels
 
         private async Task SaveTask()
         {
+            await RaisePropertyChanged(() => NetworkAccess);
             if (_networkAccess == NetworkAccess.Internet)
             {
                 if (NameTask == null & NameTask != string.Empty)
@@ -146,6 +145,7 @@ namespace IllyaVirych.Core.ViewModels
         {
             get
             {
+                _networkAccess = Connectivity.NetworkAccess;
                 return _networkAccess;
             }
             set
@@ -198,6 +198,7 @@ namespace IllyaVirych.Core.ViewModels
             set
             {
                 _nameTask = value;
+                RaisePropertyChanged(() => NetworkAccess);
                 RaisePropertyChanged(() => NameTask);                
             }
         }
@@ -208,6 +209,7 @@ namespace IllyaVirych.Core.ViewModels
             set
             {
                 _descriptionTask = value;
+                RaisePropertyChanged(() => NetworkAccess);
                 RaisePropertyChanged(() => DescriptionTask);
             }
         }
@@ -217,7 +219,7 @@ namespace IllyaVirych.Core.ViewModels
             get => _userId;
             set
             {
-                _userId = value;
+                _userId = value;                
                 RaisePropertyChanged(() => UserId);
             }
         }
@@ -228,6 +230,7 @@ namespace IllyaVirych.Core.ViewModels
             set
             {
                 _statusTask = value;
+                RaisePropertyChanged(() => NetworkAccess);
                 RaisePropertyChanged(() => StatusTask);
             }
         }
