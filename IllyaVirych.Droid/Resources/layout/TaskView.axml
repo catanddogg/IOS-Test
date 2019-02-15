@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"	
+<RelativeLayout
+ xmlns:android="http://schemas.android.com/apk/res/android"	
     xmlns:local="http://schemas.android.com/apk/res-auto"  
     android:orientation="vertical"
 	android:id = "@+id/test_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 	android:background = "@color/gray">
+<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
 	<include        
         layout="@layout/toolbartaskview"/>
 <EditText 
@@ -58,6 +63,7 @@
         android:layout_height="wrap_content"
 		android:columnCount = "2">
 	    <Button
+				android:id = "@+id/AddMarkerInMap"
 	    android:layout_columnWeight = "1"		      
         android:text = "Google Map"
 		android:background = "@drawable/buttonround"
@@ -71,8 +77,7 @@
 		android:background = "@drawable/buttonround"
 		android:layout_marginLeft="10dp"              
         android:layout_marginRight="10dp"
-		local:MvxBind = "Click DeleteMarkerMapCommand"
-		/>			
+		local:MvxBind = "Click DeleteMarkerMapCommand"/>			
      </GridLayout>
 <GridLayout      
         android:layout_width="match_parent"	  
@@ -101,4 +106,20 @@
         android:layout_marginBottom="10dp"
 		local:MvxBind = "Click DeleteTaskCommand"/>			
      </GridLayout>
-</LinearLayout>
+		</LinearLayout>
+	<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"		
+    android:layout_alignParentBottom="true"
+	android:gravity="center"
+    android:orientation="vertical"
+	android:background = "@color/white"
+	local:MvxBind="Visibility NetworkAccess">
+		<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="match_parent"
+	    android:text = "@string/network_access"
+	    android:textSize = "18dp"
+		android:textColor = "@color/gray"/>
+			</LinearLayout>
+</RelativeLayout>

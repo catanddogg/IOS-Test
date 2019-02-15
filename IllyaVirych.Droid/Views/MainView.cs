@@ -1,5 +1,7 @@
 ﻿using Android.App;
+using Android.Content.PM;
 using Android.OS;
+using Android.Runtime;
 using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using Android.Views;
@@ -7,6 +9,7 @@ using Android.Views.InputMethods;
 using IllyaVirych.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
+using Xamarin.Essentials;
 
 namespace IllyaVirych.Droid.ViewModels
 {
@@ -20,7 +23,7 @@ namespace IllyaVirych.Droid.ViewModels
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-           
+            Platform.Init(this, bundle);
             SetContentView(Resource.Layout.MainView);
             DrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);  
 
@@ -49,7 +52,14 @@ namespace IllyaVirych.Droid.ViewModels
                 base.OnBackPressed();
             }
         }
-        
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
         public void HideSoftKeyboard()
         {
             if (CurrentFocus == null)

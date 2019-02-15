@@ -4,7 +4,9 @@ using IllyaVirych.Core.Services;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
+using System;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace IllyaVirych.Core.ViewModels
 {
@@ -15,12 +17,14 @@ namespace IllyaVirych.Core.ViewModels
         private MvxObservableCollection<TaskItem> _items;
         public IMvxCommand ShowMenuViewModelCommand { get; set; }
         public IMvxCommand<TaskItem> TaskCreateCommand { get; set; }
+        public IMvxCommand<TaskItem> TaskChangeCommand { get; set; }
         public IMvxCommand ShowAboutCommand { get; set; }
         public IMvxCommand LoginViewCommand { get; set; }
         private bool _refreshTaskCollection;
         private MvxCommand _refreshTaskCommand;
         private ILoginService _iLoginService;
         private IWebApiService _iWepApiService;
+        private NetworkAccess _networkAccess;
 
         public ListTaskViewModel(IMvxNavigationService navigationService, ITaskService iTaskService, ILoginService iLoginService, IWebApiService iWepApiService) 
         {
@@ -28,11 +32,19 @@ namespace IllyaVirych.Core.ViewModels
             _navigationService = navigationService;
             _iTaskService = iTaskService;
             _iWepApiService = iWepApiService;
+            _networkAccess = Connectivity.NetworkAccess;
             Items = new MvxObservableCollection<TaskItem>();
             TaskCreateCommand = new MvxAsyncCommand<TaskItem>(TaskCreate);
+            TaskChangeCommand = new MvxAsyncCommand<TaskItem>(TaskChange);
             ShowAboutCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<AboutTaskViewModel>());
             ShowMenuViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<MenuViewModel>());
             LoginViewCommand = new MvxAsyncCommand(LogoutInstagram);
+            _iWepApiService.OnWebApiSaveHandler = new Action(() =>
+            {
+                var list = _iTaskService.GetUserTasks(CurrentInstagramUser.CurrentInstagramUserId);
+                Items = new MvxObservableCollection<TaskItem>(list);
+                RaisePropertyChanged(() => Items);
+            });
         }
 
         private async Task LogoutInstagram()
@@ -42,11 +54,17 @@ namespace IllyaVirych.Core.ViewModels
         }
 
         public override void ViewAppearing()
-        {
-            _iWepApiService.RefreshDataAsync();
-            var list = _iTaskService.GetUserTasks(CurrentInstagramUser.CurrentInstagramUserId);
-            Items = new MvxObservableCollection<TaskItem>(list);
-            RaisePropertyChanged(() => Items);
+        {            
+            if (_networkAccess == NetworkAccess.Internet)
+            {
+                _iWepApiService.RefreshTasksAsync();
+            }
+            if (_networkAccess != NetworkAccess.Internet)
+            {
+                var list = _iTaskService.GetUserTasks(CurrentInstagramUser.CurrentInstagramUserId);
+                Items = new MvxObservableCollection<TaskItem>(list);
+                RaisePropertyChanged(() => Items);
+            }
             base.ViewAppearing();
         }
 
@@ -74,7 +92,15 @@ namespace IllyaVirych.Core.ViewModels
 
         private async Task TaskCreate(TaskItem task)
         {
-            var result = await _navigationService.Navigate<TaskViewModel, TaskItem>(task);
+            if (_networkAccess == NetworkAccess.Internet)
+            {
+                var result = await _navigationService.Navigate<TaskViewModel, TaskItem>(task);
+            }
+        }
+
+        private async Task TaskChange(TaskItem task)
+        {
+                var result = await _navigationService.Navigate<TaskViewModel, TaskItem>(task);
         }
 
         public void RefreshTask()
@@ -84,6 +110,20 @@ namespace IllyaVirych.Core.ViewModels
             Items = new MvxObservableCollection<TaskItem>(list);
             RefreshTaskCollection = false;
         }
+
+        public NetworkAccess NetworkAccess
+        {
+            get
+            {
+                return _networkAccess;
+            }
+            set
+            {
+                _networkAccess = value;
+                RaisePropertyChanged(() => NetworkAccess);
+            }
+        }
+
         public bool RefreshTaskCollection
         {
             get

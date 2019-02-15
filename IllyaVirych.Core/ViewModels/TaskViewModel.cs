@@ -6,6 +6,7 @@ using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin.Messenger;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace IllyaVirych.Core.ViewModels
 {
@@ -28,12 +29,16 @@ namespace IllyaVirych.Core.ViewModels
         private double _lalitudeMarkerResult;
         private double _longitudeMarkerResult;       
         private readonly MvxSubscriptionToken _token;
+        private IWebApiService _iWebApiService;
+        private NetworkAccess _networkAccess;
 
-        public TaskViewModel(IMvxNavigationService navigationService, ITaskService iTaskService, IMvxMessenger messenger)
+        public TaskViewModel(IMvxNavigationService navigationService, ITaskService iTaskService, IMvxMessenger messenger, IWebApiService iWebApiService)
         {            
             _navigationService = navigationService;
             _iTaskService = iTaskService;
+            _iWebApiService = iWebApiService; 
             _messenger = messenger;
+            _networkAccess = Connectivity.NetworkAccess;
             _token = messenger.Subscribe<MapMessenger>(OnLocationMessage);
             SaveTaskCommand = new MvxAsyncCommand(SaveTask);
             DeleteTaskCommand = new MvxAsyncCommand(DeleteTask);
@@ -55,26 +60,31 @@ namespace IllyaVirych.Core.ViewModels
 
         private void DeleteMarkerMap()
         {
-            LalitudeMarkerResult = 0;
-            LongitudeMarkerResult = 0;
+            if (_networkAccess == NetworkAccess.Internet)
+            {
+                LalitudeMarkerResult = 0;
+                LongitudeMarkerResult = 0;
+            }
         }
 
         private async Task CreateMarkerMap()
-        {           
-            await _navigationService.Navigate<MapsViewModel>();
-
-            var message = new MapMessenger(this, 
-                IdTask,
-                LalitudeMarkerResult,
-                LongitudeMarkerResult,
-                NameTask,
-                DescriptionTask,
-                StatusTask                 
-                  );
-            UserId = CurrentInstagramUser.CurrentInstagramUserId;
-            _messenger.Publish(message);
-            _messenger.Unsubscribe<MapMessenger>(_token);
-        }       
+        {
+            if (_networkAccess == NetworkAccess.Internet)
+            {
+                await _navigationService.Navigate<MapsViewModel>();
+                var message = new MapMessenger(this,
+                    IdTask,
+                    LalitudeMarkerResult,
+                    LongitudeMarkerResult,
+                    NameTask,
+                    DescriptionTask,
+                    StatusTask
+                      );
+                UserId = CurrentInstagramUser.CurrentInstagramUserId;
+                _messenger.Publish(message);
+                _messenger.Unsubscribe<MapMessenger>(_token);
+            }
+        }
 
         private async Task BackTask()
         {
@@ -83,23 +93,29 @@ namespace IllyaVirych.Core.ViewModels
 
         private async Task DeleteTask()
         {
-            _iTaskService.DeleteTask(IdTask);
-            await _navigationService.Close(this);
+            if (_networkAccess == NetworkAccess.Internet)
+            {
+                await _iWebApiService.DeleteTaskItem(IdTask);
+                await _navigationService.Close(this);
+            }
         }
 
         private async Task SaveTask()
         {
-            if (NameTask == null & NameTask != string.Empty)
+            if (_networkAccess == NetworkAccess.Internet)
             {
-                return;
+                if (NameTask == null & NameTask != string.Empty)
+                {
+                    return;
+                }
+                if (NameTask != null & NameTask != string.Empty)
+                {
+                    UserId = CurrentInstagramUser.CurrentInstagramUserId;
+                    TaskItem taskItem = new TaskItem(IdTask, NameTask, DescriptionTask, StatusTask, UserId, LalitudeMarkerResult, LongitudeMarkerResult);
+                    await _iWebApiService.SaveTaskItem(taskItem, IdTask);
+                }
+                await _navigationService.Navigate<ListTaskViewModel>();
             }
-            if (NameTask != null & NameTask != string.Empty)
-            {
-                UserId = CurrentInstagramUser.CurrentInstagramUserId;
-                TaskItem taskItem = new TaskItem(IdTask, NameTask, DescriptionTask, StatusTask,UserId, LalitudeMarkerResult, LongitudeMarkerResult);
-                _iTaskService.InsertTask(taskItem);               
-            }
-            await _navigationService.Navigate<ListTaskViewModel>();
         }
 
         public override Task Initialize()
@@ -125,7 +141,20 @@ namespace IllyaVirych.Core.ViewModels
             _userId = CurrentInstagramUser.CurrentInstagramUserId;
             EnableStatusNameTask = true;
         }
-              
+
+        public NetworkAccess NetworkAccess
+        {
+            get
+            {
+                return _networkAccess;
+            }
+            set
+            {
+                _networkAccess = value;
+                RaisePropertyChanged(() => NetworkAccess);
+            }
+        }
+
         public double LalitudeMarkerResult
         {
             get

@@ -29,8 +29,8 @@ namespace IllyaVirych.Droid.ViewModels
             _mapView.OnResume();
             _mapView.GetMapAsync(this);
 
-            var buttonGoogleMarkerSave = view.FindViewById<ImageButton>(Resource.Id.savegooglemarker);
-            buttonGoogleMarkerSave.Click += ButtonGoogleMarkerSaveClick;
+            var buttonMarkerSave = view.FindViewById<ImageButton>(Resource.Id.savegooglemarker);
+            buttonMarkerSave.Click += ButtonMarkerSaveClick;
 
             GoogleMapOptions mapOptions = new GoogleMapOptions()
             .InvokeMapType(GoogleMap.MapTypeSatellite)
@@ -40,7 +40,7 @@ namespace IllyaVirych.Droid.ViewModels
             return view;
         }
 
-        private void ButtonGoogleMarkerSaveClick(object sender, EventArgs e)
+        private void ButtonMarkerSaveClick(object sender, EventArgs e)
         {
             var lalitudeGoogleMarker = this.ViewModel.LalitudeMarker;
             if (lalitudeGoogleMarker == 0)

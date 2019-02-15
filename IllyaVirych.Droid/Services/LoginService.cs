@@ -11,7 +11,7 @@ namespace IllyaVirych.Droid.Services
     {
         private OAuth2Authenticator _auth;
         public Action OnLoggedInHandler { get; set; }
-        private Account _findaccountforservice;
+        //private Account _findaccountforservice;
         public void LoginInstagram()
         {
             _auth = new OAuth2Authenticator

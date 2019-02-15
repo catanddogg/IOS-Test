@@ -1,11 +1,14 @@
 ﻿using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
+using Android.Widget;
 using IllyaVirych.Core.ViewModels;
 using IllyaVirych.Droid.ViewAdapter;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
+using System;
+using Xamarin.Essentials;
 
 namespace IllyaVirych.Droid.ViewModels
 {
@@ -29,7 +32,20 @@ namespace IllyaVirych.Droid.ViewModels
             ParentActivity.SetSupportActionBar(toolbar);
             ParentActivity.SupportActionBar.Title = "";
             ViewModel.ShowMenuViewModelCommand.Execute(null);
+
+            var buttonddTaskSave = view.FindViewById<ImageButton>(Resource.Id.ButtonAddTaskToolbar);
+            buttonddTaskSave.Click += ButtonAddTaskSaveClick;
+
             return view;
+        }
+
+        private void ButtonAddTaskSaveClick(object sender, EventArgs e)
+        {
+            var networkAccess = this.ViewModel.NetworkAccess;
+            if (networkAccess != NetworkAccess.Internet)
+            {
+                Toast.MakeText(this.Context, "You do not have network access!", ToastLength.Short).Show();
+            }
         }
     }
 }

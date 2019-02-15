@@ -3,7 +3,9 @@ using IllyaVirych.Core.ViewModels;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
+using System;
 using UIKit;
+using Xamarin.Essentials;
 
 namespace IllyaVirych.IOS.Views
 {
@@ -40,11 +42,11 @@ namespace IllyaVirych.IOS.Views
             _listTaskCollectionViewFlowLayout.SectionInset = new UIEdgeInsets(5, 5, 5, 5);                      
             TaskListCollectionView.CollectionViewLayout = _listTaskCollectionViewFlowLayout;
 
-
             _buttonAdd = new UIButton(UIButtonType.Custom);
             _buttonAdd.Frame = new CGRect(0, 0, 40, 40);
             _buttonAdd.SetImage(UIImage.FromBundle("AddTaskIcon"), UIControlState.Normal);
             this.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(_buttonAdd), false);
+            _buttonAdd.TouchUpInside += ButtonAddTaskClick;
 
             _buttonMenu = new UIButton(UIButtonType.Custom);
             _buttonMenu.Frame = new CGRect(0, 0, 40, 40);
@@ -60,10 +62,21 @@ namespace IllyaVirych.IOS.Views
             var set = this.CreateBindingSet<ListTaskView, ListTaskViewModel>();
             set.Bind(_buttonAdd).To(vm => vm.TaskCreateCommand);            
             set.Bind(source).To(m => m.Items);
-            set.Bind(source).For(v => v.SelectionChangedCommand).To(vm => vm.TaskCreateCommand);            
+            set.Bind(source).For(v => v.SelectionChangedCommand).To(vm => vm.TaskChangeCommand);            
             set.Apply();       
 
             TaskListCollectionView.ReloadData();
+        }
+
+        private void ButtonAddTaskClick(object sender, EventArgs e)
+        {
+            var networkAccess = this.ViewModel.NetworkAccess;
+            if (networkAccess != NetworkAccess.Internet)
+            {
+                var AllertSave = UIAlertController.Create("", "You do not have network access!", UIAlertControllerStyle.Alert);
+                AllertSave.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                PresentViewController(AllertSave, true, null);
+            }
         }
 
         public override void ViewWillTransitionToSize(CGSize toSize, IUIViewControllerTransitionCoordinator coordinator)

@@ -5,6 +5,7 @@ using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using System;
 using UIKit;
+using Xamarin.Essentials;
 
 namespace IllyaVirych.IOS.Views
 {
@@ -34,6 +35,8 @@ namespace IllyaVirych.IOS.Views
 
             DeleteMarkerButton.TouchUpInside += ButtonDeleteMarkerClick;
             SaveTaskButton.TouchUpInside += ButtonSaveTaskClick;
+            DeleteTaskButton.TouchUpInside += ButtonDeleteTaskClick;
+            MapButton.TouchUpInside += ButtonMapClick;
 
             var set = this.CreateBindingSet<TaskView, TaskViewModel>();
             set.Bind(NameTask).To(vm => vm.NameTask);            
@@ -49,6 +52,14 @@ namespace IllyaVirych.IOS.Views
 
         private void ButtonDeleteMarkerClick(object sender, EventArgs e)
         {
+            var networkAccess = this.ViewModel.NetworkAccess;
+            if (networkAccess != NetworkAccess.Internet)
+            {
+                var AllertSave = UIAlertController.Create("", "You do not have network access!", UIAlertControllerStyle.Alert);
+                AllertSave.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                PresentViewController(AllertSave, true, null);
+                return;
+            }
             var LalitudeMarker = this.ViewModel.LalitudeMarkerResult;
             if (LalitudeMarker == 0)
             {
@@ -64,10 +75,40 @@ namespace IllyaVirych.IOS.Views
 
         private void ButtonSaveTaskClick(object sender, EventArgs e)
         {
+            var networkAccess = this.ViewModel.NetworkAccess;
+            if (networkAccess != NetworkAccess.Internet)
+            {
+                var AllertSave = UIAlertController.Create("", "You do not have network access!", UIAlertControllerStyle.Alert);
+                AllertSave.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                PresentViewController(AllertSave, true, null);
+                return;
+            }
             var NameTask = this.ViewModel.NameTask;
             if (NameTask == null)
             {
                 var AllertSave = UIAlertController.Create("", "Enter name task!", UIAlertControllerStyle.Alert);
+                AllertSave.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                PresentViewController(AllertSave, true, null);
+            }
+        }
+
+        private void ButtonDeleteTaskClick(object sender, EventArgs e)
+        {
+            var networkAccess = this.ViewModel.NetworkAccess;
+            if (networkAccess != NetworkAccess.Internet)
+            {
+                var AllertSave = UIAlertController.Create("", "You do not have network access!", UIAlertControllerStyle.Alert);
+                AllertSave.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                PresentViewController(AllertSave, true, null);
+            }
+        }
+
+        private void ButtonMapClick(object sender, EventArgs e)
+        {
+            var networkAccess = this.ViewModel.NetworkAccess;
+            if (networkAccess != NetworkAccess.Internet)
+            {
+                var AllertSave = UIAlertController.Create("", "You do not have network access!", UIAlertControllerStyle.Alert);
                 AllertSave.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
                 PresentViewController(AllertSave, true, null);
             }

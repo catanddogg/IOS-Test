@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="IllyaVirych.Droid.IllyaVirych.Droid" android:installLocation="auto" android:versionCode="6" android:versionName="4.5">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="IllyaVirych.Droid.IllyaVirych.Droid" android:installLocation="internalOnly" android:versionCode="6" android:versionName="4.5">
 	<uses-sdk android:minSdkVersion="10" />
 	<uses-feature android:glEsVersion="0x00020000" android:required="true" />
 	<uses-library android:name="org.apache.http.legacy" android:required="false" />

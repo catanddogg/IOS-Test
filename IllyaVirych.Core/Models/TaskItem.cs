@@ -5,7 +5,7 @@ namespace IllyaVirych.Core.Services
     [Table("TaskItem")]
     public class TaskItem
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey]
         public int Id { get; set; }
         public string NameTask { get; set; }
         public string DescriptionTask { get; set; }

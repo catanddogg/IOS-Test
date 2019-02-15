@@ -11,7 +11,8 @@
     android:minHeight="?android:attr/actionBarSize"
     android:background="@color/darkgreen"
     android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar"> 
-	<ImageButton			
+	<ImageButton		
+			android:id = "@+id/ButtonAddTaskToolbar"
 		android:layout_width = "50dp"
 		android:layout_height = "50dp"		
 		android:background = "@mipmap/baseline_add_black_48dp"

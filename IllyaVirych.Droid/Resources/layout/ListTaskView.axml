@@ -1,23 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout	
+<RelativeLayout	
 		xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:local="http://schemas.android.com/apk/res-auto"
 	android:orientation="vertical"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
 	android:background="@color/gray">
+	<LinearLayout 
+    android:orientation="vertical"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:background = "@color/gray">
 	<include        
         layout="@layout/toolbarlisttaskview"/>
 	<MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout
-		android:layout_width="match_parent"
-	    android:layout_height="match_parent"
+		android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
 		local:MvxBind = "Refreshing RefreshTaskCollection; RefreshCommand RefreshTaskCommand">
 <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
 			android:id="@+id/RecyclerView"  
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:scrollbars="vertical"
 			local:MvxItemTemplate="@layout/listitemview"
-			local:MvxBind="ItemsSource Items; ItemClick TaskCreateCommand"/>	
-		</MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout>
-</LinearLayout>  
+			local:MvxBind="ItemsSource Items; ItemClick TaskChangeCommand"/>	
+		</MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout>	
+		</LinearLayout>
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"		
+    android:layout_alignParentBottom="true"
+	android:gravity="center"
+    android:orientation="vertical"
+	android:background = "@color/white"
+    local:MvxBind="Visibility NetworkAccess">
+		<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="match_parent"
+	    android:text = "@string/network_access"
+	    android:textSize = "18dp"
+		android:textColor = "@color/gray"/>
+</LinearLayout>
+</RelativeLayout> 
+
+

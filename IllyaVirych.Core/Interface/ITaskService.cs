@@ -1,5 +1,6 @@
 ﻿using IllyaVirych.Core.Models;
 using IllyaVirych.Core.Services;
+using System;
 using System.Collections.Generic;
 
 namespace IllyaVirych.Core.Interface
@@ -12,6 +13,8 @@ namespace IllyaVirych.Core.Interface
         List<TaskItem> GetUserTasks(string currentUserId);
 
         List<User> GetAllUsers();
+        void DeleteAllUserTask(string curretUserId);
+        void InsertAllUserTasks(List<TaskItem> task);
         User GetUser(string currentInstagramUserId);
         void InsertUser(User user);      
     }

@@ -15,10 +15,19 @@ namespace IllyaVirych.IOS.Views
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel LabelNetworkAccessLoginView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton LoginButton { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
+            if (LabelNetworkAccessLoginView != null) {
+                LabelNetworkAccessLoginView.Dispose ();
+                LabelNetworkAccessLoginView = null;
+            }
+
             if (LoginButton != null) {
                 LoginButton.Dispose ();
                 LoginButton = null;

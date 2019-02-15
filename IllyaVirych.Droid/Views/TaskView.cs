@@ -7,6 +7,7 @@ using Android.Views.InputMethods;
 using IllyaVirych.Core.ViewModels;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Android.Widget;
+using Xamarin.Essentials;
 
 namespace IllyaVirych.Droid.ViewModels
 {
@@ -15,7 +16,7 @@ namespace IllyaVirych.Droid.ViewModels
     {
         protected override int FragmentId => Resource.Layout.TaskView;
         
-        private LinearLayout _linearLayoutMain;
+        private RelativeLayout _linearLayoutMain;
         private Android.Support.V7.Widget.Toolbar _toolbar;
         private View _view;
 
@@ -27,7 +28,7 @@ namespace IllyaVirych.Droid.ViewModels
             buttonTextSaveTask.Click += ButtonSaveTaskClick;
             var buttonDeleteMarker = view.FindViewById<Button>(Resource.Id.DeleteMarker);
             buttonDeleteMarker.Click += ButtonDeleteMarkerClick;
-            _linearLayoutMain = view.FindViewById<LinearLayout>(Resource.Id.test_layout);
+            _linearLayoutMain = view.FindViewById<RelativeLayout>(Resource.Id.test_layout);
             _toolbar = view.FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar1);
             _linearLayoutMain.Click += delegate
             {
@@ -42,11 +43,42 @@ namespace IllyaVirych.Droid.ViewModels
             Typeface tf = Typeface.CreateFromAsset(Activity.Assets, "13185.ttf");
             txtTaskView.SetTypeface(tf, TypefaceStyle.Normal);
             txtNameTaskView.SetTypeface(tf, TypefaceStyle.Normal);
+
+            var buttonDeleteTask = view.FindViewById<Button>(Resource.Id.Deletetask);
+            buttonDeleteTask.Click += ButtonDeleteTaskClick;
+            var buttonAddMarkerInMap = view.FindViewById<Button>(Resource.Id.AddMarkerInMap);
+            buttonAddMarkerInMap.Click += ButtonAddMarkerInMapClick;
+
             return view;
+        }
+
+        private void ButtonAddMarkerInMapClick(object sender, EventArgs e)
+        {
+            var networkAccess = this.ViewModel.NetworkAccess;
+            if (networkAccess != NetworkAccess.Internet)
+            {
+                Toast.MakeText(this.Context, "You do not have network access!", ToastLength.Short).Show();
+            }
+        }
+
+
+        private void ButtonDeleteTaskClick(object sender, EventArgs e)
+        {
+            var networkAccess = this.ViewModel.NetworkAccess;
+            if (networkAccess != NetworkAccess.Internet)
+            {
+                Toast.MakeText(this.Context, "You do not have network access!", ToastLength.Short).Show();
+            }
         }
 
         private void ButtonDeleteMarkerClick(object sender, EventArgs e)
         {
+            var networkAccess = this.ViewModel.NetworkAccess;
+            if (networkAccess != NetworkAccess.Internet)
+            {
+                Toast.MakeText(this.Context, "You do not have network access!", ToastLength.Short).Show();
+                return;
+            }
             var LalitudeMarker = this.ViewModel.LalitudeMarkerResult;
             if (LalitudeMarker == 0)
             {
@@ -58,6 +90,12 @@ namespace IllyaVirych.Droid.ViewModels
 
         private void ButtonSaveTaskClick(object sender, EventArgs e)
         {
+            var networkAccess = this.ViewModel.NetworkAccess;
+            if (networkAccess != NetworkAccess.Internet)
+            {
+                Toast.MakeText(this.Context, "You do not have network access!", ToastLength.Short).Show();
+                return;
+            }
             var nameTask = this.ViewModel.NameTask;
             if (nameTask == null)
             {

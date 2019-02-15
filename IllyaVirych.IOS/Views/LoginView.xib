@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="view" destination="2" id="RRd-Eg-VrN"/>
                 <outlet property="LoginButton" destination="2692" id="name-outlet-2692"/>
+                <outlet property="LabelNetworkAccessLoginView" destination="9733" id="name-outlet-9733"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -31,6 +32,13 @@
                         <constraint id="6277" firstAttribute="height" constant="38"/>
                         <constraint id="8717" firstAttribute="width" constant="328"/>
                     </constraints>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You do not have network access!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9733" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                    <rect key="frame" x="0.0" y="707" width="414" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <point key="canvasLocation" x="12" y="-1"/>

@@ -13,53 +13,57 @@ namespace IllyaVirych.Core.Services
     public class WebApiService : IWebApiService
     {
         private ITaskService _iTaskService;        
-        HttpClient client;        
-        
+        HttpClient client;
+        public Action OnWebApiSaveHandler { get; set; }
+
+
         public WebApiService(ITaskService iTaskService)
         {
             client = new HttpClient();
             _iTaskService = iTaskService;            
         }   
 
-        public async Task<bool> RefreshDataAsync()
-        {            
-            var uri = new Uri(string.Format("http://10.10.3.199:65015/api/item/1"));
-            var response = await client.GetAsync(uri);
-            if (response.IsSuccessStatusCode)
-            {
+        public async Task <bool> RefreshTasksAsync()
+        {
+             var uri = new Uri(string.Format("http://10.10.3.199:65015/api/task/" + CurrentInstagramUser.CurrentInstagramUserId));
+             var response = await  client.GetAsync(uri);
+             if (response.IsSuccessStatusCode)
+             {
                 var content = await response.Content.ReadAsStringAsync();
                 var Items = JsonConvert.DeserializeObject<List<TaskItem>>(content);
-                //_iTaskService.DeleteTask(CurrentInstagramUser.CurrentInstagramUserId);
+                _iTaskService.DeleteAllUserTask(CurrentInstagramUser.CurrentInstagramUserId);
+                _iTaskService.InsertAllUserTasks(Items);
+                OnWebApiSaveHandler();
             }
-            return response.IsSuccessStatusCode;
+             return response.IsSuccessStatusCode;
         }
 
-        public async Task SaveTaskItemAsync(TaskItem item, bool isNewItem = false)
+        public async Task SaveTaskItem(TaskItem item, int id)
         {
-            var uri = new Uri("http://10.10.3.199:65015/api/item");
+            var uri = new Uri(string.Format("http://10.10.3.199:65015/api/task/" + id));
             var json = JsonConvert.SerializeObject(item);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-
             HttpResponseMessage response = null;
-            if (isNewItem)
+            if(item.Id == 0)
             {
                 response = await client.PostAsync(uri, content);
             }
+            if(item.Id != 0)
+            {
+                response = await client.PutAsync(uri, content);
+            }
             if(response.IsSuccessStatusCode)
             {
-                Console.WriteLine(@"Save");
             }
         }
 
-        public async Task DeleteTaskIemAsync(string id)
+        public async Task DeleteTaskItem(int id)
         {
-            var uri = new Uri("http://10.10.3.199:65015");
+            var uri = new Uri(string.Format("http://10.10.3.199:65015/api/task/"+id));
             var response = await client.DeleteAsync(uri);
+            if(response.IsSuccessStatusCode)
+            {
+            }
         }
-        //public async Task<MvxObservableCollection<TaskItem>> GetTaskItemsAsync (bool syncItems = false)
-        //{
-        //    IEnumerable<TaskItem> items = await _iTaskService
-        //        .Where()
-        //}
     }
 }
