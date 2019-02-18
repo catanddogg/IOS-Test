@@ -19,7 +19,7 @@ namespace IllyaVirych.Droid.ViewModels
         private MarkerOptions _markerOptions;
         private LatLng _latLng;
         private double _lalitude;
-        private double _longitude;
+        private double _longitude;        
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -46,13 +46,13 @@ namespace IllyaVirych.Droid.ViewModels
             var networkAccess = this.ViewModel.NetworkAccess;
             if (networkAccess != NetworkAccess.Internet)
             {
-                Toast.MakeText(this.Context, "You do not have network access!", ToastLength.Short).Show();
+                Toast.MakeText(this.Context, Resource.String.networkAccessAlert, ToastLength.Short).Show();
                 return;
             }
             var lalitudeGoogleMarker = this.ViewModel.LalitudeMarker;
             if (lalitudeGoogleMarker == 0)
             {
-                Toast.MakeText(this.Context, "Put marker in google map!", ToastLength.Short).Show();
+                Toast.MakeText(this.Context, Resource.String.putMarkerGoogleMapAlert, ToastLength.Short).Show();
             }
         }
 

@@ -17,7 +17,7 @@ namespace IllyaVirych.Droid.ViewModels
     {
         MvxRecyclerView _recyclerView;
         RecyclerView.LayoutManager _layoutManager;
-        protected override int FragmentId => Resource.Layout.ListTaskView;
+        protected override int FragmentId => Resource.Layout.ListTaskView;        
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -44,7 +44,7 @@ namespace IllyaVirych.Droid.ViewModels
             var networkAccess = this.ViewModel.NetworkAccess;
             if (networkAccess != NetworkAccess.Internet)
             {
-                Toast.MakeText(this.Context, "You do not have network access!", ToastLength.Short).Show();
+                Toast.MakeText(this.Context, Resource.String.networkAccessAlert, ToastLength.Short).Show();
             }
         }
     }

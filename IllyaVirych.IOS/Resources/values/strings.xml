@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <string name="networkAccessAlert">"You do not have network access!"</string>
+  <string name="deleteMarkerAlertHasMarker">"Task marker has been deleted!"</string>
+  <string name="saveTaskAlert">"Enter Name Task!";</string>
+  <string name="fontname">"13185.ttf"</string>
+  <string name="deleteMarkerAlert">"Task have not marker!"</string>
+  <string name="putMarkerGoogleMapAlert">"Put marker in google map!"</string>
+</resources>

@@ -16,7 +16,12 @@ namespace IllyaVirych.IOS.Views
         {
         }
 
-        UIButton _buttonBack;
+        private UIButton _buttonBack;
+        private readonly string _saveTaskAlert = "Enter Name Task!";
+        private readonly string _deleteMarkerAlertHasMarker = "Task marker has been deleted!";
+        private readonly string _deleteMarkerAlert = "Task have not marker!";
+        private readonly string _networkAccessAlert = "You do not have network access!";
+        private readonly string _ok = "OK";
 
         public override void ViewDidLoad()
         {
@@ -28,7 +33,9 @@ namespace IllyaVirych.IOS.Views
             _buttonBack = new UIButton(UIButtonType.Custom);
             _buttonBack.Frame = new CGRect(0, 0, 40, 40);
             _buttonBack.SetImage(UIImage.FromBundle("BackIcon"), UIControlState.Normal);
-            this.NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem(_buttonBack), false);          
+            this.NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem(_buttonBack), false);
+
+            DescriptionTask.Font = UIFont.FromName("MyCustomFont", 12.0f);
 
             var hideKeybord = new UITapGestureRecognizer(() => View.EndEditing(true));
             View.AddGestureRecognizer(hideKeybord);
@@ -57,21 +64,21 @@ namespace IllyaVirych.IOS.Views
             var networkAccess = this.ViewModel.NetworkAccess;
             if (networkAccess != NetworkAccess.Internet)
             {
-                var AllertSave = UIAlertController.Create("", "You do not have network access!", UIAlertControllerStyle.Alert);
-                AllertSave.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                var AllertSave = UIAlertController.Create("", _networkAccessAlert, UIAlertControllerStyle.Alert);
+                AllertSave.AddAction(UIAlertAction.Create(_ok, UIAlertActionStyle.Default, null));
                 PresentViewController(AllertSave, true, null);
                 return;
             }
             var LalitudeMarker = this.ViewModel.LalitudeMarkerResult;
             if (LalitudeMarker == 0)
             {
-                var AllertDeleteMarker_1 = UIAlertController.Create("", "Task have not marker!", UIAlertControllerStyle.Alert);
-                AllertDeleteMarker_1.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                var AllertDeleteMarker_1 = UIAlertController.Create("", _deleteMarkerAlert, UIAlertControllerStyle.Alert);
+                AllertDeleteMarker_1.AddAction(UIAlertAction.Create(_ok, UIAlertActionStyle.Default, null));
                 PresentViewController(AllertDeleteMarker_1, true, null);
                 return;
             }
-            var AllertDeleteMarker_2 = UIAlertController.Create("", "Task marker has been deleted!", UIAlertControllerStyle.Alert);
-            AllertDeleteMarker_2.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+            var AllertDeleteMarker_2 = UIAlertController.Create("", _deleteMarkerAlertHasMarker, UIAlertControllerStyle.Alert);
+            AllertDeleteMarker_2.AddAction(UIAlertAction.Create(_ok, UIAlertActionStyle.Default, null));
             PresentViewController(AllertDeleteMarker_2, true, null);
         }
 
@@ -80,16 +87,16 @@ namespace IllyaVirych.IOS.Views
             var networkAccess = this.ViewModel.NetworkAccess;
             if (networkAccess != NetworkAccess.Internet)
             {
-                var AllertSave = UIAlertController.Create("", "You do not have network access!", UIAlertControllerStyle.Alert);
-                AllertSave.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                var AllertSave = UIAlertController.Create("", _networkAccessAlert, UIAlertControllerStyle.Alert);
+                AllertSave.AddAction(UIAlertAction.Create(_ok, UIAlertActionStyle.Default, null));
                 PresentViewController(AllertSave, true, null);
                 return;
             }
             var NameTask = this.ViewModel.NameTask;
             if (NameTask == null)
             {
-                var AllertSave = UIAlertController.Create("", "Enter name task!", UIAlertControllerStyle.Alert);
-                AllertSave.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                var AllertSave = UIAlertController.Create("", _saveTaskAlert, UIAlertControllerStyle.Alert);
+                AllertSave.AddAction(UIAlertAction.Create(_ok, UIAlertActionStyle.Default, null));
                 PresentViewController(AllertSave, true, null);
             }
         }
@@ -99,8 +106,8 @@ namespace IllyaVirych.IOS.Views
             var networkAccess = this.ViewModel.NetworkAccess;
             if (networkAccess != NetworkAccess.Internet)
             {
-                var AllertSave = UIAlertController.Create("", "You do not have network access!", UIAlertControllerStyle.Alert);
-                AllertSave.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                var AllertSave = UIAlertController.Create("", _networkAccessAlert, UIAlertControllerStyle.Alert);
+                AllertSave.AddAction(UIAlertAction.Create(_ok, UIAlertActionStyle.Default, null));
                 PresentViewController(AllertSave, true, null);
             }
         }

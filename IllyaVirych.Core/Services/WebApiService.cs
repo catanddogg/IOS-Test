@@ -14,8 +14,7 @@ namespace IllyaVirych.Core.Services
     {
         private ITaskService _iTaskService;        
         HttpClient client;
-        public Action OnWebApiSaveHandler { get; set; }
-
+        public Action OnWebApiSaveHandler { get; set; }       
 
         public WebApiService(ITaskService iTaskService)
         {

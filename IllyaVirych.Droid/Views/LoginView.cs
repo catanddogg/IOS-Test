@@ -11,7 +11,7 @@ namespace IllyaVirych.Droid.ViewModels
     public class LoginView : BaseFragment<LoginViewModel>
     {      
         protected override int FragmentId => Resource.Layout.LoginView;
-        private ImageButton _imageButton;              
+        private ImageButton _imageButton;        
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -25,7 +25,7 @@ namespace IllyaVirych.Droid.ViewModels
                 var networkAccess = this.ViewModel.NetworkAccess;
                 if (networkAccess != NetworkAccess.Internet)
                 {
-                    Toast.MakeText(this.Context, "You do not have network access!", ToastLength.Short).Show();
+                    Toast.MakeText(this.Context, Resource.String.networkAccessAlert, ToastLength.Short).Show();
                     return;
                 }
                 InstagramLogin();

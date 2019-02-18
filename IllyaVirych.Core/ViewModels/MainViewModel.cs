@@ -10,7 +10,8 @@ namespace IllyaVirych.Core.ViewModels
     public class MainViewModel : BaseViewModel
     {
         private readonly IMvxNavigationService _navigationService;
-        private readonly ILoginService _iLoginService;         
+        private readonly ILoginService _iLoginService;
+        private readonly string _currentLoadingId = "id";
         public IMvxCommand CurrentMainViewCommand { get; set; }   
         public IMvxCommand TestIOSCommand { get; set; }
         public IMvxCommand MenuViewCommand { get; set; }
@@ -26,7 +27,7 @@ namespace IllyaVirych.Core.ViewModels
 
         private async Task CurrentMainView()
         {
-            if (CrossSettings.Current.Contains("id") == true)
+            if (CrossSettings.Current.Contains(_currentLoadingId) == true)
             {
                 CurrentInstagramUser.CurrentInstagramUserId = CrossSettings.Current.GetValueOrDefault("id", string.Empty).ToString();                
                 await _navigationService.Navigate<ListTaskViewModel>();

@@ -17,8 +17,10 @@ namespace IllyaVirych.IOS.Views
     {
         private UIButton _buttonBack, _buttonSavePin;
         private double _lalitude, _longitude;      
-
-        const string AnnotationIdentifierDefaultClusterPin = "TKDefaultClusterPin";
+        private readonly string _annotationIdentifierDefaultClusterPin = "TKDefaultClusterPin";
+        private readonly string _networkAccessAlert = "You do not have network access!";
+        private readonly string _putMarkerGoogleMapAlert = "Put marker in google map!";
+        private readonly string _ok = "Ok";
 
         public MapsView () : base (nameof(MapsView), null)
         {
@@ -52,41 +54,41 @@ namespace IllyaVirych.IOS.Views
 
         private void SetUpMapView()
         {
-            MapViewIOS = new MKMapView();
-            View = MapViewIOS;
-            MapViewIOS.ZoomEnabled = true;
-            MapViewIOS.ScrollEnabled = true;
+            MapKitView = new MKMapView();
+            View = MapKitView;
+            MapKitView.ZoomEnabled = true;
+            MapKitView.ScrollEnabled = true;
             CLLocationManager locationManager = new CLLocationManager();
             locationManager.RequestWhenInUseAuthorization();
-            MapViewIOS.ShowsUserLocation = true;
+            MapKitView.ShowsUserLocation = true;
 
-            MapViewIOS.DidUpdateUserLocation += delegate
+            MapKitView.DidUpdateUserLocation += delegate
             {
-                if (MapViewIOS.UserLocation != null)
+                if (MapKitView.UserLocation != null)
                 {
-                    CLLocationCoordinate2D coordinateUser = MapViewIOS.UserLocation.Coordinate;
+                    CLLocationCoordinate2D coordinateUser = MapKitView.UserLocation.Coordinate;
                     MKCoordinateSpan coordinateSpanUser = new MKCoordinateSpan(0.02, 0.02);
-                    MapViewIOS.Region = new MKCoordinateRegion(coordinateUser, coordinateSpanUser);
+                    MapKitView.Region = new MKCoordinateRegion(coordinateUser, coordinateSpanUser);
                 }
             };
-            if (!MapViewIOS.UserLocationVisible)
+            if (!MapKitView.UserLocationVisible)
             {
                 CLLocationCoordinate2D coords = new CLLocationCoordinate2D(49.99181, 36.23572);
                 MKCoordinateSpan span = new MKCoordinateSpan(0.05, 0.05);
-                MapViewIOS.Region = new MKCoordinateRegion(coords, span);
+                MapKitView.Region = new MKCoordinateRegion(coords, span);
             }
 
             var longGesture = new UILongPressGestureRecognizer(LongPress);
             longGesture.MinimumPressDuration = 0.5;
-            MapViewIOS.AddGestureRecognizer(longGesture);
+            MapKitView.AddGestureRecognizer(longGesture);
 
-            MapViewIOS.GetViewForAnnotation += GetViewForAnnotation;           
+            MapKitView.GetViewForAnnotation += GetViewForAnnotation;           
 
             if (ViewModel.LalitudeMarker != 0)
             {
                 _lalitude = this.ViewModel.LalitudeMarker;
                 _longitude = this.ViewModel.LongitudeMarker;
-                MapViewIOS.AddAnnotations(new MKPointAnnotation()
+                MapKitView.AddAnnotations(new MKPointAnnotation()
                 {
                     Coordinate = new CLLocationCoordinate2D(_lalitude, _longitude)
                 });
@@ -98,25 +100,25 @@ namespace IllyaVirych.IOS.Views
             var networkAccess = this.ViewModel.NetworkAccess;
             if (networkAccess != NetworkAccess.Internet)
             {
-                var AllertSave = UIAlertController.Create("", "You do not have network access!", UIAlertControllerStyle.Alert);
-                AllertSave.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                var AllertSave = UIAlertController.Create("", _networkAccessAlert, UIAlertControllerStyle.Alert);
+                AllertSave.AddAction(UIAlertAction.Create(_ok, UIAlertActionStyle.Default, null));
                 PresentViewController(AllertSave, true, null);
                 return;
             }
             var lalitudeGoogleMarker = this.ViewModel.LalitudeMarker;
             if (lalitudeGoogleMarker == 0)
             {
-                var AllertSave = UIAlertController.Create("", "Put marker in google map!", UIAlertControllerStyle.Alert);
-                AllertSave.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                var AllertSave = UIAlertController.Create("", _putMarkerGoogleMapAlert, UIAlertControllerStyle.Alert);
+                AllertSave.AddAction(UIAlertAction.Create(_ok, UIAlertActionStyle.Default, null));
                 PresentViewController(AllertSave, true, null);
             }
         }
 
         private void LongPress(UILongPressGestureRecognizer gesture)
         {
-            MapViewIOS.RemoveAnnotations(MapViewIOS.Annotations);
-            CGPoint touchPoint = gesture.LocationInView(MapViewIOS);
-            CLLocationCoordinate2D touchMapCoordinate = MapViewIOS.ConvertPoint(touchPoint, MapViewIOS);
+            MapKitView.RemoveAnnotations(MapKitView.Annotations);
+            CGPoint touchPoint = gesture.LocationInView(MapKitView);
+            CLLocationCoordinate2D touchMapCoordinate = MapKitView.ConvertPoint(touchPoint, MapKitView);
 
             MKAnnotationClass annotation = new MKAnnotationClass();
             annotation.Coordinate2D = touchMapCoordinate;
@@ -124,9 +126,9 @@ namespace IllyaVirych.IOS.Views
             _longitude = annotation.Coordinate2D.Longitude;
             ViewModel.LalitudeMarker = _lalitude;
             ViewModel.LongitudeMarker = _longitude;
-            MapViewIOS.AddAnnotation(annotation);            
+            MapKitView.AddAnnotation(annotation);
 
-            MapViewIOS.AddAnnotations(new MKPointAnnotation()
+            MapKitView.AddAnnotations(new MKPointAnnotation()
             {               
                 Coordinate = new CLLocationCoordinate2D(_lalitude, _longitude)
             });
@@ -139,11 +141,11 @@ namespace IllyaVirych.IOS.Views
 
             if (customAnnotation == null) return null;
 
-            var annotationView = mapView.DequeueReusableAnnotation(AnnotationIdentifierDefaultClusterPin);
+            var annotationView = mapView.DequeueReusableAnnotation(_annotationIdentifierDefaultClusterPin);
 
             if (annotationView == null)
             {
-                annotationView = new MKAnnotationView(customAnnotation, AnnotationIdentifierDefaultClusterPin);
+                annotationView = new MKAnnotationView(customAnnotation, _annotationIdentifierDefaultClusterPin);
             }
             else
             {

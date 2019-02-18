@@ -11,6 +11,8 @@ namespace IllyaVirych.IOS.Views
     [MvxModalPresentation(WrapInNavigationController = true)]
     public partial class LoginView : MvxViewController<LoginViewModel>
     {
+        private readonly string _networkAccessAlert = "You do not have network access!";
+
         public LoginView () : base (nameof(LoginView), null)
         {
         }
@@ -27,14 +29,14 @@ namespace IllyaVirych.IOS.Views
             set.Bind(LabelNetworkAccessLoginView).For(v => v.Hidden).To(vm => vm.NetworkAccess).WithConversion("Status");
             set.Bind(LoginButton).To(vm => vm.LoginWebViewCommand);
             set.Apply();
-        }
+        }    
 
         private void ButtonLoginClick(object sender, EventArgs e)
         {
             var networkAccess = this.ViewModel.NetworkAccess;
             if (networkAccess != NetworkAccess.Internet)
             {
-                var AllertSave = UIAlertController.Create("", "You do not have network access!", UIAlertControllerStyle.Alert);
+                var AllertSave = UIAlertController.Create("", _networkAccessAlert, UIAlertControllerStyle.Alert);
                 AllertSave.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
                 PresentViewController(AllertSave, true, null);
             }

@@ -18,7 +18,8 @@ namespace IllyaVirych.Droid.ViewModels
         
         private RelativeLayout _linearLayoutMain;
         private Android.Support.V7.Widget.Toolbar _toolbar;
-        private View _view;
+        private View _view;        
+        private readonly string _fontname = "13185.ttf";       
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -40,7 +41,7 @@ namespace IllyaVirych.Droid.ViewModels
             };
             var txtTaskView = view.FindViewById<TextView>(Resource.Id.task_text);
             var txtNameTaskView = view.FindViewById<TextView>(Resource.Id.name_text);
-            Typeface tf = Typeface.CreateFromAsset(Activity.Assets, "13185.ttf");
+            Typeface tf = Typeface.CreateFromAsset(Activity.Assets, _fontname);
             txtTaskView.SetTypeface(tf, TypefaceStyle.Normal);
             txtNameTaskView.SetTypeface(tf, TypefaceStyle.Normal);
 
@@ -56,7 +57,7 @@ namespace IllyaVirych.Droid.ViewModels
             var networkAccess = this.ViewModel.NetworkAccess;
             if (networkAccess != NetworkAccess.Internet)
             {
-                Toast.MakeText(this.Context, "You do not have network access!", ToastLength.Short).Show();
+                Toast.MakeText(this.Context, Resource.String.networkAccessAlert, ToastLength.Short).Show();
             }
         }
 
@@ -65,16 +66,16 @@ namespace IllyaVirych.Droid.ViewModels
             var networkAccess = this.ViewModel.NetworkAccess;
             if (networkAccess != NetworkAccess.Internet)
             {
-                Toast.MakeText(this.Context, "You do not have network access!", ToastLength.Short).Show();
+                Toast.MakeText(this.Context, Resource.String.networkAccessAlert, ToastLength.Short).Show();
                 return;
             }
             var LalitudeMarker = this.ViewModel.LalitudeMarkerResult;
             if (LalitudeMarker == 0)
             {
-                Toast.MakeText(this.Context, "Task have not marker!", ToastLength.Short).Show();
+                Toast.MakeText(this.Context, Resource.String.deleteMarkerAlert, ToastLength.Short).Show();
                 return;
             }
-            Toast.MakeText(this.Context, "Task marker has been deleted!", ToastLength.Short).Show();
+            Toast.MakeText(this.Context, Resource.String.deleteMarkerAlertHasMarker, ToastLength.Short).Show();
         }
 
         private void ButtonSaveTaskClick(object sender, EventArgs e)
@@ -82,13 +83,13 @@ namespace IllyaVirych.Droid.ViewModels
             var networkAccess = this.ViewModel.NetworkAccess;
             if (networkAccess != NetworkAccess.Internet)
             {
-                Toast.MakeText(this.Context, "You do not have network access!", ToastLength.Short).Show();
+                Toast.MakeText(this.Context, Resource.String.networkAccessAlert, ToastLength.Short).Show();
                 return;
             }
             var nameTask = this.ViewModel.NameTask;
             if (nameTask == null)
             {
-                Toast.MakeText(this.Context, "Enter Name Task!", ToastLength.Short).Show();
+                Toast.MakeText(this.Context, Resource.String.saveTaskAlert, ToastLength.Short).Show();
             }
         }
 

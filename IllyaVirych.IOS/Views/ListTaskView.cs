@@ -20,6 +20,7 @@ namespace IllyaVirych.IOS.Views
         private UICollectionViewFlowLayout _listTaskCollectionViewFlowLayout;
         private TaskListCollectionViewSource _source;
         private MvxUIRefreshControl _refreshListTaskControl;
+        private readonly string _networkAccessAlert = "You do not have network access!";
 
         public ListTaskView () : base (nameof(ListTaskView), null)
         {          
@@ -80,14 +81,14 @@ namespace IllyaVirych.IOS.Views
             set.Bind(_refreshListTaskControl).For(v => v.IsRefreshing).To(vm => vm.RefreshTaskCollection);
             set.Bind(_refreshListTaskControl).For(v => v.RefreshCommand).To(vm => vm.RefreshTaskCommand);
             set.Apply();
-        }
+        }       
 
         private void ButtonAddTaskClick(object sender, EventArgs e)
         {
             var networkAccess = this.ViewModel.NetworkAccess;
             if (networkAccess != NetworkAccess.Internet)
             {
-                var AllertSave = UIAlertController.Create("", "You do not have network access!", UIAlertControllerStyle.Alert);
+                var AllertSave = UIAlertController.Create("", _networkAccessAlert, UIAlertControllerStyle.Alert);
                 AllertSave.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
                 PresentViewController(AllertSave, true, null);
             }

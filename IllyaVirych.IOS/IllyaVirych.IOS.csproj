@@ -104,6 +104,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Views\MainView.cs" />
+    <BundleResource Include="Resources\values\strings.xml" />
     <InterfaceDefinition Include="Cell\ListTaskNameCell.xib" />
     <None Include="Info.plist">
       <SubType>Designer</SubType>
@@ -130,6 +131,12 @@
     <InterfaceDefinition Include="Views\LoginWebView.xib">
       <SubType>Designer</SubType>
     </InterfaceDefinition>
+    <BundleResource Include="Resources\13185.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\Lovely Boys Font by 7NTypes_D.otf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cirrious.FluentLayouts.Touch, Version=2.6.0.0, Culture=neutral, processorArchitecture=MSIL">

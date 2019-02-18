@@ -54,7 +54,7 @@ namespace IllyaVirych.Core.ViewModels
 
         public override void ViewAppearing()
         {
-            //LoadingListTask();
+            RefreshTaskCollection = true;
             if (_networkAccess == NetworkAccess.Internet)
             {
                 _iWepApiService.RefreshTasksAsync();
@@ -65,6 +65,7 @@ namespace IllyaVirych.Core.ViewModels
                 Items = new MvxObservableCollection<TaskItem>(list);
                 RaisePropertyChanged(() => Items);
             }
+            RefreshTaskCollection = false;
             base.ViewAppearing();
         }
 
@@ -89,18 +90,6 @@ namespace IllyaVirych.Core.ViewModels
                 RaisePropertyChanged(() => Items);
             }
         }
-
-        //private async Task LoadingListTask()
-        //{
-        //    RefreshTaskCollection = true;
-        //    await Task.Run(() => test());
-        //    RefreshTaskCollection = false;
-        //}
-
-        //private void test()
-        //{
-
-        //}
 
         private async Task TaskCreate(TaskItem task)
         {

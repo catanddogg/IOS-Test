@@ -9,14 +9,9 @@ namespace IllyaVirych.Core
 {
     public class AppStart : MvxAppStart 
     {
-        private readonly IMvxNavigationService _navigationService;
-        private readonly ILoginService _iLoginSrvice;
-
-        public AppStart(IMvxApplication app, IMvxNavigationService navigationService, ILoginService iLoginService)
+        public AppStart(IMvxApplication app, IMvxNavigationService navigationService)
             : base(app, navigationService)
         {
-            _navigationService = navigationService;
-            _iLoginSrvice = iLoginService;
         }
 
         protected override Task NavigateToFirstViewModel(object hint = null)
