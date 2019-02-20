@@ -7,26 +7,26 @@ namespace IllyaVirych.IOS.Views
     [MvxRootPresentation]
     public class MainView : MvxViewController<MainViewModel>
     {
+        #region Variables
         private bool _firstTimePresented = true;
+        #endregion
 
+        #region Constructors
         public MainView()
         {
         }
+        #endregion
 
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-        }
-
+        #region Lifecycle
         public override void ViewDidAppear(bool animated)
         {
-            base.ViewDidAppear(animated);            
+            base.ViewDidAppear(animated);
             if (_firstTimePresented)
             {
-                _firstTimePresented = false;                
+                _firstTimePresented = false;
                 ViewModel.CurrentMainViewCommand.Execute(null);
             }
         }
-
+        #endregion
     }
 }

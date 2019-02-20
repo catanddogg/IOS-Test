@@ -15,15 +15,17 @@ namespace IllyaVirych.Droid.ViewModels
     [MvxFragmentPresentation(typeof(MainViewModel), Resource.Id.content_frame, true)]
     public class ListTaskView : BaseFragment<ListTaskViewModel>
     {
-        MvxRecyclerView _recyclerView;
-        RecyclerView.LayoutManager _layoutManager;
-        protected override int FragmentId => Resource.Layout.ListTaskView;        
+        #region Variables
+        private MvxRecyclerView _recyclerView;
+        private RecyclerView.LayoutManager _layoutManager;
+        #endregion
 
+        #region Lifecycle
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            var view = base.OnCreateView(inflater, container, savedInstanceState);
+            View view = base.OnCreateView(inflater, container, savedInstanceState);
             HasOptionsMenu = true;
-            _recyclerView = view.FindViewById<MvxRecyclerView>(Resource.Id.RecyclerView);
+            _recyclerView = view.FindViewById<MvxRecyclerView>(Resource.Id.MyApp);
             _layoutManager = new GridLayoutManager(this.Context, 2);
             _recyclerView.SetLayoutManager(_layoutManager);
             var recyclerAdapter = new TaskListAdapter((IMvxAndroidBindingContext)this.BindingContext);
@@ -32,20 +34,12 @@ namespace IllyaVirych.Droid.ViewModels
             ParentActivity.SetSupportActionBar(toolbar);
             ParentActivity.SupportActionBar.Title = "";
             ViewModel.ShowMenuViewModelCommand.Execute(null);
-
-            var buttonddTaskSave = view.FindViewById<ImageButton>(Resource.Id.ButtonAddTaskToolbar);
-            buttonddTaskSave.Click += ButtonAddTaskSaveClick;
-
             return view;
         }
+        #endregion
 
-        private void ButtonAddTaskSaveClick(object sender, EventArgs e)
-        {
-            var networkAccess = this.ViewModel.NetworkAccess;
-            if (networkAccess != NetworkAccess.Internet)
-            {
-                Toast.MakeText(this.Context, Resource.String.networkAccessAlert, ToastLength.Short).Show();
-            }
-        }
+        #region Override
+        protected override int FragmentId => Resource.Layout.ListTaskView;
+        #endregion
     }
 }

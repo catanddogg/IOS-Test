@@ -2,7 +2,7 @@
 using Android.Util;
 using Android.Widget;
 
-namespace IllyaVirych.Droid.SquareLayout
+namespace IllyaVirych.Droid.CustomComponent
 {
     public class SquareLayout : LinearLayout
     {

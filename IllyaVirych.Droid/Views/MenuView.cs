@@ -14,25 +14,30 @@ namespace IllyaVirych.Droid.ViewModels
     [MvxFragmentPresentation(typeof(MainViewModel), Resource.Id.navigation_frame, true)]
     public class MenuFragment : MvxFragment<MenuViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {
-        private NavigationView _navigationView;       
-       
+        #region Variables
+        private NavigationView _navigationView;
+        #endregion
+
+        #region Lifecycle
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            var ignore = base.OnCreateView(inflater, container, savedInstanceState);
+            View ignore = base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.MenuView, null);
+            View view = this.BindingInflate(Resource.Layout.MenuView, null);
 
             _navigationView = view.FindViewById<NavigationView>(Resource.Id.navigation_menu_view);
-            _navigationView.SetNavigationItemSelectedListener(this);            
+            _navigationView.SetNavigationItemSelectedListener(this);
             return view;
         }
+        #endregion
 
+        #region Methods
         public bool OnNavigationItemSelected(IMenuItem item)
         {
             Navigate(item.ItemId);
             return true;
         }
-        private async Task Navigate(int itemId)
+        private async void Navigate(int itemId)
         {
             ((MainView)Activity).DrawerLayout.CloseDrawers();
             await Task.Delay(TimeSpan.FromMilliseconds(250));
@@ -49,5 +54,6 @@ namespace IllyaVirych.Droid.ViewModels
                 ViewModel.LoginViewCommand.Execute(null);
             }
         }
+        #endregion
     }
 }

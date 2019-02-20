@@ -9,12 +9,12 @@ using Xamarin.Essentials;
 namespace IllyaVirych.Core.ViewModels
 {
     public class MapsViewModel : BaseViewModel
-    {        
+    {
+        #region Variables
         private readonly IMvxNavigationService _navigationService;
-        private readonly ITaskService _iTaskService;
+        private readonly ITaskService _taskService;
+        private IAlertService _alertService;
         private readonly IMvxMessenger _messenger;
-        public IMvxCommand BackTaskCommand { get; set; }
-        public IMvxAsyncCommand SaveMapPointCommand { get; set; }
         private double _lalitudeMarker;
         private double _longitudeMarker;
         private int _idTask;
@@ -24,18 +24,90 @@ namespace IllyaVirych.Core.ViewModels
         private readonly MvxSubscriptionToken _token;
         private double _lalitudeMarkerBack;
         private double _longlitudeMarkerBack;
-        private NetworkAccess _networkAccess;
+        private bool _changedNetworkAccess;
+        private readonly string _networkAccessAlert = "You do not have network access!";
+        private readonly string _putMarkerGoogleMapAlert = "Put marker in google map!";
+        #endregion
 
-        public MapsViewModel(IMvxNavigationService navigationService, ITaskService iTaskService, IMvxMessenger messenger)
+        #region Constructors
+        public MapsViewModel(IMvxNavigationService navigationService, ITaskService taskService, IMvxMessenger messenger, IAlertService alertService)
         {
             _navigationService = navigationService;
-            _iTaskService = iTaskService;
-            _messenger = messenger;            
-            _token = messenger.Subscribe<MapMessenger>(OnLosationMessage);          
+            _taskService = taskService;
+            _messenger = messenger;
+            _alertService = alertService;
+            _token = messenger.Subscribe<MapMessenger>(OnLosationMessage);
             BackTaskCommand = new MvxAsyncCommand(BackMap);
-            SaveMapPointCommand = new MvxAsyncCommand(SaveMapPoint);                 
+            SaveMapPointCommand = new MvxAsyncCommand(SaveMapPoint);
+            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+            {
+                ChangedNetworkAccess = true;
+            }
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
-        
+        #endregion
+
+        #region Properties
+        public bool ChangedNetworkAccess
+        {
+            get
+            {
+
+                return _changedNetworkAccess;
+
+            }
+            set
+            {
+                _changedNetworkAccess = value;
+                RaisePropertyChanged(() => ChangedNetworkAccess);
+            }
+        }
+
+
+
+        public double LalitudeMarker
+        {
+            get
+            {
+                return _lalitudeMarker;
+            }
+            set
+            {
+                _lalitudeMarker = value;
+                RaisePropertyChanged(() => LalitudeMarker);
+            }
+        }
+
+        public double LongitudeMarker
+        {
+            get
+            {
+                return _longitudeMarker;
+            }
+            set
+            {
+                _longitudeMarker = value;
+                RaisePropertyChanged(() => LongitudeMarker);
+            }
+        }
+        #endregion
+
+        #region Commands
+        public IMvxCommand BackTaskCommand { get; set; }
+        public IMvxAsyncCommand SaveMapPointCommand { get; set; }
+        #endregion
+
+        #region Methods
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            if (e.NetworkAccess == NetworkAccess.Internet)
+            {
+                ChangedNetworkAccess = true;
+                return;
+            }
+            ChangedNetworkAccess = false;
+        }
+
         private async Task BackMap()
         {
             await _navigationService.Navigate<TaskViewModel>();
@@ -58,7 +130,7 @@ namespace IllyaVirych.Core.ViewModels
         {
             _idTask = mapMesseger.IdTask;
             LalitudeMarker = mapMesseger.LalitudeMarkerResult;
-            LongitudeMarker= mapMesseger.LongitudeMarkerResult;
+            LongitudeMarker = mapMesseger.LongitudeMarkerResult;
             _nameTaskBackResult = mapMesseger.NameTaskResult;
             _descriptionTaskBackResult = mapMesseger.DescriptionTaskResult;
             _statusTaskBackResult = mapMesseger.StatusTaskResult;
@@ -68,71 +140,33 @@ namespace IllyaVirych.Core.ViewModels
 
         private async Task SaveMapPoint()
         {
-            await RaisePropertyChanged(() => NetworkAccess);
-            if (_networkAccess == NetworkAccess.Internet)
+            if (_changedNetworkAccess == false)
             {
-                if (LalitudeMarker == 0 & LongitudeMarker == 0)
-                {
-                    return;
-                }
-                if (LalitudeMarker != 0 & LongitudeMarker != 0)
-                {
-                    await _navigationService.Navigate<TaskViewModel>();
-
-                    var message = new MapMessenger(this,
-                        _idTask,
-                  LalitudeMarker,
-                  LongitudeMarker,
-                  _nameTaskBackResult,
-                  _descriptionTaskBackResult,
-                  _statusTaskBackResult
-                     );
-                    _messenger.Publish(message);
-                    _messenger.Unsubscribe<MapMessenger>(_token);
-                }
+                _alertService.ShowAlert(_networkAccessAlert);
+                return;
             }
+            if (LalitudeMarker == 0 & LongitudeMarker == 0)
+            {
+                _alertService.ShowAlert(_putMarkerGoogleMapAlert);
+                return;
+            }
+            if (LalitudeMarker != 0 & LongitudeMarker != 0)
+            {
+                await _navigationService.Navigate<TaskViewModel>();
+
+                var message = new MapMessenger(this,
+                    _idTask,
+              LalitudeMarker,
+              LongitudeMarker,
+              _nameTaskBackResult,
+              _descriptionTaskBackResult,
+              _statusTaskBackResult
+                 );
+                _messenger.Publish(message);
+                _messenger.Unsubscribe<MapMessenger>(_token);
+            }
+
         }
-
-        public NetworkAccess NetworkAccess
-        {
-            get
-            {
-                _networkAccess = Connectivity.NetworkAccess;
-                return _networkAccess;
-            }
-            set
-            {
-                _networkAccess = value;
-                RaisePropertyChanged(() => NetworkAccess);
-            }
-        }
-
-        public double LalitudeMarker
-        {
-            get
-            {
-                return _lalitudeMarker;
-            }
-            set
-            {
-                _lalitudeMarker = value;
-                RaisePropertyChanged(() => NetworkAccess);
-                RaisePropertyChanged(() => LalitudeMarker);
-            }
-        }
-
-        public double LongitudeMarker 
-        {
-            get
-            {
-                return _longitudeMarker;
-            }
-            set
-            {
-                _longitudeMarker = value;
-                RaisePropertyChanged(() => NetworkAccess);
-                RaisePropertyChanged(() => LongitudeMarker);
-            }
-        }        
+        #endregion
     }
 }

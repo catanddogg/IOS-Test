@@ -7,7 +7,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 
-namespace IllyaVirych.Droid.ViewAdapter
+namespace IllyaVirych.Droid.Views.Holder
 {    
     public class TasksViewHolder : MvxRecyclerViewHolder
     {
@@ -18,7 +18,7 @@ namespace IllyaVirych.Droid.ViewAdapter
         {            
             NameTaskHolder = itemView.FindViewById<TextView>(Resource.Id.txt_name);
             LinearLayoutTaskHolder = itemView.FindViewById<LinearLayout>(Resource.Id.layout_main);            
-            Typeface tf = Typeface.CreateFromAsset(Application.Context.Assets, "13185.ttf");
+            Typeface tf = Typeface.CreateFromAsset(Application.Context.Assets, Application.Context.Resources.GetString(Resource.String.fontname));
             NameTaskHolder.SetTypeface(tf, TypefaceStyle.Normal);
             this.DelayBind(() =>
             {

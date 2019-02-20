@@ -8,8 +8,7 @@ namespace IllyaVirych.Core.Interface
 {
     public interface IWebApiService
     {
-        Action OnWebApiSaveHandler { get; set; }
-        Task<bool> RefreshTasksAsync();
+        Task<List<TaskItem>> RefreshDataAsync();
         Task SaveTaskItem(TaskItem item, int id);
         Task DeleteTaskItem(int id);
     }

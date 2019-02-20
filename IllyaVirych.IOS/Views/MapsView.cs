@@ -15,17 +15,19 @@ namespace IllyaVirych.IOS.Views
     [MvxModalPresentation(WrapInNavigationController = true)]
     public partial class MapsView : MvxViewController<MapsViewModel>, IMKMapViewDelegate
     {
+        #region Variables
         private UIButton _buttonBack, _buttonSavePin;
-        private double _lalitude, _longitude;      
+        private double _lalitude, _longitude;
         private readonly string _annotationIdentifierDefaultClusterPin = "TKDefaultClusterPin";
-        private readonly string _networkAccessAlert = "You do not have network access!";
-        private readonly string _putMarkerGoogleMapAlert = "Put marker in google map!";
-        private readonly string _ok = "Ok";
+        #endregion
 
-        public MapsView () : base (nameof(MapsView), null)
+        #region Constructors
+        public MapsView() : base(nameof(MapsView), null)
         {
         }
+        #endregion
 
+        #region Lifecycle
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -42,16 +44,18 @@ namespace IllyaVirych.IOS.Views
             _buttonSavePin.Frame = new CGRect(0, 0, 40, 40);
             _buttonSavePin.SetImage(UIImage.FromBundle("AddLocationIcon"), UIControlState.Normal);
             this.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(_buttonSavePin), false);
-            _buttonSavePin.TouchUpInside += ButtonGoogleMarkerSaveClick;
 
             SetUpMapView();
 
             var set = this.CreateBindingSet<MapsView, MapsViewModel>();
             set.Bind(_buttonBack).To(vm => vm.BackTaskCommand);
             set.Bind(_buttonSavePin).To(vm => vm.SaveMapPointCommand);
-            set.Apply();           
+            //set.Bind(LabelNetworkAccessTaskView).For(v => v.Hidden).To(vm => vm.NetworkAccess).WithConversion("TrueToFalse");
+            set.Apply();
         }
+        #endregion
 
+        #region Methods
         private void SetUpMapView()
         {
             MapKitView = new MKMapView();
@@ -82,7 +86,7 @@ namespace IllyaVirych.IOS.Views
             longGesture.MinimumPressDuration = 0.5;
             MapKitView.AddGestureRecognizer(longGesture);
 
-            MapKitView.GetViewForAnnotation += GetViewForAnnotation;           
+            MapKitView.GetViewForAnnotation += GetViewForAnnotation;
 
             if (ViewModel.LalitudeMarker != 0)
             {
@@ -92,25 +96,6 @@ namespace IllyaVirych.IOS.Views
                 {
                     Coordinate = new CLLocationCoordinate2D(_lalitude, _longitude)
                 });
-            }
-        }
-
-        private void ButtonGoogleMarkerSaveClick(object sender, EventArgs e)
-        {
-            var networkAccess = this.ViewModel.NetworkAccess;
-            if (networkAccess != NetworkAccess.Internet)
-            {
-                var AllertSave = UIAlertController.Create("", _networkAccessAlert, UIAlertControllerStyle.Alert);
-                AllertSave.AddAction(UIAlertAction.Create(_ok, UIAlertActionStyle.Default, null));
-                PresentViewController(AllertSave, true, null);
-                return;
-            }
-            var lalitudeGoogleMarker = this.ViewModel.LalitudeMarker;
-            if (lalitudeGoogleMarker == 0)
-            {
-                var AllertSave = UIAlertController.Create("", _putMarkerGoogleMapAlert, UIAlertControllerStyle.Alert);
-                AllertSave.AddAction(UIAlertAction.Create(_ok, UIAlertActionStyle.Default, null));
-                PresentViewController(AllertSave, true, null);
             }
         }
 
@@ -129,7 +114,7 @@ namespace IllyaVirych.IOS.Views
             MapKitView.AddAnnotation(annotation);
 
             MapKitView.AddAnnotations(new MKPointAnnotation()
-            {               
+            {
                 Coordinate = new CLLocationCoordinate2D(_lalitude, _longitude)
             });
 
@@ -154,8 +139,9 @@ namespace IllyaVirych.IOS.Views
             annotationView.CanShowCallout = true;
             annotationView.Selected = true;
             annotationView.Draggable = true;
-            
+
             return annotationView;
         }
+        #endregion
     }
 }

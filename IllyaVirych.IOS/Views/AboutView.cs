@@ -10,12 +10,17 @@ namespace IllyaVirych.IOS.Views
     [MvxModalPresentation(WrapInNavigationController = true)]
     public partial class AboutView : MvxViewController<AboutTaskViewModel>
     {
-        public AboutView () : base (nameof(AboutView), null)
+        #region Variables
+        private UIButton _buttonBack;
+        #endregion
+
+        #region Constructors
+        public AboutView() : base(nameof(AboutView), null)
         {
         }
+        #endregion
 
-        private UIButton _buttonBack;
-
+        #region Lifecycle
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -31,9 +36,10 @@ namespace IllyaVirych.IOS.Views
             LabelNetworkAccessAboutView.BackgroundColor = UIColor.Red;
 
             var set = this.CreateBindingSet<AboutView, AboutTaskViewModel>();
-            set.Bind(LabelNetworkAccessAboutView).For(v => v.Hidden).To(vm => vm.NetworkAccess).WithConversion("Status");
+            set.Bind(LabelNetworkAccessAboutView).For(v => v.Hidden).To(vm => vm.ChangedNetworkAccess);
             set.Bind(_buttonBack).To(vm => vm.BackTaskCommand);
             set.Apply();
         }
+        #endregion
     }
 }

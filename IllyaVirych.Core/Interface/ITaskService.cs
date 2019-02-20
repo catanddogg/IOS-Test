@@ -11,11 +11,7 @@ namespace IllyaVirych.Core.Interface
         void DeleteTask(int _idTask);
         void InsertTask(TaskItem task);
         List<TaskItem> GetUserTasks(string currentUserId);
-
-        List<User> GetAllUsers();
         void DeleteAllUserTask(string curretUserId);
-        void InsertAllUserTasks(List<TaskItem> task);
-        User GetUser(string currentInstagramUserId);
-        void InsertUser(User user);      
+        void InsertAllUserTasks(List<TaskItem> task);           
     }
 }

@@ -30,8 +30,7 @@ namespace IllyaVirych.Droid.Services
         {            
             if (CrossSettings.Current.Contains("id") == true)
             {
-                CrossSettings.Current.Clear();                
-                CurrentInstagramUser.CurrentInstagramUserId = null;
+                CrossSettings.Current.Clear();                 
             }
         }       
 
@@ -47,8 +46,7 @@ namespace IllyaVirych.Droid.Services
                 var response = await request.GetResponseAsync();
                 var json = response.GetResponseText();
                 var jobject = JObject.Parse(json);
-                var id_user = jobject["data"]["id"]?.ToString();
-                CurrentInstagramUser.CurrentInstagramUserId = id_user;
+                var id_user = jobject["data"]["id"]?.ToString();                
                 CrossSettings.Current.AddOrUpdateValue("id", id_user);
                 OnLoggedInHandler();
             }

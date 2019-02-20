@@ -1,5 +1,4 @@
 <resources>
-  <string name="app_name">IllyaVirych.Droid</string>
   <string name="action_settings">Settings</string>
   <string name="save_task">Save</string>
   <string name="delete_task">Delete</string>
@@ -13,8 +12,10 @@
   <string name="network_access">You do not have network access!</string>
   <string name="networkAccessAlert">"You do not have network access!"</string>
   <string name="deleteMarkerAlertHasMarker">"Task marker has been deleted!"</string>
-  <string name="saveTaskAlert">"Enter Name Task!";</string>
+  <string name="saveTaskAlert">"Enter Name Task!"</string>
   <string name="fontname">"13185.ttf"</string>
   <string name="deleteMarkerAlert">"Task have not marker!"</string>
   <string name="putMarkerGoogleMapAlert">"Put marker in google map!"</string> 
+  <string name="AccessLocationPermission">Location Permission is allowed</string>
+  <string name="DeniedLocationPermission">Location Permission is denied</string>
 </resources>

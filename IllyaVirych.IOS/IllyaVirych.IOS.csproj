@@ -65,7 +65,7 @@
     <AppExtensionDebugBundleId />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Converter\StatusValueConverter.cs" />
+    <Compile Include="Services\AlertService.cs" />
     <Compile Include="Views\LoginWebView.cs" />
     <Compile Include="Views\LoginWebView.designer.cs">
       <DependentUpon>LoginWebView.cs</DependentUpon>
@@ -80,17 +80,16 @@
     <Compile Include="Views\AboutView.designer.cs">
       <DependentUpon>AboutView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Converter\ColorValueConverter.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
-    <Compile Include="Cell\ListTaskNameCell.cs" />
-    <Compile Include="Cell\ListTaskNameCell.designer.cs">
+    <Compile Include="Views\Cell\ListTaskNameCell.cs" />
+    <Compile Include="Views\Cell\ListTaskNameCell.designer.cs">
       <DependentUpon>ListTaskNameCell.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ListTaskView.cs" />
     <Compile Include="Views\ListTaskView.designer.cs">
       <DependentUpon>ListTaskView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cell\TaskListCollectionViewSource.cs" />
+    <Compile Include="Views\Cell\TaskListCollectionViewSource.cs" />
     <Compile Include="Views\TaskView.cs" />
     <Compile Include="Views\TaskView.designer.cs">
       <DependentUpon>TaskView.cs</DependentUpon>
@@ -105,7 +104,7 @@
     <Compile Include="Setup.cs" />
     <Compile Include="Views\MainView.cs" />
     <BundleResource Include="Resources\values\strings.xml" />
-    <InterfaceDefinition Include="Cell\ListTaskNameCell.xib" />
+    <InterfaceDefinition Include="Views\Cell\ListTaskNameCell.xib" />
     <None Include="Info.plist">
       <SubType>Designer</SubType>
     </None>

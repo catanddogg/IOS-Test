@@ -14,15 +14,20 @@ namespace IllyaVirych.IOS
     [MvxModalPresentation(WrapInNavigationController = true)]
     public partial class LoginWebView : MvxViewController<LoginWebViewModel>, IWKNavigationDelegate
     {
+        #region Variables
         private NSUrlRequest _request;
         private WKWebViewConfiguration _configuration;
         private CGRect _cGRect;
         private WKWebView _webView;
+        #endregion
 
-        public LoginWebView () : base(nameof(LoginWebView), null)
+        #region Constructors
+        public LoginWebView() : base(nameof(LoginWebView), null)
         {
         }
+        #endregion
 
+        #region Lifecycle
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -44,7 +49,9 @@ namespace IllyaVirych.IOS
             _request = new NSUrlRequest(url);
             _webView.LoadRequest(_request);
         }
+        #endregion
 
+        #region Methods
         [Export("webView:didFinishNavigation:")]
         public async void DidFinishNavigation(WKWebView webView, WKNavigation navigation)
         {
@@ -60,11 +67,11 @@ namespace IllyaVirych.IOS
                 string responseBody = await response.Content.ReadAsStringAsync();
                 responseBody.Split(responseBody[12]);
                 var jobject = JObject.Parse(responseBody);
-                var id_user = jobject["data"]["id"]?.ToString();
-                CurrentInstagramUser.CurrentInstagramUserId = id_user;
+                var id_user = jobject["data"]["id"]?.ToString();                
                 CrossSettings.Current.AddOrUpdateValue("id", id_user);
                 ViewModel.LoginNaVigationAndCreateCommand.Execute();
             }
         }
+        #endregion
     }
 }

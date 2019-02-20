@@ -12,11 +12,54 @@ namespace IllyaVirych.Droid.ViewModels
 {
     public abstract class BaseFragment : MvxFragment
     {
+        #region Variables
         private Toolbar _toolbar;
         private MvxActionBarDrawerToggle _drawerToggle;
         protected abstract int FragmentId { get; }
         private bool _enabledDrawerLayout;
+        #endregion
 
+        #region Lifecycle
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            View ignore = base.OnCreateView(inflater, container, savedInstanceState);
+
+            View view = this.BindingInflate(FragmentId, null);
+            _toolbar = view.FindViewById<Toolbar>(Resource.Id.toolbar);
+
+            SetUpToolbar();
+            SetUpDrawerLayout();
+
+            return view;
+        }
+        #endregion
+
+        #region Override 
+        public override void OnConfigurationChanged(Configuration newConfig)
+        {
+            base.OnConfigurationChanged(newConfig);
+            if (FragmentId != Resource.Layout.LoginView)
+            {
+                if (_toolbar != null)
+                {
+                    _drawerToggle.OnConfigurationChanged(newConfig);
+                }
+            }
+        }
+        public override void OnActivityCreated(Bundle savedInstanceState)
+        {
+            base.OnActivityCreated(savedInstanceState);
+            if (FragmentId != Resource.Layout.LoginView)
+            {
+                if (_toolbar != null)
+                {
+                    _drawerToggle.SyncState();
+                }
+            }
+        }
+        #endregion
+
+        #region Properties
         public MvxAppCompatActivity ParentActivity
         {
             get
@@ -24,14 +67,11 @@ namespace IllyaVirych.Droid.ViewModels
                 return (MvxAppCompatActivity)Activity;
             }
         }
+        #endregion
 
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        #region Methods
+        private void SetUpToolbar()
         {
-            var ignore = base.OnCreateView(inflater, container, savedInstanceState);
-
-            var view = this.BindingInflate(FragmentId, null);
-            _toolbar = view.FindViewById<Toolbar>(Resource.Id.toolbar);
-
             if (_toolbar != null)
             {
                 ParentActivity.SetSupportActionBar(_toolbar);
@@ -46,12 +86,9 @@ namespace IllyaVirych.Droid.ViewModels
                 _drawerToggle.DrawerOpened += (object sender, ActionBarDrawerEventArgs e) => ((MainView)Activity)?.HideSoftKeyboard();
                 ((MainView)ParentActivity).DrawerLayout.AddDrawerListener(_drawerToggle);
             }
-            EnableDrawerLayout();
+        }
 
-            return view;
-        } 
-        
-        private  void EnableDrawerLayout()
+        private void SetUpDrawerLayout()
         {
             if (FragmentId == Resource.Layout.LoginView || FragmentId == Resource.Layout.MapsView)
             {
@@ -64,30 +101,9 @@ namespace IllyaVirych.Droid.ViewModels
             int lockMode = _enabledDrawerLayout ? DrawerLayout.LockModeUnlocked : DrawerLayout.LockModeLockedClosed;
             ((MainView)Activity).DrawerLayout.SetDrawerLockMode(lockMode);
         }
-
-        public override void OnConfigurationChanged(Configuration newConfig)
-        {
-            base.OnConfigurationChanged(newConfig);
-            if (FragmentId != Resource.Layout.LoginView)
-            {
-                if (_toolbar != null)
-                {
-                    _drawerToggle.OnConfigurationChanged(newConfig);
-                }
-            }
-        }        
-        public override void OnActivityCreated(Bundle savedInstanceState)
-        {
-            base.OnActivityCreated(savedInstanceState);
-            if (FragmentId != Resource.Layout.LoginView)
-            {
-                if (_toolbar != null)
-                {
-                    _drawerToggle.SyncState();
-                }
-            }
-        }
+        #endregion
     }
+
     public abstract class BaseFragment<TViewModel> : BaseFragment where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel

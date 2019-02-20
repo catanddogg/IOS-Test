@@ -1,78 +1,117 @@
 ﻿using System;
-using Android.Gms.Maps;
-using Android.Gms.Maps.Model;
+using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Views;
-using Android.Widget;
-using IllyaVirych.Core.ViewModels;
+using Android.Views.InputMethods;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
-using Xamarin.Essentials;
+using Android.Widget;
+using static Android.Content.ClipData;
+using Android.Support.V4.Content;
+using Android;
+using Android.Content.PM;
+using Android.App;
+using Android.Support.V4.App;
+using Android.Util;
+using Android.Support.Design.Widget;
+using IllyaVirych.Core.ViewModels;
+using Android.Gms.Maps;
+using Android.Gms.Maps.Model;
+using Android.Runtime;
+using Android.Gms.Common;
+using Android.Gms.Location;
+using Android.Locations;
+using Android.Gms.Tasks;
 
 namespace IllyaVirych.Droid.ViewModels
 {
     [MvxFragmentPresentation(typeof(MainViewModel), Resource.Id.content_frame, false)]
     public class MapsView : BaseFragment<MapsViewModel>, IOnMapReadyCallback
     {
-        protected override int FragmentId => Resource.Layout.MapsView;
+        #region Variables
         private GoogleMap _googleMap;
         private MapView _mapView;
         private MarkerOptions _markerOptions;
         private LatLng _latLng;
         private double _lalitude;
-        private double _longitude;        
+        private double _longitude;
+        static readonly int REQUEST_STORAGE = 0;
+        #endregion
 
+        #region Lifecycle
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            var view = base.OnCreateView(inflater, container, savedInstanceState);
-            
+            View view = base.OnCreateView(inflater, container, savedInstanceState);
             _mapView = (MapView)view.FindViewById(Resource.Id.map);
             _mapView.OnCreate(savedInstanceState);
             _mapView.OnResume();
             _mapView.GetMapAsync(this);
-
-            var buttonMarkerSave = view.FindViewById<ImageButton>(Resource.Id.savegooglemarker);
-            buttonMarkerSave.Click += ButtonMarkerSaveClick;
-
+            
             GoogleMapOptions mapOptions = new GoogleMapOptions()
             .InvokeMapType(GoogleMap.MapTypeSatellite)
             .InvokeZoomControlsEnabled(false)
-            .InvokeCompassEnabled(true);           
+            .InvokeCompassEnabled(true);
 
             return view;
         }
+        #endregion
 
-        private void ButtonMarkerSaveClick(object sender, EventArgs e)
+        #region Override   
+        protected override int FragmentId => Resource.Layout.MapsView;
+        #endregion
+
+        #region Methods
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
-            var networkAccess = this.ViewModel.NetworkAccess;
-            if (networkAccess != NetworkAccess.Internet)
+            if (requestCode != REQUEST_STORAGE)
             {
-                Toast.MakeText(this.Context, Resource.String.networkAccessAlert, ToastLength.Short).Show();
+                base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
                 return;
             }
-            var lalitudeGoogleMarker = this.ViewModel.LalitudeMarker;
-            if (lalitudeGoogleMarker == 0)
+            if (grantResults.Length == 1 && grantResults[0] == Android.Content.PM.Permission.Granted)
             {
-                Toast.MakeText(this.Context, Resource.String.putMarkerGoogleMapAlert, ToastLength.Short).Show();
+                Snackbar.Make(this.View, Resource.String.AccessLocationPermission, Snackbar.LengthShort).Show();
+                return;
+            }
+            Snackbar.Make(this.View, Resource.String.DeniedLocationPermission, Snackbar.LengthShort).Show();
+        }
+  
+        private void GetLocationPermission()
+        {
+            if (ActivityCompat.ShouldShowRequestPermissionRationale(ParentActivity, Manifest.Permission.AccessFineLocation))
+            {                
+                 ActivityCompat.RequestPermissions(ParentActivity, new String[] { Manifest.Permission.AccessFineLocation}, REQUEST_STORAGE);
+            }
+            if(ActivityCompat.ShouldShowRequestPermissionRationale(ParentActivity, Manifest.Permission.AccessCoarseLocation))
+            {
+                ActivityCompat.RequestPermissions(ParentActivity, new String[] {Manifest.Permission.AccessCoarseLocation }, REQUEST_STORAGE);
             }
         }
 
         public void OnMapReady(GoogleMap googleMap)
-        {  
+        {
             _googleMap = googleMap;
             _googleMap.UiSettings.ZoomControlsEnabled = true;
             _googleMap.UiSettings.CompassEnabled = true;
-            
+
+            if (ActivityCompat.CheckSelfPermission(Application.Context, Manifest.Permission.AccessFineLocation) == (Android.Content.PM.Permission.Denied) ||
+                ActivityCompat.CheckSelfPermission(Application.Context, Manifest.Permission.AccessCoarseLocation) == (Android.Content.PM.Permission.Denied))
+            {
+                GetLocationPermission();
+            }
+            _googleMap.MyLocationEnabled = true;
+
             LatLng location = new LatLng(49.99181, 36.23572);
 
             CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
             builder.Target(location);
-            builder.Zoom(15); 
+            builder.Zoom(15);
             CameraPosition cameraPosition = builder.Build();
 
             CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
             _googleMap.MoveCamera(cameraUpdate);
 
-            _markerOptions = new MarkerOptions();                       
+            _markerOptions = new MarkerOptions();
             _markerOptions.Draggable(true);
             if (ViewModel.LalitudeMarker != 0)
             {
@@ -82,7 +121,7 @@ namespace IllyaVirych.Droid.ViewModels
                 _markerOptions.SetPosition(_latLng);
                 _googleMap.AddMarker(_markerOptions);
             }
-            _googleMap.MapClick += MapOptionsClick;            
+            _googleMap.MapClick += MapOptionsClick;
             _googleMap.MarkerDragEnd += MarkerOptionLongClick;
 
             this.ViewModel.LalitudeMarker = _lalitude;
@@ -91,7 +130,7 @@ namespace IllyaVirych.Droid.ViewModels
         private void MarkerOptionLongClick(object sender, GoogleMap.MarkerDragEndEventArgs e)
         {
             _lalitude = e.Marker.Position.Latitude;
-            _longitude = e.Marker.Position.Longitude;            
+            _longitude = e.Marker.Position.Longitude;
             this.ViewModel.LalitudeMarker = _lalitude;
             this.ViewModel.LongitudeMarker = _longitude;
         }
@@ -99,7 +138,7 @@ namespace IllyaVirych.Droid.ViewModels
         private void MapOptionsClick(object sender, GoogleMap.MapClickEventArgs e)
         {
             _lalitude = e.Point.Latitude;
-            _longitude = e.Point.Longitude;            
+            _longitude = e.Point.Longitude;
             this.ViewModel.LalitudeMarker = _lalitude;
             this.ViewModel.LongitudeMarker = _longitude;
             _googleMap.Clear();
@@ -107,6 +146,7 @@ namespace IllyaVirych.Droid.ViewModels
             _markerOptions.SetPosition(_latLng);
             _googleMap.AddMarker(_markerOptions);
             _googleMap.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(_latLng, _googleMap.CameraPosition.Zoom));
-        }             
+        }
+        #endregion
     }
 }

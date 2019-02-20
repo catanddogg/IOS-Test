@@ -2,7 +2,7 @@
 using MvvmCross.Platforms.Ios.Binding.Views;
 using UIKit;
 
-namespace IllyaVirych.IOS
+namespace IllyaVirych.IOS.Views.Cell
 {
     public  class TaskListCollectionViewSource : MvxCollectionViewSource
     {

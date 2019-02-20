@@ -9,7 +9,7 @@ using MvvmCross.ViewModels;
 using System;
 using UIKit;
 
-namespace IllyaVirych.IOS
+namespace IllyaVirych.IOS.Views.Cell
 {
     public partial class ListTaskNameCell : MvxCollectionViewCell
     {
@@ -22,7 +22,7 @@ namespace IllyaVirych.IOS
             {
                 var set = this.CreateBindingSet<ListTaskNameCell, TaskItem>();
                 set.Bind(NameTaskLabel).To(vm => vm.NameTask);
-                set.Bind(this).For(v => v.BackgroundColor).To(vm => vm.StatusTask).WithConversion("Color");
+                set.Bind(this).For(v => v.BackgroundColor).To(vm => vm.StatusTask).WithConversion("StatusTaskToColor");
                 set.Apply();                           
             });           
 

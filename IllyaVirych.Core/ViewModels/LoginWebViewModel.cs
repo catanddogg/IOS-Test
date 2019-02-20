@@ -1,67 +1,55 @@
-﻿using IllyaVirych.Core.Interface;
+﻿using IllyaVirych.Core.Helper;
+using IllyaVirych.Core.Interface;
 using IllyaVirych.Core.Models;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace IllyaVirych.Core.ViewModels
 {
     public class LoginWebViewModel : BaseViewModel
     {
+        #region Variables
         private readonly IMvxNavigationService _navigationService;
         public IMvxCommand ListTaskTaskCommand { get; set; }
-        private ILoginService _iLoginService;
-        private ITaskService _iTaskService;
-        public IMvxCommand LoginCommand { get; set; }
-        public IMvxCommand LoginNaVigationAndCreateCommand { get; set; }
+        private ILoginService _loginService;
+        private IUserService _userService;
         private string _userId;
+        private bool _changedNetworkAccess;
 
-        public LoginWebViewModel(IMvxNavigationService navigationService, ILoginService iLoginService, ITaskService iTaskService)
+        #endregion
+
+        #region Constructors
+        public LoginWebViewModel(IMvxNavigationService navigationService, ILoginService loginService, IUserService userService)
         {
-            _iTaskService = iTaskService;
-            _iLoginService = iLoginService;
+            _loginService = loginService;
             _navigationService = navigationService;
+            _userService = userService;
             ListTaskTaskCommand = new MvxAsyncCommand(BackTask);
-            LoginCommand = new MvxCommand(_iLoginService.LoginInstagram);
+            LoginCommand = new MvxCommand(_loginService.LoginInstagram);
             LoginNaVigationAndCreateCommand = new MvxAsyncCommand(NavigationAndCreate);
-           
-        }
 
-        private async Task NavigationAndCreate()
-        {
-            CreateNewUser();
-            await _navigationService.Navigate<ListTaskViewModel>();
         }
+        #endregion
 
+        #region Lifecycle
         public override void ViewAppearing()
         {
-            if (CurrentInstagramUser.CurrentInstagramUserId == string.Empty)
+            if (UserInstagramId.UserId() == string.Empty)
             {
                 return;
             }
-            User user = _iTaskService.GetUser(CurrentInstagramUser.CurrentInstagramUserId);
+            User user = _userService.GetUser(UserInstagramId.UserId());
             if (user != null)
             {
                 UserId = user.UserId;
             }
         }
-        
-        public void CreateNewUser()
-        {
-            UserId = CurrentInstagramUser.CurrentInstagramUserId;
-            List<User> users = _iTaskService.GetAllUsers();
-            User user = new User(UserId);
-            for (int i = 0; i < users.Count; i++)
-            {
-                if (users[i].UserId == user.UserId)
-                {
-                    return;
-                }
-            }
-            _iTaskService.InsertUser(user);
-        }
+        #endregion
 
+        #region Properties
         public string UserId
         {
             get
@@ -74,10 +62,53 @@ namespace IllyaVirych.Core.ViewModels
                 RaisePropertyChanged(() => UserId);
             }
         }
+        #endregion
 
-        private async Task BackTask()
-        {            
+        #region Commands
+        public IMvxCommand LoginCommand { get; set; }
+        public IMvxCommand LoginNaVigationAndCreateCommand { get; set; }
+        #endregion
+
+        #region Methods
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            if (e.NetworkAccess == NetworkAccess.Internet)
+            {
+                _changedNetworkAccess = true;
+                return;
+            }
+            _changedNetworkAccess = false;
+        }
+
+        private async Task NavigationAndCreate()
+        {
+            CreateNewUser();
             await _navigationService.Navigate<ListTaskViewModel>();
         }
+
+
+
+        public void CreateNewUser()
+        {
+            UserId = UserInstagramId.UserId();
+            List<User> users = _userService.GetAllUsers();
+            User user = new User(UserId);
+            for (int i = 0; i < users.Count; i++)
+            {
+                if (users[i].UserId == user.UserId)
+                {
+                    return;
+                }
+            }
+            _userService.InsertUser(user);
+        }
+
+
+
+        private async Task BackTask()
+        {
+            await _navigationService.Navigate<ListTaskViewModel>();
+        }
+        #endregion
     }
 }

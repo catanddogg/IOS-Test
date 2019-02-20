@@ -12,17 +12,17 @@ namespace IllyaVirych.IOS.Views
     [MvxModalPresentation(WrapInNavigationController = true)]
     public partial class TaskView : MvxViewController<TaskViewModel>
     {
-        public TaskView () : base (nameof(TaskView), null)
+        #region Variables
+        private UIButton _buttonBack;
+        #endregion
+
+        #region Constructors
+        public TaskView() : base(nameof(TaskView), null)
         {
         }
-
-        private UIButton _buttonBack;
-        private readonly string _saveTaskAlert = "Enter Name Task!";
-        private readonly string _deleteMarkerAlertHasMarker = "Task marker has been deleted!";
-        private readonly string _deleteMarkerAlert = "Task have not marker!";
-        private readonly string _networkAccessAlert = "You do not have network access!";
-        private readonly string _ok = "OK";
-
+        #endregion
+  
+        #region Lifecycle
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -42,74 +42,18 @@ namespace IllyaVirych.IOS.Views
 
             LabelNetworkAccessTaskView.BackgroundColor = UIColor.Red;
 
-            DeleteMarkerButton.TouchUpInside += ButtonDeleteMarkerClick;
-            SaveTaskButton.TouchUpInside += ButtonSaveTaskClick;
-            DeleteTaskButton.TouchUpInside += ButtonDeleteTaskClick;
-
             var set = this.CreateBindingSet<TaskView, TaskViewModel>();
-            set.Bind(NameTask).To(vm => vm.NameTask);            
+            set.Bind(NameTask).To(vm => vm.NameTask);
             set.Bind(StatusTask).To(vm => vm.StatusTask);
             set.Bind(DescriptionTask).To(vm => vm.DescriptionTask);
             set.Bind(SaveTaskButton).To(vm => vm.SaveTaskCommand);
             set.Bind(DeleteTaskButton).To(vm => vm.DeleteTaskCommand);
-            set.Bind(LabelNetworkAccessTaskView).For(v => v.Hidden).To(vm => vm.NetworkAccess).WithConversion("Status");
+            set.Bind(LabelNetworkAccessTaskView).For(v => v.Hidden).To(vm => vm.ChangedNetworkAccess);
             set.Bind(MapButton).To(vm => vm.MapCommand);
             set.Bind(DeleteMarkerButton).To(vm => vm.DeleteMarkerMapCommand);
             set.Bind(_buttonBack).To(vm => vm.BackTaskCommand);
             set.Apply();
         }
-
-        private void ButtonDeleteMarkerClick(object sender, EventArgs e)
-        {
-            var networkAccess = this.ViewModel.NetworkAccess;
-            if (networkAccess != NetworkAccess.Internet)
-            {
-                var AllertSave = UIAlertController.Create("", _networkAccessAlert, UIAlertControllerStyle.Alert);
-                AllertSave.AddAction(UIAlertAction.Create(_ok, UIAlertActionStyle.Default, null));
-                PresentViewController(AllertSave, true, null);
-                return;
-            }
-            var LalitudeMarker = this.ViewModel.LalitudeMarkerResult;
-            if (LalitudeMarker == 0)
-            {
-                var AllertDeleteMarker_1 = UIAlertController.Create("", _deleteMarkerAlert, UIAlertControllerStyle.Alert);
-                AllertDeleteMarker_1.AddAction(UIAlertAction.Create(_ok, UIAlertActionStyle.Default, null));
-                PresentViewController(AllertDeleteMarker_1, true, null);
-                return;
-            }
-            var AllertDeleteMarker_2 = UIAlertController.Create("", _deleteMarkerAlertHasMarker, UIAlertControllerStyle.Alert);
-            AllertDeleteMarker_2.AddAction(UIAlertAction.Create(_ok, UIAlertActionStyle.Default, null));
-            PresentViewController(AllertDeleteMarker_2, true, null);
-        }
-
-        private void ButtonSaveTaskClick(object sender, EventArgs e)
-        {
-            var networkAccess = this.ViewModel.NetworkAccess;
-            if (networkAccess != NetworkAccess.Internet)
-            {
-                var AllertSave = UIAlertController.Create("", _networkAccessAlert, UIAlertControllerStyle.Alert);
-                AllertSave.AddAction(UIAlertAction.Create(_ok, UIAlertActionStyle.Default, null));
-                PresentViewController(AllertSave, true, null);
-                return;
-            }
-            var NameTask = this.ViewModel.NameTask;
-            if (NameTask == null)
-            {
-                var AllertSave = UIAlertController.Create("", _saveTaskAlert, UIAlertControllerStyle.Alert);
-                AllertSave.AddAction(UIAlertAction.Create(_ok, UIAlertActionStyle.Default, null));
-                PresentViewController(AllertSave, true, null);
-            }
-        }
-
-        private void ButtonDeleteTaskClick(object sender, EventArgs e)
-        {
-            var networkAccess = this.ViewModel.NetworkAccess;
-            if (networkAccess != NetworkAccess.Internet)
-            {
-                var AllertSave = UIAlertController.Create("", _networkAccessAlert, UIAlertControllerStyle.Alert);
-                AllertSave.AddAction(UIAlertAction.Create(_ok, UIAlertActionStyle.Default, null));
-                PresentViewController(AllertSave, true, null);
-            }
-        }
+        #endregion
     }
 }

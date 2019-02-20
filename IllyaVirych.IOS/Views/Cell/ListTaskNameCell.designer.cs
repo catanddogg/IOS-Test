@@ -9,7 +9,7 @@ using System;
 using System.CodeDom.Compiler;
 using UIKit;
 
-namespace IllyaVirych.IOS
+namespace IllyaVirych.IOS.Views.Cell
 {
     [Register ("ListTaskNameCell")]
     partial class ListTaskNameCell

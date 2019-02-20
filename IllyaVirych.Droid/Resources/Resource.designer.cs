@@ -6816,7 +6816,7 @@ namespace IllyaVirych.Droid
 			public const int MvxBindingTagUnique = 2131492894;
 			
 			// aapt resource value: 0x7f0c00a9
-			public const int RecyclerView = 2131493033;
+			public const int MyApp = 2131493033;
 			
 			// aapt resource value: 0x7f0c0043
 			public const int SHIFT = 2131492931;
@@ -7780,6 +7780,12 @@ namespace IllyaVirych.Droid
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f09004c
+			public const int AccessLocationPermission = 2131296332;
+			
+			// aapt resource value: 0x7f09004d
+			public const int DeniedLocationPermission = 2131296333;
+			
 			// aapt resource value: 0x7f090012
 			public const int abc_action_bar_home_description = 2131296274;
 			
@@ -7867,11 +7873,8 @@ namespace IllyaVirych.Droid
 			// aapt resource value: 0x7f090022
 			public const int abc_toolbar_collapse_description = 2131296290;
 			
-			// aapt resource value: 0x7f09003c
-			public const int action_settings = 2131296316;
-			
 			// aapt resource value: 0x7f09003b
-			public const int app_name = 2131296315;
+			public const int action_settings = 2131296315;
 			
 			// aapt resource value: 0x7f090030
 			public const int appbar_scrolling_view_behavior = 2131296304;
@@ -7933,26 +7936,38 @@ namespace IllyaVirych.Droid
 			// aapt resource value: 0x7f090010
 			public const int common_signin_button_text_long = 2131296272;
 			
-			// aapt resource value: 0x7f09003e
-			public const int delete_task = 2131296318;
+			// aapt resource value: 0x7f09004a
+			public const int deleteMarkerAlert = 2131296330;
 			
-			// aapt resource value: 0x7f090044
-			public const int drawer_close = 2131296324;
+			// aapt resource value: 0x7f090047
+			public const int deleteMarkerAlertHasMarker = 2131296327;
+			
+			// aapt resource value: 0x7f09003d
+			public const int delete_task = 2131296317;
 			
 			// aapt resource value: 0x7f090043
-			public const int drawer_open = 2131296323;
+			public const int drawer_close = 2131296323;
+			
+			// aapt resource value: 0x7f090042
+			public const int drawer_open = 2131296322;
+			
+			// aapt resource value: 0x7f09003e
+			public const int edit_text_name_hint = 2131296318;
 			
 			// aapt resource value: 0x7f09003f
-			public const int edit_text_name_hint = 2131296319;
-			
-			// aapt resource value: 0x7f090040
-			public const int edit_text_task_hint = 2131296320;
+			public const int edit_text_task_hint = 2131296319;
 			
 			// aapt resource value: 0x7f090039
 			public const int fab_scroll_shrink_grow_autohide_behavior = 2131296313;
 			
+			// aapt resource value: 0x7f090049
+			public const int fontname = 2131296329;
+			
 			// aapt resource value: 0x7f090046
-			public const int network_access = 2131296326;
+			public const int networkAccessAlert = 2131296326;
+			
+			// aapt resource value: 0x7f090045
+			public const int network_access = 2131296325;
 			
 			// aapt resource value: 0x7f090033
 			public const int password_toggle_content_description = 2131296307;
@@ -7969,8 +7984,14 @@ namespace IllyaVirych.Droid
 			// aapt resource value: 0x7f090037
 			public const int path_password_strike_through = 2131296311;
 			
-			// aapt resource value: 0x7f09003d
-			public const int save_task = 2131296317;
+			// aapt resource value: 0x7f09004b
+			public const int putMarkerGoogleMapAlert = 2131296331;
+			
+			// aapt resource value: 0x7f090048
+			public const int saveTaskAlert = 2131296328;
+			
+			// aapt resource value: 0x7f09003c
+			public const int save_task = 2131296316;
 			
 			// aapt resource value: 0x7f090023
 			public const int search_menu_title = 2131296291;
@@ -7981,14 +8002,14 @@ namespace IllyaVirych.Droid
 			// aapt resource value: 0x7f090011
 			public const int title_activity_webview = 2131296273;
 			
-			// aapt resource value: 0x7f090045
-			public const int title_list_task = 2131296325;
+			// aapt resource value: 0x7f090044
+			public const int title_list_task = 2131296324;
+			
+			// aapt resource value: 0x7f090040
+			public const int toolbar_list_task_name = 2131296320;
 			
 			// aapt resource value: 0x7f090041
-			public const int toolbar_list_task_name = 2131296321;
-			
-			// aapt resource value: 0x7f090042
-			public const int toolbar_task_name = 2131296322;
+			public const int toolbar_task_name = 2131296321;
 			
 			// aapt resource value: 0x7f09003a
 			public const int view_scroll_translation_autohide_behavior = 2131296314;
