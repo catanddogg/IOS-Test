@@ -1,19 +1,24 @@
-﻿using MvvmCross.ViewModels;
+﻿using MvvmCross.Navigation;
+using MvvmCross.ViewModels;
 
 namespace IllyaVirych.Core.ViewModels
 {
     public abstract class BaseViewModel: MvxViewModel
     {
-        protected BaseViewModel()
+        protected readonly IMvxNavigationService _navigationService;
+        protected BaseViewModel(IMvxNavigationService navigationService)
         {
+            _navigationService = navigationService;
         }        
     }
     public abstract class BaseViewModel <TParameter> : MvxViewModel <TParameter>
         where TParameter : class
         
     {
-        protected BaseViewModel()
+        protected readonly IMvxNavigationService _navigationService;
+        protected BaseViewModel(IMvxNavigationService navigationService)
         {
+            _navigationService = navigationService;
         }
     }
 }

@@ -15,7 +15,6 @@ namespace IllyaVirych.Core.ViewModels
     public class ListTaskViewModel : BaseViewModel
     {
         #region Variables
-        private readonly IMvxNavigationService _navigationService;
         private readonly ITaskService _taskService;
         private MvxObservableCollection<TaskItem> _items;
         private bool _refreshTaskCollection;
@@ -28,17 +27,17 @@ namespace IllyaVirych.Core.ViewModels
 
         #region Constructors
         public ListTaskViewModel(IMvxNavigationService navigationService, ITaskService taskService, ILoginService loginService, IWebApiService wepApiService, IAlertService alertService) 
+            :base(navigationService)
         {
             _loginService = loginService;
-            _navigationService = navigationService;
             _taskService = taskService;
             _wepApiService = wepApiService;
             _alertService = alertService;
             Items = new MvxObservableCollection<TaskItem>();
             TaskCreateCommand = new MvxAsyncCommand<TaskItem>(TaskCreate);
             TaskChangeCommand = new MvxAsyncCommand<TaskItem>(TaskChange);
-            ShowAboutCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<AboutTaskViewModel>());
-            ShowMenuViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<MenuViewModel>());
+            ShowAboutCommand = new MvxAsyncCommand(async () => await navigationService.Navigate<AboutTaskViewModel>());
+            ShowMenuViewModelCommand = new MvxAsyncCommand(async () => await navigationService.Navigate<MenuViewModel>());
             LoginViewCommand = new MvxAsyncCommand(LogoutInstagram);
             if(Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
@@ -136,7 +135,7 @@ namespace IllyaVirych.Core.ViewModels
 
         private void LoadData()
         {
-            var list = _taskService.GetUserTasks(UserInstagramId.UserId());
+            var list = _taskService.GetUserTasks(UserInstagramId.GetUserId());
             Items = new MvxObservableCollection<TaskItem>(list);
         }
 

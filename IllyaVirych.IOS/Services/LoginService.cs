@@ -54,7 +54,6 @@ namespace IllyaVirych.IOS.Services
             if (CrossSettings.Current.Contains("id") == true)
             {
                 CrossSettings.Current.Clear();
-                CurrentInstagramUser.CurrentInstagramUserId = null;
             }
         }
         //Not Use

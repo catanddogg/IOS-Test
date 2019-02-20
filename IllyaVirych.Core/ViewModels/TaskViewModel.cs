@@ -36,6 +36,7 @@ namespace IllyaVirych.Core.ViewModels
 
         #region Constructors
         public TaskViewModel(IMvxNavigationService navigationService, IMvxMessenger messenger, IWebApiService webApiService, IAlertService alertService)
+            : base (navigationService)
         {
             _navigationService = navigationService;
             _webApiService = webApiService;
@@ -76,7 +77,7 @@ namespace IllyaVirych.Core.ViewModels
                 LongitudeMarkerResult = parameter.LongitudeMarker;
                 return;
             }
-            _userId = UserInstagramId.UserId();
+            _userId = UserInstagramId.GetUserId();
             EnableStatusNameTask = true;
         }
         #endregion
@@ -281,7 +282,7 @@ namespace IllyaVirych.Core.ViewModels
             }
             if (NameTask != null & NameTask != string.Empty)
             {
-                UserId = UserInstagramId.UserId();
+                UserId = UserInstagramId.GetUserId();
                 TaskItem taskItem = new TaskItem(IdTask, NameTask, DescriptionTask, StatusTask, UserId, LalitudeMarkerResult, LongitudeMarkerResult);
                 await _webApiService.SaveTaskItem(taskItem, IdTask);
             }

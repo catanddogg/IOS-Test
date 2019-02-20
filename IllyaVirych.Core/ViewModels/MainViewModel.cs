@@ -19,6 +19,7 @@ namespace IllyaVirych.Core.ViewModels
         #region Constructors
 
         public MainViewModel(IMvxNavigationService navigationService, ILoginService loginService)
+            : base(navigationService)
         {
             _navigationService = navigationService;
             _loginService = loginService;
@@ -41,7 +42,7 @@ namespace IllyaVirych.Core.ViewModels
             {
                 await _navigationService.Navigate<ListTaskViewModel>();
                 return;
-            }
+            }              
             await _navigationService.Navigate<LoginViewModel>();
         }
         #endregion

@@ -6607,26 +6607,26 @@ namespace IllyaVirych.Droid
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f020085
-			public const int avd_hide_password_1 = 2130837637;
-			
 			// aapt resource value: 0x7f020086
-			public const int avd_hide_password_2 = 2130837638;
+			public const int avd_hide_password_1 = 2130837638;
 			
 			// aapt resource value: 0x7f020087
-			public const int avd_hide_password_3 = 2130837639;
+			public const int avd_hide_password_2 = 2130837639;
+			
+			// aapt resource value: 0x7f020088
+			public const int avd_hide_password_3 = 2130837640;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
-			// aapt resource value: 0x7f020088
-			public const int avd_show_password_1 = 2130837640;
-			
 			// aapt resource value: 0x7f020089
-			public const int avd_show_password_2 = 2130837641;
+			public const int avd_show_password_1 = 2130837641;
 			
 			// aapt resource value: 0x7f02008a
-			public const int avd_show_password_3 = 2130837642;
+			public const int avd_show_password_2 = 2130837642;
+			
+			// aapt resource value: 0x7f02008b
+			public const int avd_show_password_3 = 2130837643;
 			
 			// aapt resource value: 0x7f020055
 			public const int baseline_add_location_black_48dp = 2130837589;
@@ -6713,64 +6713,67 @@ namespace IllyaVirych.Droid
 			public const int edittextround = 2130837616;
 			
 			// aapt resource value: 0x7f020071
-			public const int googleg_disabled_color_18 = 2130837617;
+			public const int fbbf920e36653529bb4baec98251b908 = 2130837617;
 			
 			// aapt resource value: 0x7f020072
-			public const int googleg_standard_color_18 = 2130837618;
+			public const int googleg_disabled_color_18 = 2130837618;
 			
 			// aapt resource value: 0x7f020073
-			public const int ic_arrow_back = 2130837619;
+			public const int googleg_standard_color_18 = 2130837619;
 			
 			// aapt resource value: 0x7f020074
-			public const int image_inst = 2130837620;
+			public const int ic_arrow_back = 2130837620;
 			
 			// aapt resource value: 0x7f020075
-			public const int mqse9xro = 2130837621;
+			public const int image_inst = 2130837621;
 			
 			// aapt resource value: 0x7f020076
-			public const int navigation_empty_icon = 2130837622;
+			public const int mqse9xro = 2130837622;
 			
 			// aapt resource value: 0x7f020077
-			public const int notification_action_background = 2130837623;
+			public const int navigation_empty_icon = 2130837623;
 			
 			// aapt resource value: 0x7f020078
-			public const int notification_bg = 2130837624;
+			public const int notification_action_background = 2130837624;
 			
 			// aapt resource value: 0x7f020079
-			public const int notification_bg_low = 2130837625;
+			public const int notification_bg = 2130837625;
 			
 			// aapt resource value: 0x7f02007a
-			public const int notification_bg_low_normal = 2130837626;
+			public const int notification_bg_low = 2130837626;
 			
 			// aapt resource value: 0x7f02007b
-			public const int notification_bg_low_pressed = 2130837627;
+			public const int notification_bg_low_normal = 2130837627;
 			
 			// aapt resource value: 0x7f02007c
-			public const int notification_bg_normal = 2130837628;
+			public const int notification_bg_low_pressed = 2130837628;
 			
 			// aapt resource value: 0x7f02007d
-			public const int notification_bg_normal_pressed = 2130837629;
+			public const int notification_bg_normal = 2130837629;
 			
 			// aapt resource value: 0x7f02007e
-			public const int notification_icon_background = 2130837630;
-			
-			// aapt resource value: 0x7f020083
-			public const int notification_template_icon_bg = 2130837635;
-			
-			// aapt resource value: 0x7f020084
-			public const int notification_template_icon_low_bg = 2130837636;
+			public const int notification_bg_normal_pressed = 2130837630;
 			
 			// aapt resource value: 0x7f02007f
-			public const int notification_tile_bg = 2130837631;
+			public const int notification_icon_background = 2130837631;
+			
+			// aapt resource value: 0x7f020084
+			public const int notification_template_icon_bg = 2130837636;
+			
+			// aapt resource value: 0x7f020085
+			public const int notification_template_icon_low_bg = 2130837637;
 			
 			// aapt resource value: 0x7f020080
-			public const int notify_panel_notification_icon_bg = 2130837632;
+			public const int notification_tile_bg = 2130837632;
 			
 			// aapt resource value: 0x7f020081
-			public const int tooltip_frame_dark = 2130837633;
+			public const int notify_panel_notification_icon_bg = 2130837633;
 			
 			// aapt resource value: 0x7f020082
-			public const int tooltip_frame_light = 2130837634;
+			public const int tooltip_frame_dark = 2130837634;
+			
+			// aapt resource value: 0x7f020083
+			public const int tooltip_frame_light = 2130837635;
 			
 			static Drawable()
 			{
@@ -7700,22 +7703,25 @@ namespace IllyaVirych.Droid
 			public const int select_dialog_singlechoice_material = 2130968642;
 			
 			// aapt resource value: 0x7f040043
-			public const int support_simple_spinner_dropdown_item = 2130968643;
+			public const int SplashScreen = 2130968643;
 			
 			// aapt resource value: 0x7f040044
-			public const int TaskView = 2130968644;
+			public const int support_simple_spinner_dropdown_item = 2130968644;
 			
 			// aapt resource value: 0x7f040045
-			public const int toolbarlisttaskview = 2130968645;
+			public const int TaskView = 2130968645;
 			
 			// aapt resource value: 0x7f040046
-			public const int toolbarmapview = 2130968646;
+			public const int toolbarlisttaskview = 2130968646;
 			
 			// aapt resource value: 0x7f040047
-			public const int toolbartaskview = 2130968647;
+			public const int toolbarmapview = 2130968647;
 			
 			// aapt resource value: 0x7f040048
-			public const int tooltip = 2130968648;
+			public const int toolbartaskview = 2130968648;
+			
+			// aapt resource value: 0x7f040049
+			public const int tooltip = 2130968649;
 			
 			static Layout()
 			{
@@ -7780,11 +7786,11 @@ namespace IllyaVirych.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f09004c
-			public const int AccessLocationPermission = 2131296332;
-			
 			// aapt resource value: 0x7f09004d
-			public const int DeniedLocationPermission = 2131296333;
+			public const int AccessLocationPermission = 2131296333;
+			
+			// aapt resource value: 0x7f09004e
+			public const int DeniedLocationPermission = 2131296334;
 			
 			// aapt resource value: 0x7f090012
 			public const int abc_action_bar_home_description = 2131296274;
@@ -7873,8 +7879,11 @@ namespace IllyaVirych.Droid
 			// aapt resource value: 0x7f090022
 			public const int abc_toolbar_collapse_description = 2131296290;
 			
+			// aapt resource value: 0x7f09003c
+			public const int action_settings = 2131296316;
+			
 			// aapt resource value: 0x7f09003b
-			public const int action_settings = 2131296315;
+			public const int app_name = 2131296315;
 			
 			// aapt resource value: 0x7f090030
 			public const int appbar_scrolling_view_behavior = 2131296304;
@@ -7936,38 +7945,38 @@ namespace IllyaVirych.Droid
 			// aapt resource value: 0x7f090010
 			public const int common_signin_button_text_long = 2131296272;
 			
-			// aapt resource value: 0x7f09004a
-			public const int deleteMarkerAlert = 2131296330;
+			// aapt resource value: 0x7f09004b
+			public const int deleteMarkerAlert = 2131296331;
 			
-			// aapt resource value: 0x7f090047
-			public const int deleteMarkerAlertHasMarker = 2131296327;
-			
-			// aapt resource value: 0x7f09003d
-			public const int delete_task = 2131296317;
-			
-			// aapt resource value: 0x7f090043
-			public const int drawer_close = 2131296323;
-			
-			// aapt resource value: 0x7f090042
-			public const int drawer_open = 2131296322;
+			// aapt resource value: 0x7f090048
+			public const int deleteMarkerAlertHasMarker = 2131296328;
 			
 			// aapt resource value: 0x7f09003e
-			public const int edit_text_name_hint = 2131296318;
+			public const int delete_task = 2131296318;
+			
+			// aapt resource value: 0x7f090044
+			public const int drawer_close = 2131296324;
+			
+			// aapt resource value: 0x7f090043
+			public const int drawer_open = 2131296323;
 			
 			// aapt resource value: 0x7f09003f
-			public const int edit_text_task_hint = 2131296319;
+			public const int edit_text_name_hint = 2131296319;
+			
+			// aapt resource value: 0x7f090040
+			public const int edit_text_task_hint = 2131296320;
 			
 			// aapt resource value: 0x7f090039
 			public const int fab_scroll_shrink_grow_autohide_behavior = 2131296313;
 			
-			// aapt resource value: 0x7f090049
-			public const int fontname = 2131296329;
+			// aapt resource value: 0x7f09004a
+			public const int fontname = 2131296330;
+			
+			// aapt resource value: 0x7f090047
+			public const int networkAccessAlert = 2131296327;
 			
 			// aapt resource value: 0x7f090046
-			public const int networkAccessAlert = 2131296326;
-			
-			// aapt resource value: 0x7f090045
-			public const int network_access = 2131296325;
+			public const int network_access = 2131296326;
 			
 			// aapt resource value: 0x7f090033
 			public const int password_toggle_content_description = 2131296307;
@@ -7984,14 +7993,14 @@ namespace IllyaVirych.Droid
 			// aapt resource value: 0x7f090037
 			public const int path_password_strike_through = 2131296311;
 			
-			// aapt resource value: 0x7f09004b
-			public const int putMarkerGoogleMapAlert = 2131296331;
+			// aapt resource value: 0x7f09004c
+			public const int putMarkerGoogleMapAlert = 2131296332;
 			
-			// aapt resource value: 0x7f090048
-			public const int saveTaskAlert = 2131296328;
+			// aapt resource value: 0x7f090049
+			public const int saveTaskAlert = 2131296329;
 			
-			// aapt resource value: 0x7f09003c
-			public const int save_task = 2131296316;
+			// aapt resource value: 0x7f09003d
+			public const int save_task = 2131296317;
 			
 			// aapt resource value: 0x7f090023
 			public const int search_menu_title = 2131296291;
@@ -8002,14 +8011,14 @@ namespace IllyaVirych.Droid
 			// aapt resource value: 0x7f090011
 			public const int title_activity_webview = 2131296273;
 			
-			// aapt resource value: 0x7f090044
-			public const int title_list_task = 2131296324;
-			
-			// aapt resource value: 0x7f090040
-			public const int toolbar_list_task_name = 2131296320;
+			// aapt resource value: 0x7f090045
+			public const int title_list_task = 2131296325;
 			
 			// aapt resource value: 0x7f090041
-			public const int toolbar_task_name = 2131296321;
+			public const int toolbar_list_task_name = 2131296321;
+			
+			// aapt resource value: 0x7f090042
+			public const int toolbar_task_name = 2131296322;
 			
 			// aapt resource value: 0x7f09003a
 			public const int view_scroll_translation_autohide_behavior = 2131296314;
@@ -8905,6 +8914,9 @@ namespace IllyaVirych.Droid
 			
 			// aapt resource value: 0x7f0d016e
 			public const int Theme_Design_NoActionBar = 2131558766;
+			
+			// aapt resource value: 0x7f0d0183
+			public const int Theme_Splash = 2131558787;
 			
 			// aapt resource value: 0x7f0d0107
 			public const int ThemeOverlay_AppCompat = 2131558663;

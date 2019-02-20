@@ -14,7 +14,7 @@ using Xamarin.Essentials;
 namespace IllyaVirych.Droid.ViewModels
 {
     [MvxActivityPresentation]
-    [Activity(Label = "RecycleView", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", LaunchMode = LaunchMode.SingleTop)]
     public class MainView : MvxAppCompatActivity<MainViewModel>
     {
         #region Variables

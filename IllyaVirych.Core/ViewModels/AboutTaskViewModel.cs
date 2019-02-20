@@ -8,14 +8,13 @@ namespace IllyaVirych.Core.ViewModels
     public class AboutTaskViewModel : BaseViewModel
     {
         #region Variables
-        private readonly IMvxNavigationService _navigationService;
         private bool _changedNetworkAccess;
         #endregion
 
         #region Constructors
-        public AboutTaskViewModel(IMvxNavigationService navigationService)
+        public AboutTaskViewModel(IMvxNavigationService navigationService) 
+            : base(navigationService)
         {
-            _navigationService = navigationService;
             if (Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
                 ChangedNetworkAccess = true;

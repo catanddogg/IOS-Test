@@ -25,12 +25,27 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="773" translatesAutoresizingMaskIntoConstraints="NO" image="LounchScreen">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="762"/>
+                                <constraints>
+                                    <constraint id="777" firstAttribute="width" constant="414"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
+                        <constraints>
+                            <constraint id="774" firstItem="773" firstAttribute="top" secondItem="223" secondAttribute="top"/>
+                            <constraint id="775" firstItem="773" firstAttribute="bottom" secondItem="223" secondAttribute="bottom" constant="26"/>
+                            <constraint id="778" firstItem="773" firstAttribute="trailing" secondItem="223" secondAttribute="trailingMargin" constant="20"/>
+                        </constraints>
                     </view>
+                    <connections/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="224" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-200" y="-388"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LounchScreen" width="480" height="800"/>
+    </resources>
 </document>

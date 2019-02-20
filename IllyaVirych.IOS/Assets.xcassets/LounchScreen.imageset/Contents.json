@@ -1,0 +1,24 @@
+{
+  "images": [
+    {
+      "scale": "1x",
+      "idiom": "universal",
+      "filename": "fbbf920e36653529bb4baec98251b908.jpg"
+    },
+    {
+      "scale": "2x",
+      "idiom": "universal",
+      "filename": "fbbf920e36653529bb4baec98251b9081.jpg"
+    },
+    {
+      "scale": "3x",
+      "idiom": "universal",
+      "filename": "fbbf920e36653529bb4baec98251b9082.jpg"
+    }
+  ],
+  "properties": {},
+  "info": {
+    "version": 1,
+    "author": ""
+  }
+}

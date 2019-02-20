@@ -1,5 +1,6 @@
 using CoreGraphics;
 using Foundation;
+using IllyaVirych.Core.Helper;
 using IllyaVirych.Core.Models;
 using IllyaVirych.Core.ViewModels;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
@@ -67,8 +68,8 @@ namespace IllyaVirych.IOS
                 string responseBody = await response.Content.ReadAsStringAsync();
                 responseBody.Split(responseBody[12]);
                 var jobject = JObject.Parse(responseBody);
-                var id_user = jobject["data"]["id"]?.ToString();                
-                CrossSettings.Current.AddOrUpdateValue("id", id_user);
+                var id_user = jobject["data"]["id"]?.ToString();
+                UserInstagramId.SetUserId(id_user);
                 ViewModel.LoginNaVigationAndCreateCommand.Execute();
             }
         }

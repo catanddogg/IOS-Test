@@ -68,6 +68,7 @@
     <Compile Include="Services\LoginService.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="CustomComponent\SquareLayout.cs" />
+    <Compile Include="SplashScreen.cs" />
     <Compile Include="ViewAdapters\TaskViewAdapter.cs" />
     <Compile Include="Views\Holder\TaskViewHolder.cs" />
     <Compile Include="Views\AboutView.cs" />
@@ -307,6 +308,14 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\buttonround.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\SplashScreen.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\fbbf920e36653529bb4baec98251b908.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

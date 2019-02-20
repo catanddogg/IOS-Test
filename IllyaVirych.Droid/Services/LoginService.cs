@@ -1,4 +1,5 @@
 ﻿using System;
+using IllyaVirych.Core.Helper;
 using IllyaVirych.Core.Interface;
 using IllyaVirych.Core.Models;
 using Newtonsoft.Json.Linq;
@@ -46,8 +47,8 @@ namespace IllyaVirych.Droid.Services
                 var response = await request.GetResponseAsync();
                 var json = response.GetResponseText();
                 var jobject = JObject.Parse(json);
-                var id_user = jobject["data"]["id"]?.ToString();                
-                CrossSettings.Current.AddOrUpdateValue("id", id_user);
+                var id_user = jobject["data"]["id"]?.ToString();
+                UserInstagramId.SetUserId(id_user);
                 OnLoggedInHandler();
             }
         }       

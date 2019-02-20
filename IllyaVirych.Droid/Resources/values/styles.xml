@@ -16,4 +16,10 @@
     <item name="android:layout_height">?attr/actionBarSize</item>
     <item name="android:background">?attr/colorPrimary</item>
   </style>
+  <style name="Theme.Splash" parent="AppTheme">
+    <item name="android:windowBackground">@drawable/fbbf920e36653529bb4baec98251b908</item>
+    <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowFullscreen">true</item>
+  </style>
 </resources>

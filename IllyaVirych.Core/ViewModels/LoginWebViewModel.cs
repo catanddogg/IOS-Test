@@ -23,6 +23,7 @@ namespace IllyaVirych.Core.ViewModels
 
         #region Constructors
         public LoginWebViewModel(IMvxNavigationService navigationService, ILoginService loginService, IUserService userService)
+            : base(navigationService)
         {
             _loginService = loginService;
             _navigationService = navigationService;
@@ -37,11 +38,11 @@ namespace IllyaVirych.Core.ViewModels
         #region Lifecycle
         public override void ViewAppearing()
         {
-            if (UserInstagramId.UserId() == string.Empty)
+            if (UserInstagramId.GetUserId() == string.Empty)
             {
                 return;
             }
-            User user = _userService.GetUser(UserInstagramId.UserId());
+            User user = _userService.GetUser(UserInstagramId.GetUserId());
             if (user != null)
             {
                 UserId = user.UserId;
@@ -90,7 +91,7 @@ namespace IllyaVirych.Core.ViewModels
 
         public void CreateNewUser()
         {
-            UserId = UserInstagramId.UserId();
+            UserId = UserInstagramId.GetUserId();
             List<User> users = _userService.GetAllUsers();
             User user = new User(UserId);
             for (int i = 0; i < users.Count; i++)

@@ -7,11 +7,17 @@ namespace IllyaVirych.Core.Helper
 {
     public class UserInstagramId
     {       
-        public static string UserId()
+        
+        public static string GetUserId()
         {
             string userId = CrossSettings.Current.GetValueOrDefault("id", string.Empty).ToString();
 
             return userId;
+        }
+
+        public static void SetUserId(string userId)
+        {
+            CrossSettings.Current.GetValueOrDefault("id", userId).ToString();
         }
     }
 }
