@@ -26,14 +26,14 @@ namespace IllyaVirych.Core.Services
         public async Task<List<TaskItem>> RefreshDataAsync()
         {
             List<TaskItem> items = null;            
-            var currentUserId = UserInstagramId.UserId();
+            var currentUserId = UserInstagramId.GetUserId();
             var uri = new Uri(string.Format(_wepApiAddressServer + currentUserId));
             var response = await _client.GetAsync(uri);
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
                 items = JsonConvert.DeserializeObject<List<TaskItem>>(content);
-                _taskService.DeleteAllUserTask(UserInstagramId.UserId());
+                _taskService.DeleteAllUserTask(UserInstagramId.GetUserId());
                 _taskService.InsertAllUserTasks(items);
             }
             return items;
@@ -54,18 +54,14 @@ namespace IllyaVirych.Core.Services
             {
                 response = await _client.PutAsync(uri, content);
             }
-            if(response.IsSuccessStatusCode)
-            {
-            }
+           
         }
 
         public async Task DeleteTaskItem(int id)
         {
             var uri = new Uri(string.Format(_wepApiAddressServer + id));
             var response = await _client.DeleteAsync(uri);
-            if(response.IsSuccessStatusCode)
-            {
-            }
+            
         }
     }
 }

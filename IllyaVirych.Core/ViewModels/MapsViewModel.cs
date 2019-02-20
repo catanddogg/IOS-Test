@@ -31,6 +31,7 @@ namespace IllyaVirych.Core.ViewModels
 
         #region Constructors
         public MapsViewModel(IMvxNavigationService navigationService, ITaskService taskService, IMvxMessenger messenger, IAlertService alertService)
+            : base(navigationService)
         {
             _navigationService = navigationService;
             _taskService = taskService;

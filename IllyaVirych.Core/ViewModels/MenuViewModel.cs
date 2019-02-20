@@ -22,6 +22,7 @@ namespace IllyaVirych.Core.ViewModels
 
         #region Constructors
         public MenuViewModel(IMvxNavigationService navigationService, ILoginService loginService, IAlertService alertService)
+            :base(navigationService)        
         {
             _navigationService = navigationService;
             _loginService = loginService;
