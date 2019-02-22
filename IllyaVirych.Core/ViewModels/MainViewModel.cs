@@ -11,7 +11,6 @@ namespace IllyaVirych.Core.ViewModels
     public class MainViewModel : BaseViewModel
     {
         #region Variables
-        private readonly IMvxNavigationService _navigationService;
         private readonly ILoginService _loginService;
         private readonly string _currentLoadingId = "id";
         #endregion
@@ -21,7 +20,6 @@ namespace IllyaVirych.Core.ViewModels
         public MainViewModel(IMvxNavigationService navigationService, ILoginService loginService)
             : base(navigationService)
         {
-            _navigationService = navigationService;
             _loginService = loginService;
             CurrentMainViewCommand = new MvxAsyncCommand(CurrentMainView);
             TestIOSCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<LoginViewModel>());

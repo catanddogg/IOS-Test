@@ -14,7 +14,6 @@ namespace IllyaVirych.Core.ViewModels
     public class TaskViewModel : BaseViewModel<TaskItem>
     {
         #region Variables
-        private readonly IMvxNavigationService _navigationService;
         private readonly IMvxMessenger _messenger;     
         private int _idTask;
         private string _nameTask;
@@ -38,7 +37,6 @@ namespace IllyaVirych.Core.ViewModels
         public TaskViewModel(IMvxNavigationService navigationService, IMvxMessenger messenger, IWebApiService webApiService, IAlertService alertService)
             : base (navigationService)
         {
-            _navigationService = navigationService;
             _webApiService = webApiService;
             _messenger = messenger;
             _alertService = alertService;
@@ -275,15 +273,15 @@ namespace IllyaVirych.Core.ViewModels
                 _alertService.ShowAlert(_networkAccessAlert);
                 return;
             }
-            if (NameTask == null & NameTask != string.Empty)
+             if (NameTask == null | NameTask.Trim() == string.Empty)
             {
                 _alertService.ShowAlert(_saveTaskAlert);
                 return;
             }
-            if (NameTask != null & NameTask != string.Empty)
+            if (NameTask != null & NameTask.Trim() != string.Empty)
             {
                 UserId = UserInstagramId.GetUserId();
-                TaskItem taskItem = new TaskItem(IdTask, NameTask, DescriptionTask, StatusTask, UserId, LalitudeMarkerResult, LongitudeMarkerResult);
+                TaskItem taskItem = new TaskItem(IdTask, NameTask.Trim(), DescriptionTask, StatusTask, UserId, LalitudeMarkerResult, LongitudeMarkerResult);
                 await _webApiService.SaveTaskItem(taskItem, IdTask);
             }
             await _navigationService.Navigate<ListTaskViewModel>();

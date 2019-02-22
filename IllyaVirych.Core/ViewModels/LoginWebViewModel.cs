@@ -12,7 +12,6 @@ namespace IllyaVirych.Core.ViewModels
     public class LoginWebViewModel : BaseViewModel
     {
         #region Variables
-        private readonly IMvxNavigationService _navigationService;
         public IMvxCommand ListTaskTaskCommand { get; set; }
         private ILoginService _loginService;
         private IUserService _userService;
@@ -26,7 +25,6 @@ namespace IllyaVirych.Core.ViewModels
             : base(navigationService)
         {
             _loginService = loginService;
-            _navigationService = navigationService;
             _userService = userService;
             ListTaskTaskCommand = new MvxAsyncCommand(BackTask);
             LoginCommand = new MvxCommand(_loginService.LoginInstagram);

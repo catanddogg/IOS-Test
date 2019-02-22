@@ -11,7 +11,6 @@ namespace IllyaVirych.Core.ViewModels
     public class MapsViewModel : BaseViewModel
     {
         #region Variables
-        private readonly IMvxNavigationService _navigationService;
         private readonly ITaskService _taskService;
         private IAlertService _alertService;
         private readonly IMvxMessenger _messenger;
@@ -33,7 +32,6 @@ namespace IllyaVirych.Core.ViewModels
         public MapsViewModel(IMvxNavigationService navigationService, ITaskService taskService, IMvxMessenger messenger, IAlertService alertService)
             : base(navigationService)
         {
-            _navigationService = navigationService;
             _taskService = taskService;
             _messenger = messenger;
             _alertService = alertService;

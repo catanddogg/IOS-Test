@@ -14,7 +14,6 @@ namespace IllyaVirych.Core.ViewModels
     public class LoginViewModel : BaseViewModel
     {
         #region Variables
-        private readonly IMvxNavigationService _navigationService;
         private ILoginService _loginService;
         private ITaskService _taskService;
       
@@ -31,7 +30,6 @@ namespace IllyaVirych.Core.ViewModels
         {
             _taskService = taskService;
             _loginService = loginService;
-            _navigationService = navigationService;
             _userService = userService;
             _alertService = alertService;
             LoginCommand = new MvxCommand(_loginService.LoginInstagram);

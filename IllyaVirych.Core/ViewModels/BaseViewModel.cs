@@ -9,8 +9,10 @@ namespace IllyaVirych.Core.ViewModels
         protected BaseViewModel(IMvxNavigationService navigationService)
         {
             _navigationService = navigationService;
-        }        
+        }
     }
+    
+
     public abstract class BaseViewModel <TParameter> : MvxViewModel <TParameter>
         where TParameter : class
         

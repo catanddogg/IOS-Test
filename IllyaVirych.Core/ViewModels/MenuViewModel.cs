@@ -13,7 +13,6 @@ namespace IllyaVirych.Core.ViewModels
     public class MenuViewModel : BaseViewModel
     {
         #region Variables
-        private readonly IMvxNavigationService _navigationService;
         private readonly ILoginService _loginService;
         private IAlertService _alertService;      
         private bool _changedNetworkAccess;
@@ -24,7 +23,6 @@ namespace IllyaVirych.Core.ViewModels
         public MenuViewModel(IMvxNavigationService navigationService, ILoginService loginService, IAlertService alertService)
             :base(navigationService)        
         {
-            _navigationService = navigationService;
             _loginService = loginService;
             _alertService = alertService;
             TaskCreateViewCommand = new MvxAsyncCommand(TaskCreateView);
