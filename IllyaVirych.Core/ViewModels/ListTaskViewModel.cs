@@ -4,9 +4,11 @@ using IllyaVirych.Core.Models;
 using IllyaVirych.Core.Services;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
+using MvvmCross.UI;
 using MvvmCross.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
@@ -15,9 +17,9 @@ namespace IllyaVirych.Core.ViewModels
     public class ListTaskViewModel : BaseViewModel
     {
         #region Variables
-        private readonly ITaskService _taskService;
         private MvxObservableCollection<TaskItem> _items;
         private bool _refreshTaskCollection;
+        private readonly ITaskService _taskService;
         private ILoginService _loginService;
         private IWebApiService _wepApiService;
         private IAlertService _alertService;
@@ -39,32 +41,42 @@ namespace IllyaVirych.Core.ViewModels
             ShowAboutCommand = new MvxAsyncCommand(async () => await navigationService.Navigate<AboutTaskViewModel>());
             ShowMenuViewModelCommand = new MvxAsyncCommand(async () => await navigationService.Navigate<MenuViewModel>());
             LoginViewCommand = new MvxAsyncCommand(LogoutInstagram);
-            if(Connectivity.NetworkAccess == NetworkAccess.Internet)
+            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
                 ChangedNetworkAccess = true;
             }
-            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;            
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
         #endregion
-     
+
         #region Lifecycle
         public override void ViewAppearing()
         {
             base.ViewAppearing();
             AppearingData();            
         }
-
-        
         #endregion
 
         #region Properties
+        private Color _mvxColor = Color.Red;
+        public Color MvxColor
+        { 
+            get
+            {
+                return _mvxColor = Color.Red;
+            }
+            set
+            {
+                _mvxColor = value;
+                RaisePropertyChanged(() => MvxColor);
+            }
+        }
+
         public bool ChangedNetworkAccess
         {
             get
             {
-
                 return _changedNetworkAccess;
-
             }
             set
             {

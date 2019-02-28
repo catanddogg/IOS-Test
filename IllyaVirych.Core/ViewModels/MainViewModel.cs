@@ -17,19 +17,18 @@ namespace IllyaVirych.Core.ViewModels
 
         #region Constructors
 
-        public MainViewModel(IMvxNavigationService navigationService, ILoginService loginService)
+        public MainViewModel(IMvxNavigationService navigationService)
             : base(navigationService)
         {
-            _loginService = loginService;
             CurrentMainViewCommand = new MvxAsyncCommand(CurrentMainView);
-            TestIOSCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<LoginViewModel>());
-            MenuViewCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ListTaskViewModel>());
+            ListTaskViewCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ListTaskViewModel>());
+            MenuViewCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<MenuViewModel>());
         }
         #endregion
 
         #region Commands
         public IMvxCommand CurrentMainViewCommand { get; set; }
-        public IMvxCommand TestIOSCommand { get; set; }
+        public IMvxCommand ListTaskViewCommand { get; set; }
         public IMvxCommand MenuViewCommand { get; set; }
         #endregion
 

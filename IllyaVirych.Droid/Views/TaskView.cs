@@ -26,7 +26,7 @@ namespace IllyaVirych.Droid.ViewModels
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View view = base.OnCreateView(inflater, container, savedInstanceState);
-
+           
             _buttonTextSaveTask = view.FindViewById<Button>(Resource.Id.Savetask);
             _buttonDeleteTask = view.FindViewById<Button>(Resource.Id.Deletetask);
             _buttonDeleteMarker = view.FindViewById<Button>(Resource.Id.DeleteMarker);

@@ -1,9 +1,12 @@
-﻿using IllyaVirych.Core.Interface;
+﻿using Foundation;
+using IllyaVirych.Core.Interface;
 using IllyaVirych.Core.Messenger;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin.Messenger;
+using System;
 using System.Threading.Tasks;
+using WebKit;
 using Xamarin.Essentials;
 
 namespace IllyaVirych.Core.ViewModels
@@ -32,6 +35,7 @@ namespace IllyaVirych.Core.ViewModels
         public MapsViewModel(IMvxNavigationService navigationService, ITaskService taskService, IMvxMessenger messenger, IAlertService alertService)
             : base(navigationService)
         {
+
             _taskService = taskService;
             _messenger = messenger;
             _alertService = alertService;
@@ -97,6 +101,7 @@ namespace IllyaVirych.Core.ViewModels
         #endregion
 
         #region Methods
+
         private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
         {
             if (e.NetworkAccess == NetworkAccess.Internet)

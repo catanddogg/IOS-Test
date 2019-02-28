@@ -25,19 +25,18 @@ namespace IllyaVirych.Core.Services
 
         public async Task<List<TaskItem>> RefreshDataAsync()
         {
-            List<TaskItem> items = null;            
+            List<TaskItem> items = null;
             var currentUserId = UserInstagramId.GetUserId();
             var uri = new Uri(string.Format(_wepApiAddressServer + currentUserId));
+            _taskService.DeleteAllUserTask(UserInstagramId.GetUserId());
             var response = await _client.GetAsync(uri);
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
                 items = JsonConvert.DeserializeObject<List<TaskItem>>(content);
-                _taskService.DeleteAllUserTask(UserInstagramId.GetUserId());
                 _taskService.InsertAllUserTasks(items);
             }
             return items;
-
         }
 
         public async Task SaveTaskItem(TaskItem item, int id)

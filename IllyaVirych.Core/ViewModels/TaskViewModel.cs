@@ -6,6 +6,7 @@ using IllyaVirych.Core.Services;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin.Messenger;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
@@ -27,6 +28,9 @@ namespace IllyaVirych.Core.ViewModels
         private IWebApiService _webApiService;
         private IAlertService _alertService;
         private bool _changedNetworkAccess;
+        private ChatMessage _chatMessage;
+        private ISignalR _signalR;
+        private string _roomName = "TaskHub";
         private readonly string _saveTaskAlert = "Enter Name Task!";
         private readonly string _deleteMarkerAlertHasMarker = "Task marker has been deleted!";
         private readonly string _deleteMarkerAlert = "Task have not marker!";
@@ -34,12 +38,14 @@ namespace IllyaVirych.Core.ViewModels
         #endregion
 
         #region Constructors
-        public TaskViewModel(IMvxNavigationService navigationService, IMvxMessenger messenger, IWebApiService webApiService, IAlertService alertService)
+        public TaskViewModel(IMvxNavigationService navigationService, IMvxMessenger messenger, IWebApiService webApiService, IAlertService alertService/*, ISignalR signalR*/)
             : base (navigationService)
         {
             _webApiService = webApiService;
             _messenger = messenger;
             _alertService = alertService;
+            //_signalR = signalR;
+            //_signalR.Connect();
             _token = messenger.Subscribe<MapMessenger>(OnLocationMessage);
             SaveTaskCommand = new MvxAsyncCommand(SaveTask);
             DeleteTaskCommand = new MvxAsyncCommand(DeleteTask);
@@ -222,7 +228,7 @@ namespace IllyaVirych.Core.ViewModels
                 _alertService.ShowAlert(_networkAccessAlert);
                 return;
             }
-            if (_lalitudeMarkerResult == 0 & _longitudeMarkerResult == 0)
+            if (_lalitudeMarkerResult != 0 & _longitudeMarkerResult != 0)
             {
                 _alertService.ShowAlert(_deleteMarkerAlert);
                 LalitudeMarkerResult = 0;
@@ -268,6 +274,16 @@ namespace IllyaVirych.Core.ViewModels
 
         private async Task SaveTask()
         {
+            //var test = new SignalR();
+            //_chatMessage = new ChatMessage()
+            //{
+            //    Name = "test",
+            //    Message = "test1"                
+            //};
+
+            //  await test.Send(_chatMessage, _roomName);
+            //test.OnMessageReceived += _chatServices_OnMessageReceived;
+
             if (_changedNetworkAccess == false)
             {
                 _alertService.ShowAlert(_networkAccessAlert);
@@ -286,6 +302,11 @@ namespace IllyaVirych.Core.ViewModels
             }
             await _navigationService.Navigate<ListTaskViewModel>();
 
+        }
+
+        private void _chatServices_OnMessageReceived(object sender, ChatMessage e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

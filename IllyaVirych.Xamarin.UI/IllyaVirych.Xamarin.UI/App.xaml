@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:styles="clr-namespace:IllyaVirych.Xamarin.UI.Styles"
+             xmlns:converter="clr-namespace:IllyaVirych.Xamarin.UI.Converter"
+             x:Class="IllyaVirych.Xamarin.UI.App">
+    <Application.Resources>
+        <converter:TheNativeStatusTaskToColorValueConverter x:Key="StatusTaskToColorValue"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <styles:Colors/>
+                <styles:Widgets/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

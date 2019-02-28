@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<views:MvxContentPage
+    x:TypeArguments="viewModels:MenuViewModel"
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    xmlns:viewModels ="clr-namespace:IllyaVirych.Core.ViewModels;assembly=IllyaVirych.Core"
+    xmlns:component="clr-namespace:IllyaVirych.Xamarin.UI.Components"
+    x:Class="IllyaVirych.Xamarin.UI.Views.MenuPage"
+    BackgroundColor="{StaticResource BackgroundGray}"
+    Title="Menu">
+  <ContentPage.Content>
+        <Grid
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            Padding="0"
+            Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid
+                Grid.Row="0"
+                Margin="0"
+                Padding="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="StartAndExpand">
+                <Image
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    Aspect="AspectFill"
+                    HeightRequest="200"
+                    Source="imagemenu.jpg"/>
+            </Grid>
+            <StackLayout
+                Grid.Row="1"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="StartAndExpand"
+                Orientation="Vertical"
+                BackgroundColor="{StaticResource BackgroundGray}">
+                <component:MenuOptionView
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="StartAndExpand"                    
+                    Text="Create Task"
+                    Source="itemdeletemenu.png">
+                    <component:MenuOptionView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ToggleClicked" Command="{Binding TaskCreateViewCommand}"/>
+                    </component:MenuOptionView.GestureRecognizers>
+                </component:MenuOptionView>
+                <component:MenuOptionView
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="StartAndExpand"                    
+                    Text="About Task"
+                    Source="itemdeletemenu.png">
+                    <component:MenuOptionView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ToggleClicked" Command="{Binding AboutViewCommand}"/>
+                    </component:MenuOptionView.GestureRecognizers>
+                </component:MenuOptionView>
+                <component:MenuOptionView
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="StartAndExpand"                    
+                    Text="Logout"
+                    Source="itemdeletemenu.png">
+                    <component:MenuOptionView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ToggleClicked" Command="{Binding LoginViewCommand}"/>
+                    </component:MenuOptionView.GestureRecognizers>
+                </component:MenuOptionView>
+            </StackLayout>
+        </Grid>
+  </ContentPage.Content>
+</views:MvxContentPage>

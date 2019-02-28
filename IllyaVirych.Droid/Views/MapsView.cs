@@ -18,10 +18,7 @@ using IllyaVirych.Core.ViewModels;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.Runtime;
-using Android.Gms.Common;
-using Android.Gms.Location;
-using Android.Locations;
-using Android.Gms.Tasks;
+using Android.Webkit;
 
 namespace IllyaVirych.Droid.ViewModels
 {
@@ -35,6 +32,7 @@ namespace IllyaVirych.Droid.ViewModels
         private LatLng _latLng;
         private double _lalitude;
         private double _longitude;
+        private Marker _marker; 
         static readonly int REQUEST_STORAGE = 0;
         #endregion
 
@@ -54,13 +52,20 @@ namespace IllyaVirych.Droid.ViewModels
 
             return view;
         }
+
+        public override void OnDestroyView()
+        {
+            base.OnDestroyView();
+            //if (ViewModel.LalitudeMarker != 0 | ViewModel.LongitudeMarker != 0)
+            //{
+            //    _marker.Remove();
+            //}
+        }
         #endregion
 
         #region Override   
         protected override int FragmentId => Resource.Layout.MapsView;
-        #endregion
 
-        #region Methods
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             if (requestCode != REQUEST_STORAGE)
@@ -75,14 +80,17 @@ namespace IllyaVirych.Droid.ViewModels
             }
             Snackbar.Make(this.View, Resource.String.DeniedLocationPermission, Snackbar.LengthShort).Show();
         }
-  
+        #endregion
+
+        #region Methods
+         
         private void GetLocationPermission()
         {
-            if (ActivityCompat.ShouldShowRequestPermissionRationale(ParentActivity, Manifest.Permission.AccessFineLocation))
+            if (ActivityCompat.CheckSelfPermission(Application.Context, Manifest.Permission.AccessFineLocation) == (Android.Content.PM.Permission.Denied))
             {                
                  ActivityCompat.RequestPermissions(ParentActivity, new String[] { Manifest.Permission.AccessFineLocation}, REQUEST_STORAGE);
             }
-            if(ActivityCompat.ShouldShowRequestPermissionRationale(ParentActivity, Manifest.Permission.AccessCoarseLocation))
+            if(ActivityCompat.CheckSelfPermission(Application.Context, Manifest.Permission.AccessCoarseLocation) == (Android.Content.PM.Permission.Denied))
             {
                 ActivityCompat.RequestPermissions(ParentActivity, new String[] {Manifest.Permission.AccessCoarseLocation }, REQUEST_STORAGE);
             }
@@ -113,14 +121,16 @@ namespace IllyaVirych.Droid.ViewModels
 
             _markerOptions = new MarkerOptions();
             _markerOptions.Draggable(true);
-            if (ViewModel.LalitudeMarker != 0)
+            if (ViewModel.LalitudeMarker != 0 & ViewModel.LongitudeMarker != 0)
             {
                 _lalitude = this.ViewModel.LalitudeMarker;
                 _longitude = this.ViewModel.LongitudeMarker;
                 _latLng = new LatLng(_lalitude, _longitude);
-                _markerOptions.SetPosition(_latLng);
-                _googleMap.AddMarker(_markerOptions);
+                _marker = _googleMap.AddMarker(new MarkerOptions().SetPosition(_latLng));
+                //_markerOptions.SetPosition(_latLng);
+                //_marker =  _googleMap.AddMarker(_markerOptions);
             }
+          
             _googleMap.MapClick += MapOptionsClick;
             _googleMap.MarkerDragEnd += MarkerOptionLongClick;
 
@@ -143,8 +153,9 @@ namespace IllyaVirych.Droid.ViewModels
             this.ViewModel.LongitudeMarker = _longitude;
             _googleMap.Clear();
             _latLng = new LatLng(_lalitude, _longitude);
-            _markerOptions.SetPosition(_latLng);
-            _googleMap.AddMarker(_markerOptions);
+            _marker = _googleMap.AddMarker(new MarkerOptions().SetPosition(_latLng));
+            //_markerOptions.SetPosition(_latLng);
+            //_marker = _googleMap.AddMarker(_markerOptions);
             _googleMap.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(_latLng, _googleMap.CameraPosition.Zoom));
         }
         #endregion

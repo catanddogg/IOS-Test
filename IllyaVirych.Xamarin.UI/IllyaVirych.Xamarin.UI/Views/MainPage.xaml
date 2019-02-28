@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<views:MvxMasterDetailPage x:TypeArguments="viewModels:MainViewModel"
+                 xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+    xmlns:viewModels ="clr-namespace:IllyaVirych.Core.ViewModels"
+             x:Class="IllyaVirych.Xamarin.UI.Views.MainPage"
+                           Icon="mqse9xro.jpg">
+</views:MvxMasterDetailPage>

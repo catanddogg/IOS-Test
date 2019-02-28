@@ -11,8 +11,6 @@ namespace IllyaVirych.IOS.Services
     public class LoginService : ILoginService
     {        
         public Action OnLoggedInHandler { get; set; }
-       // private Account _findaccountforservice;      
-        //private string _string;
 
         public void LoginInstagram()
         {
