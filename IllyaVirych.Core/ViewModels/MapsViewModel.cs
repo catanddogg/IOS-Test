@@ -29,6 +29,7 @@ namespace IllyaVirych.Core.ViewModels
         private bool _changedNetworkAccess;
         private readonly string _networkAccessAlert = "You do not have network access!";
         private readonly string _putMarkerGoogleMapAlert = "Put marker in google map!";
+        public static double _testLalitude;
         #endregion
 
         #region Constructors
@@ -39,7 +40,7 @@ namespace IllyaVirych.Core.ViewModels
             _taskService = taskService;
             _messenger = messenger;
             _alertService = alertService;
-            _token = messenger.Subscribe<MapMessenger>(OnLosationMessage);
+            _token = messenger.Subscribe<MapMessenger>(OnLocationMessage);
             BackTaskCommand = new MvxAsyncCommand(BackMap);
             SaveMapPointCommand = new MvxAsyncCommand(SaveMapPoint);
             if (Connectivity.NetworkAccess == NetworkAccess.Internet)
@@ -130,7 +131,7 @@ namespace IllyaVirych.Core.ViewModels
             _messenger.Unsubscribe<MapMessenger>(_token);
         }
 
-        private void OnLosationMessage(MapMessenger mapMesseger)
+        private void OnLocationMessage(MapMessenger mapMesseger)
         {
             _idTask = mapMesseger.IdTask;
             LalitudeMarker = mapMesseger.LalitudeMarkerResult;

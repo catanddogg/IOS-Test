@@ -58,20 +58,6 @@ namespace IllyaVirych.Core.ViewModels
         #endregion
 
         #region Properties
-        private Color _mvxColor = Color.Red;
-        public Color MvxColor
-        { 
-            get
-            {
-                return _mvxColor = Color.Red;
-            }
-            set
-            {
-                _mvxColor = value;
-                RaisePropertyChanged(() => MvxColor);
-            }
-        }
-
         public bool ChangedNetworkAccess
         {
             get

@@ -1,4 +1,5 @@
 ﻿using IllyaVirych.Core.ViewModels;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Forms.Presenters.Attributes;
 using MvvmCross.Forms.Views;
 using System;
@@ -19,5 +20,13 @@ namespace IllyaVirych.Xamarin.UI.Views
 		{
 			InitializeComponent ();
 		}
-	}
+        protected override void OnViewModelSet()
+        {
+            base.OnViewModelSet();
+
+            //var set = this.CreateBindingSet<MapsPage, MapsViewModel>();
+            //set.Bind(this).For(v => v.rendererMap.TestBool).To(vm => vm.LalitudeMarker);
+            //set.Apply();
+        }
+    }
 }

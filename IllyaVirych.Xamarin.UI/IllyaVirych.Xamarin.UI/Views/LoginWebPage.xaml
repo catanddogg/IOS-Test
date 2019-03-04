@@ -7,6 +7,13 @@
     xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
        xmlns:viewModels ="clr-namespace:IllyaVirych.Core.ViewModels;assembly=IllyaVirych.Core"
              x:Class="IllyaVirych.Xamarin.UI.Views.LoginWebPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="AddTaskMenuItem"
+                     Order="Primary"          
+                     Icon="back.png"
+                     Command="{mvx:MvxBind ListTaskTaskCommand}"
+                     Priority="0"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <WebView x:Name="webView"

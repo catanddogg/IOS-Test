@@ -22,14 +22,14 @@ namespace IllyaVirych.Xamarin.UI.Views
 		}
         protected override void OnAppearing()
         {
-            base.OnAppearing();
             if (_firstTime)
             {
                 ViewModel.MenuViewCommand.Execute(null);
                 ViewModel.CurrentMainViewCommand.Execute(null);
-
+               
                 _firstTime = false;
             }
+            base.OnAppearing();
         }
     }
 }

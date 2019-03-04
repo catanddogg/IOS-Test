@@ -23,6 +23,7 @@
                 FlowColumnCount="2"                
                 SeparatorVisibility="None"
                 BackgroundColor="Gray"
+                IsPullToRefreshEnabled="True"
                 RefreshCommand="{Binding RefreshTaskCommand}"
                 IsRefreshing="{Binding RefreshTaskCollection}"
                 HasUnevenRows="False"                

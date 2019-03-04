@@ -16,7 +16,7 @@ namespace IllyaVirych.IOS.Views
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        MapKit.MKMapView MapKitView { get; set; }
+        MKMapView MapKitView { get; set; }
 
         void ReleaseDesignerOutlets ()
         {

@@ -53,14 +53,12 @@ namespace IllyaVirych.Core.Services
             {
                 response = await _client.PutAsync(uri, content);
             }
-           
         }
 
         public async Task DeleteTaskItem(int id)
         {
             var uri = new Uri(string.Format(_wepApiAddressServer + id));
             var response = await _client.DeleteAsync(uri);
-            
         }
     }
 }

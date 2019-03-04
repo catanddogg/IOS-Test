@@ -19,6 +19,7 @@ using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.Runtime;
 using Android.Webkit;
+using System.Threading.Tasks;
 
 namespace IllyaVirych.Droid.ViewModels
 {
@@ -56,10 +57,6 @@ namespace IllyaVirych.Droid.ViewModels
         public override void OnDestroyView()
         {
             base.OnDestroyView();
-            //if (ViewModel.LalitudeMarker != 0 | ViewModel.LongitudeMarker != 0)
-            //{
-            //    _marker.Remove();
-            //}
         }
         #endregion
 
@@ -83,6 +80,10 @@ namespace IllyaVirych.Droid.ViewModels
         #endregion
 
         #region Methods
+        private async void GetPermissionAsync()
+        {
+            await Task.Run(() => GetLocationPermission());
+        }
          
         private void GetLocationPermission()
         {
@@ -105,7 +106,7 @@ namespace IllyaVirych.Droid.ViewModels
             if (ActivityCompat.CheckSelfPermission(Application.Context, Manifest.Permission.AccessFineLocation) == (Android.Content.PM.Permission.Denied) ||
                 ActivityCompat.CheckSelfPermission(Application.Context, Manifest.Permission.AccessCoarseLocation) == (Android.Content.PM.Permission.Denied))
             {
-                GetLocationPermission();
+                GetPermissionAsync();
             }
             _googleMap.MyLocationEnabled = true;
 
@@ -127,8 +128,6 @@ namespace IllyaVirych.Droid.ViewModels
                 _longitude = this.ViewModel.LongitudeMarker;
                 _latLng = new LatLng(_lalitude, _longitude);
                 _marker = _googleMap.AddMarker(new MarkerOptions().SetPosition(_latLng));
-                //_markerOptions.SetPosition(_latLng);
-                //_marker =  _googleMap.AddMarker(_markerOptions);
             }
           
             _googleMap.MapClick += MapOptionsClick;
@@ -137,6 +136,7 @@ namespace IllyaVirych.Droid.ViewModels
             this.ViewModel.LalitudeMarker = _lalitude;
             this.ViewModel.LongitudeMarker = _longitude;
         }
+
         private void MarkerOptionLongClick(object sender, GoogleMap.MarkerDragEndEventArgs e)
         {
             _lalitude = e.Marker.Position.Latitude;
@@ -154,8 +154,6 @@ namespace IllyaVirych.Droid.ViewModels
             _googleMap.Clear();
             _latLng = new LatLng(_lalitude, _longitude);
             _marker = _googleMap.AddMarker(new MarkerOptions().SetPosition(_latLng));
-            //_markerOptions.SetPosition(_latLng);
-            //_marker = _googleMap.AddMarker(_markerOptions);
             _googleMap.AnimateCamera(CameraUpdateFactory.NewLatLngZoom(_latLng, _googleMap.CameraPosition.Zoom));
         }
         #endregion

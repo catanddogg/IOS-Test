@@ -1,4 +1,4 @@
-﻿using IllyaVirych.Core.ViewModels;
+﻿ using IllyaVirych.Core.ViewModels;
 using MvvmCross.Forms.Presenters.Attributes;
 using MvvmCross.Forms.Views;
 using System;
@@ -12,7 +12,7 @@ using Xamarin.Forms.Xaml;
 
 namespace IllyaVirych.Xamarin.UI.Views
 {
-    [MvxMasterDetailPagePresentation(MasterDetailPosition.Detail, WrapInNavigationPage = true, NoHistory = true)]
+    [MvxMasterDetailPagePresentation(MasterDetailPosition.Detail, NoHistory = true)]
     public partial class ListTaskPage : MvxContentPage<ListTaskViewModel>
 	{
         public static BindableProperty bindableProperty;
@@ -27,6 +27,7 @@ namespace IllyaVirych.Xamarin.UI.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            ViewModel.ShowMenuViewModelCommand.Execute();
         }
 
         protected override void OnSizeAllocated(double width, double height)

@@ -14,23 +14,22 @@ using Xamarin.Forms.Xaml;
 
 namespace IllyaVirych.Xamarin.UI.Views
 {
-    [MvxNavigationPagePresentationAttribute(WrapInNavigationPage = false)]
     public partial class LoginWebPage : MvxContentPage<LoginWebViewModel>
 	{
 		public LoginWebPage ()
 		{
 			InitializeComponent ();
-            
+            NavigationPage.SetHasNavigationBar(this, false);
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
         }
-
+      
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            ViewModel.LoginCommand.Execute();
+            //ViewModel.LoginCommand.Execute();
         }
 
         public async void webviewNavigated(WebView sender, WebNavigatedEventArgs e)

@@ -12,7 +12,6 @@ namespace IllyaVirych.Core.ViewModels
     public class LoginWebViewModel : BaseViewModel
     {
         #region Variables
-        public IMvxCommand ListTaskTaskCommand { get; set; }
         private ILoginService _loginService;
         private IUserService _userService;
         private string _userId;
@@ -29,7 +28,7 @@ namespace IllyaVirych.Core.ViewModels
             ListTaskTaskCommand = new MvxAsyncCommand(BackTask);
             LoginCommand = new MvxCommand(_loginService.LoginInstagram);
             LoginNaVigationAndCreateCommand = new MvxAsyncCommand(NavigationAndCreate);
-
+            BackToLoginCommand = new MvxAsyncCommand(Back);
         }
         #endregion
 
@@ -64,7 +63,9 @@ namespace IllyaVirych.Core.ViewModels
         #endregion
 
         #region Commands
+        public IMvxCommand ListTaskTaskCommand { get; set; }
         public IMvxCommand LoginCommand { get; set; }
+        public IMvxCommand BackToLoginCommand { get; set; }
         public IMvxCommand LoginNaVigationAndCreateCommand { get; set; }
         #endregion
 
@@ -102,11 +103,14 @@ namespace IllyaVirych.Core.ViewModels
             _userService.InsertUser(user);
         }
 
-
+        private async Task Back()
+        {
+            await _navigationService.Navigate<AboutTaskViewModel>();
+        }
 
         private async Task BackTask()
         {
-            await _navigationService.Navigate<ListTaskViewModel>();
+            await _navigationService.Navigate<LoginViewModel>();
         }
         #endregion
     }

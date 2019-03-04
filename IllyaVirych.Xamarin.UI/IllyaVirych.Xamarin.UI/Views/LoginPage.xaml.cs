@@ -11,13 +11,13 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace IllyaVirych.Xamarin.UI.Views
-{
-    [MvxContentPagePresentation(WrapInNavigationPage = true, NoHistory = true)]
+{ 
     public partial class LoginPage : MvxContentPage<LoginViewModel>
 	{
 		public LoginPage ()
 		{
-			InitializeComponent ();
+            NavigationPage.SetHasNavigationBar(this, false);
+            InitializeComponent ();
 		}
 	}
 }

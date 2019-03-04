@@ -8,9 +8,19 @@
        xmlns:viewModels ="clr-namespace:IllyaVirych.Core.ViewModels;assembly=IllyaVirych.Core"
     xmlns:render="clr-namespace:IllyaVirych.Xamarin.UI.RendererComponent"
              x:Class="IllyaVirych.Xamarin.UI.Views.MapsPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="SavePinMenuItem"
+                     Order="Primary"          
+                     Text=""
+                     Icon="addpin.png"
+                     Command="{mvx:MvxBind SaveMapPointCommand}"
+                     Priority="0"/>
+    </ContentPage.ToolbarItems>
   <ContentPage.Content>
       <StackLayout>
-            <render:RendererMap></render:RendererMap>
-      </StackLayout>
+            <render:RendererMap x:Name="rendererMap"
+                                UserLalitude="{Binding LalitudeMarker, Mode=OneWayToSource}"
+                                UserLongitude="{Binding LongitudeMarker, Mode=OneWayToSource}" />
+        </StackLayout>
   </ContentPage.Content>
 </views:MvxContentPage>

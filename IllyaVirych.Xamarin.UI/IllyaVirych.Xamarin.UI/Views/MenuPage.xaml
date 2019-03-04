@@ -9,7 +9,8 @@
     xmlns:component="clr-namespace:IllyaVirych.Xamarin.UI.Components"
     x:Class="IllyaVirych.Xamarin.UI.Views.MenuPage"
     BackgroundColor="{StaticResource BackgroundGray}"
-    Title="Menu">
+    Title="Menu"
+    Icon="back.png">
   <ContentPage.Content>
         <Grid
             HorizontalOptions="FillAndExpand"

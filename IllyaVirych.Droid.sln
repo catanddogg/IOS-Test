@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IllyaVirych.Xamarin.UI.Andr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IllyaVirych.Xamarin.UI.iOS", "IllyaVirych.Xamarin.UI\IllyaVirych.Xamarin.UI.iOS\IllyaVirych.Xamarin.UI.iOS.csproj", "{C2125966-34D5-4827-B8CF-9198736ADF81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IllyaVirych.Xamarin.UI", "IllyaVirych.Xamarin.UI\IllyaVirych.Xamarin.UI\IllyaVirych.Xamarin.UI.csproj", "{8CF5791F-7440-4E88-9EDD-00F2F0E49214}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IllyaVirych.Xamarin.UI", "IllyaVirych.Xamarin.UI\IllyaVirych.Xamarin.UI\IllyaVirych.Xamarin.UI.csproj", "{8CF5791F-7440-4E88-9EDD-00F2F0E49214}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -160,6 +160,7 @@ Global
 		{C2125966-34D5-4827-B8CF-9198736ADF81}.AppStore|iPhoneSimulator.ActiveCfg = AppStore|iPhoneSimulator
 		{C2125966-34D5-4827-B8CF-9198736ADF81}.AppStore|iPhoneSimulator.Build.0 = AppStore|iPhoneSimulator
 		{C2125966-34D5-4827-B8CF-9198736ADF81}.Debug|Any CPU.ActiveCfg = Debug|iPhone
+		{C2125966-34D5-4827-B8CF-9198736ADF81}.Debug|Any CPU.Build.0 = Debug|iPhone
 		{C2125966-34D5-4827-B8CF-9198736ADF81}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{C2125966-34D5-4827-B8CF-9198736ADF81}.Debug|iPhone.Build.0 = Debug|iPhone
 		{C2125966-34D5-4827-B8CF-9198736ADF81}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
