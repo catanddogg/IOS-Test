@@ -10,7 +10,7 @@
     x:Class="IllyaVirych.Xamarin.UI.Views.MenuPage"
     BackgroundColor="{StaticResource BackgroundGray}"
     Title="Menu"
-    Icon="back.png">
+    Icon="itemdeletemenu">
   <ContentPage.Content>
         <Grid
             HorizontalOptions="FillAndExpand"
@@ -67,6 +67,7 @@
                         <TapGestureRecognizer Tapped="ToggleClicked" Command="{Binding LoginViewCommand}"/>
                     </component:MenuOptionView.GestureRecognizers>
                 </component:MenuOptionView>
+                
             </StackLayout>
         </Grid>
   </ContentPage.Content>

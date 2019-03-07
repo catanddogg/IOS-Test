@@ -16,6 +16,12 @@
             <ImageButton Source="image_inst.jpg"
                          HorizontalOptions="Center"                         
                          Command="{mvx:MvxBind LoginWebViewCommand}"/>
+            <Label  Text="You do not have network access!"
+                    VerticalOptions="End"
+                    BackgroundColor="Red"
+                    HorizontalTextAlignment="Center"
+                    IsVisible="{Binding ChangedNetworkAccess, 
+                    Converter={StaticResource TrueToFalseConverter}}"/>
         </StackLayout>
   </ContentPage.Content>
 </views:MvxContentPage>

@@ -75,7 +75,9 @@ namespace IllyaVirych.Droid.ViewModels
             if (_toolbar != null)
             {
                 ParentActivity.SetSupportActionBar(_toolbar);
+                _toolbar.SetNavigationIcon(Resource.Drawable.baseline_add_location_black_48dp);
                 ParentActivity.SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+                ParentActivity.SupportActionBar.SetDefaultDisplayHomeAsUpEnabled(false);
                 _drawerToggle = new MvxActionBarDrawerToggle(
                     Activity,
                     ((MainView)ParentActivity).DrawerLayout,
@@ -83,8 +85,11 @@ namespace IllyaVirych.Droid.ViewModels
                     Resource.String.drawer_open,
                     Resource.String.drawer_close
                     );
+                _drawerToggle.DrawerIndicatorEnabled = false;
+                _drawerToggle.SetHomeAsUpIndicator(Resource.Drawable.baseline_add_location_black_48dp);
                 _drawerToggle.DrawerOpened += (object sender, ActionBarDrawerEventArgs e) => ((MainView)Activity)?.HideSoftKeyboard();
                 ((MainView)ParentActivity).DrawerLayout.AddDrawerListener(_drawerToggle);
+                
             }
         }
 

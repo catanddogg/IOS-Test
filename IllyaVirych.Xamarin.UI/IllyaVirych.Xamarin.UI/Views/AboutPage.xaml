@@ -9,7 +9,12 @@
              x:Class="IllyaVirych.Xamarin.UI.Views.AboutView">
   <ContentPage.Content>
       <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
+            <Label  Text="You do not have network access!"
+                    VerticalOptions="End"
+                    BackgroundColor="Red"
+                    HorizontalTextAlignment="Center"
+                    IsVisible="{Binding ChangedNetworkAccess, 
+                    Converter={StaticResource TrueToFalseConverter}}"/>
+        </StackLayout>
   </ContentPage.Content>
 </views:MvxContentPage>

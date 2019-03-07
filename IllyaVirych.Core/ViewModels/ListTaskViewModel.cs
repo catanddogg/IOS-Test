@@ -155,6 +155,7 @@ namespace IllyaVirych.Core.ViewModels
 
         private async Task TaskCreate(TaskItem task)
         {
+            await _navigationService.Close(this);
             if (_changedNetworkAccess == true)
             {
                 var result = await _navigationService.Navigate<TaskViewModel, TaskItem>(task);
@@ -165,7 +166,7 @@ namespace IllyaVirych.Core.ViewModels
 
         private async Task TaskChange(TaskItem task)
         {
-                var result = await _navigationService.Navigate<TaskViewModel, TaskItem>(task);
+            var result = await _navigationService.Navigate<TaskViewModel, TaskItem>(task);
         }
 
         public async void RefreshTask()

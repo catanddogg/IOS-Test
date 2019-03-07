@@ -7497,8 +7497,8 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d0044
 			public const int SYM = 2131558468;
 			
-			// aapt resource value: 0x7f0d00c3
-			public const int action0 = 2131558595;
+			// aapt resource value: 0x7f0d00c4
+			public const int action0 = 2131558596;
 			
 			// aapt resource value: 0x7f0d0088
 			public const int action_bar = 2131558536;
@@ -7521,17 +7521,17 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d0066
 			public const int action_bar_title = 2131558502;
 			
-			// aapt resource value: 0x7f0d00c0
-			public const int action_container = 2131558592;
+			// aapt resource value: 0x7f0d00c1
+			public const int action_container = 2131558593;
 			
 			// aapt resource value: 0x7f0d0089
 			public const int action_context_bar = 2131558537;
 			
-			// aapt resource value: 0x7f0d00c7
-			public const int action_divider = 2131558599;
+			// aapt resource value: 0x7f0d00c8
+			public const int action_divider = 2131558600;
 			
-			// aapt resource value: 0x7f0d00c1
-			public const int action_image = 2131558593;
+			// aapt resource value: 0x7f0d00c2
+			public const int action_image = 2131558594;
 			
 			// aapt resource value: 0x7f0d0003
 			public const int action_menu_divider = 2131558403;
@@ -7548,11 +7548,11 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d0068
 			public const int action_mode_close_button = 2131558504;
 			
-			// aapt resource value: 0x7f0d00c2
-			public const int action_text = 2131558594;
+			// aapt resource value: 0x7f0d00c3
+			public const int action_text = 2131558595;
 			
-			// aapt resource value: 0x7f0d00d0
-			public const int actions = 2131558608;
+			// aapt resource value: 0x7f0d00d1
+			public const int actions = 2131558609;
 			
 			// aapt resource value: 0x7f0d0069
 			public const int activity_chooser_view_content = 2131558505;
@@ -7593,8 +7593,8 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d006f
 			public const int buttonPanel = 2131558511;
 			
-			// aapt resource value: 0x7f0d00c4
-			public const int cancel_action = 2131558596;
+			// aapt resource value: 0x7f0d00c5
+			public const int cancel_action = 2131558597;
 			
 			// aapt resource value: 0x7f0d0051
 			public const int center = 2131558481;
@@ -7608,8 +7608,8 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d007f
 			public const int checkbox = 2131558527;
 			
-			// aapt resource value: 0x7f0d00cc
-			public const int chronometer = 2131558604;
+			// aapt resource value: 0x7f0d00cd
+			public const int chronometer = 2131558605;
 			
 			// aapt resource value: 0x7f0d005a
 			public const int clip_horizontal = 2131558490;
@@ -7620,14 +7620,14 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d0046
 			public const int collapseActionView = 2131558470;
 			
-			// aapt resource value: 0x7f0d009a
-			public const int container = 2131558554;
+			// aapt resource value: 0x7f0d009b
+			public const int container = 2131558555;
 			
 			// aapt resource value: 0x7f0d0072
 			public const int contentPanel = 2131558514;
 			
-			// aapt resource value: 0x7f0d009b
-			public const int coordinator = 2131558555;
+			// aapt resource value: 0x7f0d009c
+			public const int coordinator = 2131558556;
 			
 			// aapt resource value: 0x7f0d0079
 			public const int custom = 2131558521;
@@ -7644,20 +7644,20 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d006c
 			public const int default_activity_button = 2131558508;
 			
-			// aapt resource value: 0x7f0d009d
-			public const int design_bottom_sheet = 2131558557;
+			// aapt resource value: 0x7f0d009e
+			public const int design_bottom_sheet = 2131558558;
+			
+			// aapt resource value: 0x7f0d00a5
+			public const int design_menu_item_action_area = 2131558565;
 			
 			// aapt resource value: 0x7f0d00a4
-			public const int design_menu_item_action_area = 2131558564;
+			public const int design_menu_item_action_area_stub = 2131558564;
 			
 			// aapt resource value: 0x7f0d00a3
-			public const int design_menu_item_action_area_stub = 2131558563;
+			public const int design_menu_item_text = 2131558563;
 			
 			// aapt resource value: 0x7f0d00a2
-			public const int design_menu_item_text = 2131558562;
-			
-			// aapt resource value: 0x7f0d00a1
-			public const int design_navigation_view = 2131558561;
+			public const int design_navigation_view = 2131558562;
 			
 			// aapt resource value: 0x7f0d002e
 			public const int disableHome = 2131558446;
@@ -7668,8 +7668,8 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d003d
 			public const int end = 2131558461;
 			
-			// aapt resource value: 0x7f0d00d2
-			public const int end_padder = 2131558610;
+			// aapt resource value: 0x7f0d00d3
+			public const int end_padder = 2131558611;
 			
 			// aapt resource value: 0x7f0d004c
 			public const int enterAlways = 2131558476;
@@ -7716,8 +7716,8 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d006e
 			public const int icon = 2131558510;
 			
-			// aapt resource value: 0x7f0d00d1
-			public const int icon_group = 2131558609;
+			// aapt resource value: 0x7f0d00d2
+			public const int icon_group = 2131558610;
 			
 			// aapt resource value: 0x7f0d0026
 			public const int icon_only = 2131558438;
@@ -7728,8 +7728,8 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d006b
 			public const int image = 2131558507;
 			
-			// aapt resource value: 0x7f0d00cd
-			public const int info = 2131558605;
+			// aapt resource value: 0x7f0d00ce
+			public const int info = 2131558606;
 			
 			// aapt resource value: 0x7f0d0065
 			public const int italic = 2131558501;
@@ -7737,8 +7737,8 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d0000
 			public const int item_touch_helper_previous_elevation = 2131558400;
 			
-			// aapt resource value: 0x7f0d0099
-			public const int largeLabel = 2131558553;
+			// aapt resource value: 0x7f0d009a
+			public const int largeLabel = 2131558554;
 			
 			// aapt resource value: 0x7f0d0055
 			public const int left = 2131558485;
@@ -7761,8 +7761,8 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d00d7
 			public const int masked = 2131558615;
 			
-			// aapt resource value: 0x7f0d00c6
-			public const int media_actions = 2131558598;
+			// aapt resource value: 0x7f0d00c7
+			public const int media_actions = 2131558599;
 			
 			// aapt resource value: 0x7f0d00d5
 			public const int message = 2131558613;
@@ -7773,86 +7773,86 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d005f
 			public const int mini = 2131558495;
 			
-			// aapt resource value: 0x7f0d00b2
-			public const int mr_art = 2131558578;
-			
-			// aapt resource value: 0x7f0d00a7
-			public const int mr_chooser_list = 2131558567;
-			
-			// aapt resource value: 0x7f0d00aa
-			public const int mr_chooser_route_desc = 2131558570;
+			// aapt resource value: 0x7f0d00b3
+			public const int mr_art = 2131558579;
 			
 			// aapt resource value: 0x7f0d00a8
-			public const int mr_chooser_route_icon = 2131558568;
-			
-			// aapt resource value: 0x7f0d00a9
-			public const int mr_chooser_route_name = 2131558569;
-			
-			// aapt resource value: 0x7f0d00a6
-			public const int mr_chooser_title = 2131558566;
-			
-			// aapt resource value: 0x7f0d00af
-			public const int mr_close = 2131558575;
-			
-			// aapt resource value: 0x7f0d00b5
-			public const int mr_control_divider = 2131558581;
-			
-			// aapt resource value: 0x7f0d00bb
-			public const int mr_control_playback_ctrl = 2131558587;
-			
-			// aapt resource value: 0x7f0d00be
-			public const int mr_control_subtitle = 2131558590;
-			
-			// aapt resource value: 0x7f0d00bd
-			public const int mr_control_title = 2131558589;
-			
-			// aapt resource value: 0x7f0d00bc
-			public const int mr_control_title_container = 2131558588;
-			
-			// aapt resource value: 0x7f0d00b0
-			public const int mr_custom_control = 2131558576;
-			
-			// aapt resource value: 0x7f0d00b1
-			public const int mr_default_control = 2131558577;
-			
-			// aapt resource value: 0x7f0d00ac
-			public const int mr_dialog_area = 2131558572;
+			public const int mr_chooser_list = 2131558568;
 			
 			// aapt resource value: 0x7f0d00ab
-			public const int mr_expandable_area = 2131558571;
+			public const int mr_chooser_route_desc = 2131558571;
 			
-			// aapt resource value: 0x7f0d00bf
-			public const int mr_group_expand_collapse = 2131558591;
+			// aapt resource value: 0x7f0d00a9
+			public const int mr_chooser_route_icon = 2131558569;
 			
-			// aapt resource value: 0x7f0d00b3
-			public const int mr_media_main_control = 2131558579;
+			// aapt resource value: 0x7f0d00aa
+			public const int mr_chooser_route_name = 2131558570;
 			
-			// aapt resource value: 0x7f0d00ae
-			public const int mr_name = 2131558574;
+			// aapt resource value: 0x7f0d00a7
+			public const int mr_chooser_title = 2131558567;
 			
-			// aapt resource value: 0x7f0d00b4
-			public const int mr_playback_control = 2131558580;
-			
-			// aapt resource value: 0x7f0d00ad
-			public const int mr_title_bar = 2131558573;
+			// aapt resource value: 0x7f0d00b0
+			public const int mr_close = 2131558576;
 			
 			// aapt resource value: 0x7f0d00b6
-			public const int mr_volume_control = 2131558582;
+			public const int mr_control_divider = 2131558582;
+			
+			// aapt resource value: 0x7f0d00bc
+			public const int mr_control_playback_ctrl = 2131558588;
+			
+			// aapt resource value: 0x7f0d00bf
+			public const int mr_control_subtitle = 2131558591;
+			
+			// aapt resource value: 0x7f0d00be
+			public const int mr_control_title = 2131558590;
+			
+			// aapt resource value: 0x7f0d00bd
+			public const int mr_control_title_container = 2131558589;
+			
+			// aapt resource value: 0x7f0d00b1
+			public const int mr_custom_control = 2131558577;
+			
+			// aapt resource value: 0x7f0d00b2
+			public const int mr_default_control = 2131558578;
+			
+			// aapt resource value: 0x7f0d00ad
+			public const int mr_dialog_area = 2131558573;
+			
+			// aapt resource value: 0x7f0d00ac
+			public const int mr_expandable_area = 2131558572;
+			
+			// aapt resource value: 0x7f0d00c0
+			public const int mr_group_expand_collapse = 2131558592;
+			
+			// aapt resource value: 0x7f0d00b4
+			public const int mr_media_main_control = 2131558580;
+			
+			// aapt resource value: 0x7f0d00af
+			public const int mr_name = 2131558575;
+			
+			// aapt resource value: 0x7f0d00b5
+			public const int mr_playback_control = 2131558581;
+			
+			// aapt resource value: 0x7f0d00ae
+			public const int mr_title_bar = 2131558574;
 			
 			// aapt resource value: 0x7f0d00b7
-			public const int mr_volume_group_list = 2131558583;
+			public const int mr_volume_control = 2131558583;
 			
-			// aapt resource value: 0x7f0d00b9
-			public const int mr_volume_item_icon = 2131558585;
+			// aapt resource value: 0x7f0d00b8
+			public const int mr_volume_group_list = 2131558584;
 			
 			// aapt resource value: 0x7f0d00ba
-			public const int mr_volume_slider = 2131558586;
+			public const int mr_volume_item_icon = 2131558586;
+			
+			// aapt resource value: 0x7f0d00bb
+			public const int mr_volume_slider = 2131558587;
 			
 			// aapt resource value: 0x7f0d0035
 			public const int multiply = 2131558453;
 			
-			// aapt resource value: 0x7f0d00a0
-			public const int navigation_header_container = 2131558560;
+			// aapt resource value: 0x7f0d00a1
+			public const int navigation_header_container = 2131558561;
 			
 			// aapt resource value: 0x7f0d0048
 			public const int never = 2131558472;
@@ -7863,14 +7863,14 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d0021
 			public const int normal = 2131558433;
 			
-			// aapt resource value: 0x7f0d00cf
-			public const int notification_background = 2131558607;
+			// aapt resource value: 0x7f0d00d0
+			public const int notification_background = 2131558608;
+			
+			// aapt resource value: 0x7f0d00ca
+			public const int notification_main_column = 2131558602;
 			
 			// aapt resource value: 0x7f0d00c9
-			public const int notification_main_column = 2131558601;
-			
-			// aapt resource value: 0x7f0d00c8
-			public const int notification_main_column_container = 2131558600;
+			public const int notification_main_column_container = 2131558601;
 			
 			// aapt resource value: 0x7f0d0058
 			public const int parallax = 2131558488;
@@ -7896,11 +7896,11 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d0056
 			public const int right = 2131558486;
 			
-			// aapt resource value: 0x7f0d00ce
-			public const int right_icon = 2131558606;
+			// aapt resource value: 0x7f0d00cf
+			public const int right_icon = 2131558607;
 			
-			// aapt resource value: 0x7f0d00ca
-			public const int right_side = 2131558602;
+			// aapt resource value: 0x7f0d00cb
+			public const int right_side = 2131558603;
 			
 			// aapt resource value: 0x7f0d0022
 			public const int satellite = 2131558434;
@@ -7977,17 +7977,17 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d0032
 			public const int showTitle = 2131558450;
 			
-			// aapt resource value: 0x7f0d00d3
-			public const int sliding_tabs = 2131558611;
+			// aapt resource value: 0x7f0d00d4
+			public const int sliding_tabs = 2131558612;
 			
-			// aapt resource value: 0x7f0d0098
-			public const int smallLabel = 2131558552;
+			// aapt resource value: 0x7f0d0099
+			public const int smallLabel = 2131558553;
+			
+			// aapt resource value: 0x7f0d00a0
+			public const int snackbar_action = 2131558560;
 			
 			// aapt resource value: 0x7f0d009f
-			public const int snackbar_action = 2131558559;
-			
-			// aapt resource value: 0x7f0d009e
-			public const int snackbar_text = 2131558558;
+			public const int snackbar_text = 2131558559;
 			
 			// aapt resource value: 0x7f0d0050
 			public const int snap = 2131558480;
@@ -8013,8 +8013,8 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d0057
 			public const int start = 2131558487;
 			
-			// aapt resource value: 0x7f0d00c5
-			public const int status_bar_latest_event_content = 2131558597;
+			// aapt resource value: 0x7f0d00c6
+			public const int status_bar_latest_event_content = 2131558598;
 			
 			// aapt resource value: 0x7f0d0082
 			public const int submenuarrow = 2131558530;
@@ -8043,8 +8043,8 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d0075
 			public const int textSpacerNoTitle = 2131558517;
 			
-			// aapt resource value: 0x7f0d00a5
-			public const int text_input_password_toggle = 2131558565;
+			// aapt resource value: 0x7f0d00a6
+			public const int text_input_password_toggle = 2131558566;
 			
 			// aapt resource value: 0x7f0d0014
 			public const int textinput_counter = 2131558420;
@@ -8052,8 +8052,8 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d0015
 			public const int textinput_error = 2131558421;
 			
-			// aapt resource value: 0x7f0d00cb
-			public const int time = 2131558603;
+			// aapt resource value: 0x7f0d00cc
+			public const int time = 2131558604;
 			
 			// aapt resource value: 0x7f0d001c
 			public const int title = 2131558428;
@@ -8064,8 +8064,8 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d007b
 			public const int title_template = 2131558523;
 			
-			// aapt resource value: 0x7f0d00d4
-			public const int toolbar = 2131558612;
+			// aapt resource value: 0x7f0d0098
+			public const int toolbar = 2131558552;
 			
 			// aapt resource value: 0x7f0d004b
 			public const int top = 2131558475;
@@ -8073,8 +8073,8 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d007a
 			public const int topPanel = 2131558522;
 			
-			// aapt resource value: 0x7f0d009c
-			public const int touch_outside = 2131558556;
+			// aapt resource value: 0x7f0d009d
+			public const int touch_outside = 2131558557;
 			
 			// aapt resource value: 0x7f0d000f
 			public const int transition_current_scene = 2131558415;
@@ -8106,8 +8106,8 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			// aapt resource value: 0x7f0d00d6
 			public const int visible = 2131558614;
 			
-			// aapt resource value: 0x7f0d00b8
-			public const int volume_item_container = 2131558584;
+			// aapt resource value: 0x7f0d00b9
+			public const int volume_item_container = 2131558585;
 			
 			// aapt resource value: 0x7f0d0097
 			public const int webview = 2131558551;
@@ -8290,133 +8290,136 @@ namespace IllyaVirych.Xamarin.UI.Droid
 			public const int activity_webview = 2130968602;
 			
 			// aapt resource value: 0x7f04001b
-			public const int design_bottom_navigation_item = 2130968603;
+			public const int customtoolbartaskview = 2130968603;
 			
 			// aapt resource value: 0x7f04001c
-			public const int design_bottom_sheet_dialog = 2130968604;
+			public const int design_bottom_navigation_item = 2130968604;
 			
 			// aapt resource value: 0x7f04001d
-			public const int design_layout_snackbar = 2130968605;
+			public const int design_bottom_sheet_dialog = 2130968605;
 			
 			// aapt resource value: 0x7f04001e
-			public const int design_layout_snackbar_include = 2130968606;
+			public const int design_layout_snackbar = 2130968606;
 			
 			// aapt resource value: 0x7f04001f
-			public const int design_layout_tab_icon = 2130968607;
+			public const int design_layout_snackbar_include = 2130968607;
 			
 			// aapt resource value: 0x7f040020
-			public const int design_layout_tab_text = 2130968608;
+			public const int design_layout_tab_icon = 2130968608;
 			
 			// aapt resource value: 0x7f040021
-			public const int design_menu_item_action_area = 2130968609;
+			public const int design_layout_tab_text = 2130968609;
 			
 			// aapt resource value: 0x7f040022
-			public const int design_navigation_item = 2130968610;
+			public const int design_menu_item_action_area = 2130968610;
 			
 			// aapt resource value: 0x7f040023
-			public const int design_navigation_item_header = 2130968611;
+			public const int design_navigation_item = 2130968611;
 			
 			// aapt resource value: 0x7f040024
-			public const int design_navigation_item_separator = 2130968612;
+			public const int design_navigation_item_header = 2130968612;
 			
 			// aapt resource value: 0x7f040025
-			public const int design_navigation_item_subheader = 2130968613;
+			public const int design_navigation_item_separator = 2130968613;
 			
 			// aapt resource value: 0x7f040026
-			public const int design_navigation_menu = 2130968614;
+			public const int design_navigation_item_subheader = 2130968614;
 			
 			// aapt resource value: 0x7f040027
-			public const int design_navigation_menu_item = 2130968615;
+			public const int design_navigation_menu = 2130968615;
 			
 			// aapt resource value: 0x7f040028
-			public const int design_text_input_password_icon = 2130968616;
+			public const int design_navigation_menu_item = 2130968616;
 			
 			// aapt resource value: 0x7f040029
-			public const int mr_chooser_dialog = 2130968617;
+			public const int design_text_input_password_icon = 2130968617;
 			
 			// aapt resource value: 0x7f04002a
-			public const int mr_chooser_list_item = 2130968618;
+			public const int mr_chooser_dialog = 2130968618;
 			
 			// aapt resource value: 0x7f04002b
-			public const int mr_controller_material_dialog_b = 2130968619;
+			public const int mr_chooser_list_item = 2130968619;
 			
 			// aapt resource value: 0x7f04002c
-			public const int mr_controller_volume_item = 2130968620;
+			public const int mr_controller_material_dialog_b = 2130968620;
 			
 			// aapt resource value: 0x7f04002d
-			public const int mr_playback_control = 2130968621;
+			public const int mr_controller_volume_item = 2130968621;
 			
 			// aapt resource value: 0x7f04002e
-			public const int mr_volume_control = 2130968622;
+			public const int mr_playback_control = 2130968622;
 			
 			// aapt resource value: 0x7f04002f
-			public const int notification_action = 2130968623;
+			public const int mr_volume_control = 2130968623;
 			
 			// aapt resource value: 0x7f040030
-			public const int notification_action_tombstone = 2130968624;
+			public const int notification_action = 2130968624;
 			
 			// aapt resource value: 0x7f040031
-			public const int notification_media_action = 2130968625;
+			public const int notification_action_tombstone = 2130968625;
 			
 			// aapt resource value: 0x7f040032
-			public const int notification_media_cancel_action = 2130968626;
+			public const int notification_media_action = 2130968626;
 			
 			// aapt resource value: 0x7f040033
-			public const int notification_template_big_media = 2130968627;
+			public const int notification_media_cancel_action = 2130968627;
 			
 			// aapt resource value: 0x7f040034
-			public const int notification_template_big_media_custom = 2130968628;
+			public const int notification_template_big_media = 2130968628;
 			
 			// aapt resource value: 0x7f040035
-			public const int notification_template_big_media_narrow = 2130968629;
+			public const int notification_template_big_media_custom = 2130968629;
 			
 			// aapt resource value: 0x7f040036
-			public const int notification_template_big_media_narrow_custom = 2130968630;
+			public const int notification_template_big_media_narrow = 2130968630;
 			
 			// aapt resource value: 0x7f040037
-			public const int notification_template_custom_big = 2130968631;
+			public const int notification_template_big_media_narrow_custom = 2130968631;
 			
 			// aapt resource value: 0x7f040038
-			public const int notification_template_icon_group = 2130968632;
+			public const int notification_template_custom_big = 2130968632;
 			
 			// aapt resource value: 0x7f040039
-			public const int notification_template_lines_media = 2130968633;
+			public const int notification_template_icon_group = 2130968633;
 			
 			// aapt resource value: 0x7f04003a
-			public const int notification_template_media = 2130968634;
+			public const int notification_template_lines_media = 2130968634;
 			
 			// aapt resource value: 0x7f04003b
-			public const int notification_template_media_custom = 2130968635;
+			public const int notification_template_media = 2130968635;
 			
 			// aapt resource value: 0x7f04003c
-			public const int notification_template_part_chronometer = 2130968636;
+			public const int notification_template_media_custom = 2130968636;
 			
 			// aapt resource value: 0x7f04003d
-			public const int notification_template_part_time = 2130968637;
+			public const int notification_template_part_chronometer = 2130968637;
 			
 			// aapt resource value: 0x7f04003e
-			public const int select_dialog_item_material = 2130968638;
+			public const int notification_template_part_time = 2130968638;
 			
 			// aapt resource value: 0x7f04003f
-			public const int select_dialog_multichoice_material = 2130968639;
+			public const int select_dialog_item_material = 2130968639;
 			
 			// aapt resource value: 0x7f040040
-			public const int select_dialog_singlechoice_material = 2130968640;
+			public const int select_dialog_multichoice_material = 2130968640;
 			
 			// aapt resource value: 0x7f040041
-			public const int SplashScreen = 2130968641;
+			public const int select_dialog_singlechoice_material = 2130968641;
 			
 			// aapt resource value: 0x7f040042
-			public const int support_simple_spinner_dropdown_item = 2130968642;
+			public const int SplashScreen = 2130968642;
 			
 			// aapt resource value: 0x7f040043
-			public const int Tabbar = 2130968643;
+			public const int support_simple_spinner_dropdown_item = 2130968643;
 			
 			// aapt resource value: 0x7f040044
-			public const int Toolbar = 2130968644;
+			public const int Tabbar = 2130968644;
 			
 			// aapt resource value: 0x7f040045
-			public const int tooltip = 2130968645;
+			public const int Toolbar = 2130968645;
+			
+			// aapt resource value: 0x7f040046
+			public const int tooltip = 2130968646;
 			
 			static Layout()
 			{

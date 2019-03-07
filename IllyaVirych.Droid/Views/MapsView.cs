@@ -9,7 +9,7 @@ using Android.Widget;
 using static Android.Content.ClipData;
 using Android.Support.V4.Content;
 using Android;
-using Android.Content.PM;
+
 using Android.App;
 using Android.Support.V4.App;
 using Android.Util;
@@ -20,11 +20,13 @@ using Android.Gms.Maps.Model;
 using Android.Runtime;
 using Android.Webkit;
 using System.Threading.Tasks;
+using static Android.Support.V4.App.ActivityCompat;
+using Android.Content.PM;
 
 namespace IllyaVirych.Droid.ViewModels
 {
     [MvxFragmentPresentation(typeof(MainViewModel), Resource.Id.content_frame, false)]
-    public class MapsView : BaseFragment<MapsViewModel>, IOnMapReadyCallback
+    public class MapsView : BaseFragment<MapsViewModel>, IOnMapReadyCallback, IOnRequestPermissionsResultCallback
     {
         #region Variables
         private GoogleMap _googleMap;
@@ -34,7 +36,7 @@ namespace IllyaVirych.Droid.ViewModels
         private double _lalitude;
         private double _longitude;
         private Marker _marker; 
-        static readonly int REQUEST_STORAGE = 0;
+        static readonly int REQUEST_STORAGE = 1;
         #endregion
 
         #region Lifecycle
@@ -63,7 +65,7 @@ namespace IllyaVirych.Droid.ViewModels
         #region Override   
         protected override int FragmentId => Resource.Layout.MapsView;
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
             if (requestCode != REQUEST_STORAGE)
             {
@@ -73,6 +75,7 @@ namespace IllyaVirych.Droid.ViewModels
             if (grantResults.Length == 1 && grantResults[0] == Android.Content.PM.Permission.Granted)
             {
                 Snackbar.Make(this.View, Resource.String.AccessLocationPermission, Snackbar.LengthShort).Show();
+                _googleMap.MyLocationEnabled = true;
                 return;
             }
             Snackbar.Make(this.View, Resource.String.DeniedLocationPermission, Snackbar.LengthShort).Show();
@@ -80,16 +83,14 @@ namespace IllyaVirych.Droid.ViewModels
         #endregion
 
         #region Methods
-        private async void GetPermissionAsync()
-        {
-            await Task.Run(() => GetLocationPermission());
-        }
-         
+
         private void GetLocationPermission()
         {
             if (ActivityCompat.CheckSelfPermission(Application.Context, Manifest.Permission.AccessFineLocation) == (Android.Content.PM.Permission.Denied))
             {                
-                 ActivityCompat.RequestPermissions(ParentActivity, new String[] { Manifest.Permission.AccessFineLocation}, REQUEST_STORAGE);
+                ActivityCompat.RequestPermissions(ParentActivity, new String[] { Manifest.Permission.AccessFineLocation}, REQUEST_STORAGE);
+                //String[] permission = new String[] { Manifest.Permission.AccessFineLocation };
+                //ActivityCompat.RequestPermissions(ParentActivity, permission, REQUEST_STORAGE);
             }
             if(ActivityCompat.CheckSelfPermission(Application.Context, Manifest.Permission.AccessCoarseLocation) == (Android.Content.PM.Permission.Denied))
             {
@@ -106,7 +107,8 @@ namespace IllyaVirych.Droid.ViewModels
             if (ActivityCompat.CheckSelfPermission(Application.Context, Manifest.Permission.AccessFineLocation) == (Android.Content.PM.Permission.Denied) ||
                 ActivityCompat.CheckSelfPermission(Application.Context, Manifest.Permission.AccessCoarseLocation) == (Android.Content.PM.Permission.Denied))
             {
-                GetPermissionAsync();
+                GetLocationPermission();
+                System.Threading.Thread.Sleep(5000);
             }
             _googleMap.MyLocationEnabled = true;
 

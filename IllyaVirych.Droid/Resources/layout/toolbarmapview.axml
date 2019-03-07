@@ -25,6 +25,6 @@
 		android:background ="@drawable/baseline_add_location_black_48dp"		
 		android:layout_gravity = "right"
 		android:backgroundTint = "@color/white"
-		local:MvxBind = "Click SaveMapPointCommand"/>	
+		local:MvxBind = "Click NativeSaveMapPointCommand"/>	
 </android.support.v7.widget.Toolbar>
 </LinearLayout>

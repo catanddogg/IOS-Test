@@ -12,12 +12,14 @@ using Xamarin.Forms.Xaml;
 
 namespace IllyaVirych.Xamarin.UI.Views
 {
-    [MvxContentPagePresentation(WrapInNavigationPage = true)]
+    [MvxContentPagePresentation(WrapInNavigationPage = true, Animated = false)]
     public partial class TaskPage : MvxContentPage<TaskViewModel>
 	{
 		public TaskPage ()
 		{
-			InitializeComponent ();            
-		}
-	}
+			InitializeComponent ();
+            NavigationPage.SetHasNavigationBar(this, false);
+            NavigationPage.SetHasBackButton(this, false);
+        }
+    }
 }

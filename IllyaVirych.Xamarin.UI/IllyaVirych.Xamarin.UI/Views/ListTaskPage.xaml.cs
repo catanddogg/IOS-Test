@@ -21,7 +21,8 @@ namespace IllyaVirych.Xamarin.UI.Views
 
         public ListTaskPage ()
 		{
-			InitializeComponent ();
+            NavigationPage.SetHasBackButton(this, false);
+            InitializeComponent ();
         }
 
         protected override void OnAppearing()
@@ -32,9 +33,9 @@ namespace IllyaVirych.Xamarin.UI.Views
 
         protected override void OnSizeAllocated(double width, double height)
         {
-            base.OnSizeAllocated(width, height);
             _heightRequest = (int)(width - 20) / 2;
             FlowListViewName.RowHeight = _heightRequest;
+            base.OnSizeAllocated(width, height);
         }
     }
 }

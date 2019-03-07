@@ -18,6 +18,7 @@ namespace IllyaVirych.Xamarin.UI.Views
 		public MenuPage ()
 		{
 			InitializeComponent ();
+            
 		}
         public void ToggleClicked(object sender, EventArgs e)
         {

@@ -1,9 +1,11 @@
 ﻿using Foundation;
 using IllyaVirych.Core.Interface;
 using IllyaVirych.Core.Messenger;
+using IllyaVirych.Core.MvxInteraction;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin.Messenger;
+using MvvmCross.ViewModels;
 using System;
 using System.Threading.Tasks;
 using WebKit;
@@ -30,6 +32,7 @@ namespace IllyaVirych.Core.ViewModels
         private readonly string _networkAccessAlert = "You do not have network access!";
         private readonly string _putMarkerGoogleMapAlert = "Put marker in google map!";
         public static double _testLalitude;
+        public MvxInteraction<CoordinateAction> Interaction { get; set; } = new MvxInteraction<CoordinateAction>();
         #endregion
 
         #region Constructors
@@ -43,6 +46,8 @@ namespace IllyaVirych.Core.ViewModels
             _token = messenger.Subscribe<MapMessenger>(OnLocationMessage);
             BackTaskCommand = new MvxAsyncCommand(BackMap);
             SaveMapPointCommand = new MvxAsyncCommand(SaveMapPoint);
+            NativeSaveMapPointCommand = new MvxAsyncCommand(NativeSaveMapPoint);
+
             if (Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
                 ChangedNetworkAccess = true;
@@ -99,6 +104,7 @@ namespace IllyaVirych.Core.ViewModels
         #region Commands
         public IMvxCommand BackTaskCommand { get; set; }
         public IMvxAsyncCommand SaveMapPointCommand { get; set; }
+        public IMvxAsyncCommand NativeSaveMapPointCommand { get; set; }
         #endregion
 
         #region Methods
@@ -141,6 +147,13 @@ namespace IllyaVirych.Core.ViewModels
             _statusTaskBackResult = mapMesseger.StatusTaskResult;
             _lalitudeMarkerBack = mapMesseger.LalitudeMarkerResult;
             _longlitudeMarkerBack = mapMesseger.LongitudeMarkerResult;
+
+            var request = new CoordinateAction
+            {
+                LalitudePin = LalitudeMarker,
+                LongitudePin = LongitudeMarker
+            };
+            Interaction.Raise(request);
         }
 
         private async Task SaveMapPoint()
@@ -158,7 +171,35 @@ namespace IllyaVirych.Core.ViewModels
             if (LalitudeMarker != 0 & LongitudeMarker != 0)
             {
                 await _navigationService.Navigate<TaskViewModel>();
+                var message = new MapMessenger(this,
+                    _idTask,
+              LalitudeMarker,
+              LongitudeMarker,
+              _nameTaskBackResult,
+              _descriptionTaskBackResult,
+              _statusTaskBackResult
+                 );
+                _messenger.Publish(message);
+                _messenger.Unsubscribe<MapMessenger>(_token);
+            }
 
+        }
+
+        private async Task NativeSaveMapPoint()
+        {
+            if (_changedNetworkAccess == false)
+            {
+                _alertService.ShowAlert(_networkAccessAlert);
+                return;
+            }
+            if (LalitudeMarker == 0 & LongitudeMarker == 0)
+            {
+                _alertService.ShowAlert(_putMarkerGoogleMapAlert);
+                return;
+            }
+            if (LalitudeMarker != 0 & LongitudeMarker != 0)
+            {
+                await _navigationService.Navigate<TaskViewModel>();
                 var message = new MapMessenger(this,
                     _idTask,
               LalitudeMarker,

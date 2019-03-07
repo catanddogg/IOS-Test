@@ -6,6 +6,7 @@
              x:Class="IllyaVirych.Xamarin.UI.App">
     <Application.Resources>
         <converter:TheNativeStatusTaskToColorValueConverter x:Key="StatusTaskToColorValue"/>
+        <converter:NativeTrueToFalseValueConverter x:Key="TrueToFalseConverter"/>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <styles:Colors/>

@@ -5,6 +5,5 @@
        xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
     xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
     xmlns:viewModels ="clr-namespace:IllyaVirych.Core.ViewModels"
-             x:Class="IllyaVirych.Xamarin.UI.Views.MainPage"
-                           Icon="mqse9xro.jpg">
+             x:Class="IllyaVirych.Xamarin.UI.Views.MainPage" >
 </views:MvxMasterDetailPage>

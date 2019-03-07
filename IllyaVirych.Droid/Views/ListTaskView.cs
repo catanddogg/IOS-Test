@@ -37,7 +37,7 @@ namespace IllyaVirych.Droid.ViewModels
             return view;
         }
         #endregion
-
+        
         #region Override
         protected override int FragmentId => Resource.Layout.ListTaskView;
         #endregion

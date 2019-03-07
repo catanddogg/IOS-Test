@@ -93,6 +93,9 @@
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="CustomControls\CustomMapRenderer.cs" />
+    <Compile Include="CustomControls\CustomToolbarItem.cs" />
+    <Compile Include="CustomControls\MKAnnotationClass.cs" />
     <Compile Include="Services\AlertService.cs" />
     <Compile Include="Services\DatabaseConnectionService.cs" />
     <Compile Include="Services\LoginService.cs" />
@@ -123,6 +126,15 @@
     <ImageAsset Include="Assets.xcassets\addtask.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\back.imageset\back.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\back.imageset\back1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\back.imageset\back2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\imagemenu.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -136,6 +148,9 @@
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\addpin.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\back.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\itemdeletemenu.imageset\Contents.json">
@@ -226,7 +241,5 @@
       <Name>IllyaVirych.Xamarin.UI</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Renderer\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

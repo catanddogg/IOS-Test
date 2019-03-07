@@ -44,6 +44,12 @@
                     </DataTemplate>    
                 </flv:FlowListView.FlowColumnTemplate>
             </flv:FlowListView>
+            <Label  Text="You do not have network access!"
+                    VerticalOptions="End"
+                    BackgroundColor="Red"
+                    HorizontalTextAlignment="Center"
+                    IsVisible="{Binding ChangedNetworkAccess, 
+                    Converter={StaticResource TrueToFalseConverter}}"/>
         </Grid>
     </ContentPage.Content>
 </views:MvxContentPage>

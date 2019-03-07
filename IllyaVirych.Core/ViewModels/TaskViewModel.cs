@@ -289,7 +289,7 @@ namespace IllyaVirych.Core.ViewModels
                 _alertService.ShowAlert(_networkAccessAlert);
                 return;
             }
-             if (NameTask == null | NameTask.Trim() == string.Empty)
+            if (NameTask == null || NameTask.Trim() == string.Empty)
             {
                 _alertService.ShowAlert(_saveTaskAlert);
                 return;

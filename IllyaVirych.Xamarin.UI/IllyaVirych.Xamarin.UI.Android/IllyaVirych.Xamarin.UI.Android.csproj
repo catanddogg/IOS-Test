@@ -122,7 +122,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LinkerPleaseInclude.cs" />
-    <Compile Include="Renderer\MapViewRenderer.cs" />
+    <Compile Include="CustomControls\AndroidCustomMap.cs" />
+    <Compile Include="CustomControls\AndroidCustomToolbarItem.cs" />
     <Compile Include="RootActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -196,6 +197,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\addpin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\customtoolbartaskview.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

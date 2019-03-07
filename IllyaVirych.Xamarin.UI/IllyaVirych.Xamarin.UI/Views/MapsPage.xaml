@@ -6,7 +6,7 @@
         xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
     xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
        xmlns:viewModels ="clr-namespace:IllyaVirych.Core.ViewModels;assembly=IllyaVirych.Core"
-    xmlns:render="clr-namespace:IllyaVirych.Xamarin.UI.RendererComponent"
+    xmlns:custom="clr-namespace:IllyaVirych.Xamarin.UI.CustomControls"
              x:Class="IllyaVirych.Xamarin.UI.Views.MapsPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="SavePinMenuItem"
@@ -18,9 +18,15 @@
     </ContentPage.ToolbarItems>
   <ContentPage.Content>
       <StackLayout>
-            <render:RendererMap x:Name="rendererMap"
+            <custom:CustomMap x:Name="customMap"
                                 UserLalitude="{Binding LalitudeMarker, Mode=OneWayToSource}"
                                 UserLongitude="{Binding LongitudeMarker, Mode=OneWayToSource}" />
+            <Label  Text="You do not have network access!"
+                    VerticalOptions="End"
+                    BackgroundColor="Red"
+                    HorizontalTextAlignment="Center"
+                    IsVisible="{Binding ChangedNetworkAccess, 
+                    Converter={StaticResource TrueToFalseConverter}}"/>
         </StackLayout>
   </ContentPage.Content>
 </views:MvxContentPage>
