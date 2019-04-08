@@ -11,7 +11,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace IllyaVirych.Xamarin.UI.Views
-{ 
+{
+    [MvxModalPresentation]
     public partial class LoginPage : MvxContentPage<LoginViewModel>
 	{
 		public LoginPage ()

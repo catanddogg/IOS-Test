@@ -54,12 +54,7 @@ namespace IllyaVirych.Droid.ViewModels
             .InvokeCompassEnabled(true);
 
             return view;
-        }
-
-        public override void OnDestroyView()
-        {
-            base.OnDestroyView();
-        }
+        }             
         #endregion
 
         #region Override   

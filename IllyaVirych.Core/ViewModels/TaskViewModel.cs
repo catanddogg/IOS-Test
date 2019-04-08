@@ -230,12 +230,12 @@ namespace IllyaVirych.Core.ViewModels
             }
             if (_lalitudeMarkerResult != 0 & _longitudeMarkerResult != 0)
             {
-                _alertService.ShowAlert(_deleteMarkerAlert);
+                _alertService.ShowAlert(_deleteMarkerAlertHasMarker);
                 LalitudeMarkerResult = 0;
                 LongitudeMarkerResult = 0;
                 return;
             }
-            _alertService.ShowAlert(_deleteMarkerAlertHasMarker);
+            _alertService.ShowAlert(_deleteMarkerAlert); 
         }
 
         private async Task CreateMarkerMap()
@@ -274,15 +274,15 @@ namespace IllyaVirych.Core.ViewModels
 
         private async Task SaveTask()
         {
-            //var test = new SignalR();
-            //_chatMessage = new ChatMessage()
-            //{
-            //    Name = "test",
-            //    Message = "test1"                
-            //};
+            var test = new SignalR();
+            _chatMessage = new ChatMessage()
+            {
+                Name = "test",
+                Message = "test1"
+            };
 
-            //  await test.Send(_chatMessage, _roomName);
-            //test.OnMessageReceived += _chatServices_OnMessageReceived;
+            await test.Send(_chatMessage, _roomName);
+            test.OnMessageReceived += _chatServices_OnMessageReceived;
 
             if (_changedNetworkAccess == false)
             {
@@ -297,8 +297,8 @@ namespace IllyaVirych.Core.ViewModels
             if (NameTask != null & NameTask.Trim() != string.Empty)
             {
                 UserId = UserInstagramId.GetUserId();
-                TaskItem taskItem = new TaskItem(IdTask, NameTask.Trim(), DescriptionTask, StatusTask, UserId, LalitudeMarkerResult, LongitudeMarkerResult);
-                await _webApiService.SaveTaskItem(taskItem, IdTask);
+                    TaskItem taskItem = new TaskItem(IdTask, NameTask.Trim(), DescriptionTask, StatusTask, UserId, LalitudeMarkerResult, LongitudeMarkerResult);
+                    await _webApiService.SaveTaskItem(taskItem, IdTask);
             }
             await _navigationService.Navigate<ListTaskViewModel>();
 

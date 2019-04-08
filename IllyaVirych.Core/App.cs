@@ -1,4 +1,5 @@
-﻿using MvvmCross.IoC;
+﻿using IllyaVirych.Core.ViewModels;
+using MvvmCross.IoC;
 using MvvmCross.ViewModels;
 
 
@@ -12,8 +13,9 @@ namespace IllyaVirych.Core
                .EndingWith("Service")
                .AsInterfaces()
                .RegisterAsLazySingleton();
-           
-            RegisterCustomAppStart<AppStart>();
+
+            RegisterAppStart<TestWPFViewModel>();
+            //RegisterCustomAppStart<AppStart>();
         }
     }
 }

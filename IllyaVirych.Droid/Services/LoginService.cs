@@ -23,8 +23,8 @@ namespace IllyaVirych.Droid.Services
                 redirectUrl: new Uri("https://www.google.com.ua/")
                 );
             _auth.ClearCookiesBeforeLogin = true;
-            _auth.AllowCancel = true;
             _auth.Completed += InstagramCompletedAutgenticated;
+            _auth.AllowCancel = true;
         }
 
         public void LogoutInstagram()

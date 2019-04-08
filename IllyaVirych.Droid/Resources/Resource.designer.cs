@@ -7694,34 +7694,37 @@ namespace IllyaVirych.Droid
 			public const int notification_template_part_time = 2130968639;
 			
 			// aapt resource value: 0x7f040040
-			public const int select_dialog_item_material = 2130968640;
+			public const int pdfview = 2130968640;
 			
 			// aapt resource value: 0x7f040041
-			public const int select_dialog_multichoice_material = 2130968641;
+			public const int select_dialog_item_material = 2130968641;
 			
 			// aapt resource value: 0x7f040042
-			public const int select_dialog_singlechoice_material = 2130968642;
+			public const int select_dialog_multichoice_material = 2130968642;
 			
 			// aapt resource value: 0x7f040043
-			public const int SplashScreen = 2130968643;
+			public const int select_dialog_singlechoice_material = 2130968643;
 			
 			// aapt resource value: 0x7f040044
-			public const int support_simple_spinner_dropdown_item = 2130968644;
+			public const int SplashScreen = 2130968644;
 			
 			// aapt resource value: 0x7f040045
-			public const int TaskView = 2130968645;
+			public const int support_simple_spinner_dropdown_item = 2130968645;
 			
 			// aapt resource value: 0x7f040046
-			public const int toolbarlisttaskview = 2130968646;
+			public const int TaskView = 2130968646;
 			
 			// aapt resource value: 0x7f040047
-			public const int toolbarmapview = 2130968647;
+			public const int toolbarlisttaskview = 2130968647;
 			
 			// aapt resource value: 0x7f040048
-			public const int toolbartaskview = 2130968648;
+			public const int toolbarmapview = 2130968648;
 			
 			// aapt resource value: 0x7f040049
-			public const int tooltip = 2130968649;
+			public const int toolbartaskview = 2130968649;
+			
+			// aapt resource value: 0x7f04004a
+			public const int tooltip = 2130968650;
 			
 			static Layout()
 			{

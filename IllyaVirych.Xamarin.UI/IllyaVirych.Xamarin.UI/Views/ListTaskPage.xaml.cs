@@ -1,4 +1,4 @@
-﻿ using IllyaVirych.Core.ViewModels;
+﻿       using IllyaVirych.Core.ViewModels;
 using MvvmCross.Forms.Presenters.Attributes;
 using MvvmCross.Forms.Views;
 using System;
@@ -12,7 +12,7 @@ using Xamarin.Forms.Xaml;
 
 namespace IllyaVirych.Xamarin.UI.Views
 {
-    [MvxMasterDetailPagePresentation(MasterDetailPosition.Detail, NoHistory = true)]
+    [MvxMasterDetailPagePresentation(MasterDetailPosition.Detail, NoHistory = true, Animated = false)]
     public partial class ListTaskPage : MvxContentPage<ListTaskViewModel>
 	{
         public static BindableProperty bindableProperty;

@@ -16,7 +16,7 @@ using Xamarin.Forms.Xaml;
 
 namespace IllyaVirych.Xamarin.UI.Views
 {
-    [MvxContentPagePresentation(WrapInNavigationPage = true)]
+    [MvxModalPresentation(WrapInNavigationPage = true)]
     public partial class MapsPage : MvxContentPage<MapsViewModel>
 	{
         private double _lalitude, _longitude;

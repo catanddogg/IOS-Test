@@ -32,6 +32,8 @@ namespace IllyaVirych.Droid.ViewModels
             {
                 ViewModel.CurrentMainViewCommand.Execute();
             }
+            SetContentView(Resource.Layout.MainView);
+            //var met = Resource
         }
         #endregion
 

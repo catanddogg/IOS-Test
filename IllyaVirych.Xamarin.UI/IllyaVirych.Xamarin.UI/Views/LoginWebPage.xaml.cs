@@ -14,6 +14,7 @@ using Xamarin.Forms.Xaml;
 
 namespace IllyaVirych.Xamarin.UI.Views
 {
+    [MvxModalPresentation]
     public partial class LoginWebPage : MvxContentPage<LoginWebViewModel>
 	{
 		public LoginWebPage ()
@@ -29,7 +30,7 @@ namespace IllyaVirych.Xamarin.UI.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            //ViewModel.LoginCommand.Execute();
+            ViewModel.LoginCommand.Execute();
         }
 
         public async void webviewNavigated(WebView sender, WebNavigatedEventArgs e)

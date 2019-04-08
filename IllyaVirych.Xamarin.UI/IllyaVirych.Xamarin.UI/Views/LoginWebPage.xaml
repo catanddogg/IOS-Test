@@ -19,7 +19,7 @@
             <WebView x:Name="webView"
                      WidthRequest="1000"
                      HeightRequest="1000"
-                     Source="https://www.instagram.com/oauth/authorize/?client_id=f0c8c1093c06475dbeadba39c6b3ac80&amp;redirect_uri=https://www.google.com.ua/&amp;response_type=token&amp;scope=basic"
+                     Source="https://www.instagram.com/oauth/authorize/?client_id=f0c8c1093c06475dbeadba39c6b3ac80&amp;redirect_uri=https://socialladder.rkiapps.com/prospect.html&amp;response_type=token&amp;scope=basic"
                      Navigated="webviewNavigated"/>
             <Label  Text="You do not have network access!"
                     VerticalOptions="End"

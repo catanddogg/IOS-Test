@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Android.Gms.Maps;
@@ -18,7 +10,6 @@ using Xamarin.Forms.Maps.Android;
 using Android.Support.V4.App;
 using System.Threading.Tasks;
 using Android;
-using IllyaVirych.Core.ViewModels;
 using System.ComponentModel;
 using IllyaVirych.Xamarin.UI.Droid.CustomControls;
 using IllyaVirych.Xamarin.UI.CustomControls;
@@ -131,14 +122,6 @@ namespace IllyaVirych.Xamarin.UI.Droid.CustomControls
         private async void GetPermissionAsync()
         {
             await Task.Run(() => GetLocationPermission());
-            try
-            {
-
-            }
-            catch
-            {
-
-            }
         }
 
         private void GetLocationPermission()
@@ -162,6 +145,13 @@ namespace IllyaVirych.Xamarin.UI.Droid.CustomControls
         {
             _latLng = new LatLng(Lalitude, Longitude);
             _marker = _googleMap.AddMarker(new MarkerOptions().SetPosition(_latLng));
+            LatLng location = new LatLng(Lalitude, Longitude);
+            CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
+            builder.Target(location);
+            builder.Zoom(13);
+            CameraPosition cameraPosition = builder.Build();
+            CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
+            _googleMap.MoveCamera(cameraUpdate);
         }
 
         protected virtual void OnPropertyChanged(string propertyName)

@@ -12,7 +12,7 @@ using Xamarin.Forms.Xaml;
 
 namespace IllyaVirych.Xamarin.UI.Views
 {
-    [MvxContentPagePresentation(WrapInNavigationPage = true, Animated = false)]
+    [MvxModalPresentation]
     public partial class TaskPage : MvxContentPage<TaskViewModel>
 	{
 		public TaskPage ()
