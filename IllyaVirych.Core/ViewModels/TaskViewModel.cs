@@ -29,7 +29,6 @@ namespace IllyaVirych.Core.ViewModels
         private IAlertService _alertService;
         private bool _changedNetworkAccess;
         private ChatMessage _chatMessage;
-        private ISignalR _signalR;
         private string _roomName = "TaskHub";
         private readonly string _saveTaskAlert = "Enter Name Task!";
         private readonly string _deleteMarkerAlertHasMarker = "Task marker has been deleted!";
@@ -44,8 +43,6 @@ namespace IllyaVirych.Core.ViewModels
             _webApiService = webApiService;
             _messenger = messenger;
             _alertService = alertService;
-            //_signalR = signalR;
-            //_signalR.Connect();
             _token = messenger.Subscribe<MapMessenger>(OnLocationMessage);
             SaveTaskCommand = new MvxAsyncCommand(SaveTask);
             DeleteTaskCommand = new MvxAsyncCommand(DeleteTask);
@@ -274,16 +271,6 @@ namespace IllyaVirych.Core.ViewModels
 
         private async Task SaveTask()
         {
-            var test = new SignalR();
-            _chatMessage = new ChatMessage()
-            {
-                Name = "test",
-                Message = "test1"
-            };
-
-            await test.Send(_chatMessage, _roomName);
-            test.OnMessageReceived += _chatServices_OnMessageReceived;
-
             if (_changedNetworkAccess == false)
             {
                 _alertService.ShowAlert(_networkAccessAlert);

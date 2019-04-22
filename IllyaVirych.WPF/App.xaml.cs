@@ -14,5 +14,9 @@ namespace IllyaVirych.WPF
             this.RegisterSetupType<Setup>();
             //base.RegisterSetup();
         }
+        //protected override void RegisterSetup()
+        //{
+        //    base.RegisterSetup();
+        //}
     }
 }

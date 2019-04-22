@@ -1,14 +1,11 @@
-﻿using Foundation;
-using IllyaVirych.Core.Interface;
+﻿using IllyaVirych.Core.Interface;
 using IllyaVirych.Core.Messenger;
 using IllyaVirych.Core.MvxInteraction;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
-using System;
 using System.Threading.Tasks;
-using WebKit;
 using Xamarin.Essentials;
 
 namespace IllyaVirych.Core.ViewModels

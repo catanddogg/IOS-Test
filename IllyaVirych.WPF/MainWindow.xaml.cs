@@ -1,4 +1,7 @@
-﻿using MvvmCross.Platforms.Wpf.Views;
+﻿using IllyaVirych.Core.Messenger;
+using MvvmCross;
+using MvvmCross.Platforms.Wpf.Views;
+using MvvmCross.Plugin.Messenger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +24,18 @@ namespace IllyaVirych.WPF
     /// </summary>
     public partial class MainWindow : MvxWindow
     {
+        private IMvxMessenger _message;
         public MainWindow()
         {
             InitializeComponent();
+            _message = Mvx.Resolve<IMvxMessenger>();
+
+        }
+
+        private void WPFClient_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            CloseEventTestMessenger message = new CloseEventTestMessenger(this);
+            _message.Publish(message);
         }
     }
 }

@@ -1,27 +1,71 @@
 ﻿<views:MvxWpfView
-    xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf" x:Class="IllyaVirych.WPF.Views.TestWPFView"
+    xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
+    x:Class="IllyaVirych.WPF.Views.TestWPFView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        xmlns:utils ="clr-namespace:IllyaVirych.WPF.Utils"
+    xmlns:command="clr-namespace:IllyaVirych.Core.ViewModels;assembly=IllyaVirych.Core"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:IllyaVirych.WPF.Views"
+        xmlns:local1="clr-namespace:IllyaVirych.WPF.Converters"
         mc:Ignorable="d"
-        Height="552" Width="517" MinWidth="517" MinHeight="552" >
-    <Grid>
-        <StackPanel x:Name="SingInPanel" Margin="10,0" MaxWidth="550">
-            <Label Content="Enter user name:"/>
+        MinHeight="400" MinWidth="620" >
+    <views:MvxWpfView.Resources>
+        <local1:BoolToVisibilityConverter
+         x:Key="BoolToHiddenConverter"
+         TrueValue="Visible" FalseValue="Hidden" />
+
+    </views:MvxWpfView.Resources>
+    <Grid Background="Green">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="88*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="30*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Label Name="UserName" Content="{Binding UserName}" />
+        </Grid>
+       
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="1" x:Name="ChatPanel">
             <Grid>
-                <TextBox x:Name="UserNameTextBox" Height="20" Margin="0,0,80,0"/>
-                <Button x:Name="SingInButton" Content="Sing In" Width="75" HorizontalAlignment="Right"/>
+                <TextBox  x:Name="TextBoxMessage" Text="{Binding TextBoxMessage}" TextWrapping="Wrap" Margin="0,0,100,0" Grid.ColumnSpan="2"/>
+                <Button x:Name="ButtonSend" Content="Send" Width="95" Command="{Binding SendButtomCommand}" IsDefault="True" IsEnabled="{Binding ButtonSendStatus}" HorizontalAlignment="Right" Grid.Column="1"/>
             </Grid>
-            <Label x:Name="StatusText" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,10"/>
         </StackPanel>
-        <StackPanel x:Name="ChatPanel" Margin="10" MaxWidth="550" Visibility="Collapsed">
-            <Grid>
-                <TextBox x:Name="TextBoxMessage" Height="20" TextWrapping="Wrap" Margin="0,0,80,0"/>
-                <Button x:Name="ButtonSend" Content="Send" Width="75" Height="20" IsDefault="True" IsEnabled="False" HorizontalAlignment="Right"/>
-            </Grid>
-            <RichTextBox x:Name="RichTextBoxConsole" HorizontalAlignment="Left" Height="461" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="0,10" IsReadOnly="True"/>
-        </StackPanel>
-    </Grid>    
-    </views:MvxWpfView>
+
+        <ItemsControl x:Name="MessagesItemsCtrl" Grid.Column="0" Margin="10,0,0,10" Grid.Row="2" Background="Blue"                      
+                      ItemsSource="{Binding SelectedParticipant.Chatter}" 
+                      ItemTemplate="{DynamicResource MessagesDataTemplate}"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
+            <i:Interaction.Behaviors>
+                <utils:BringNewItemIntoViewBehavior/>
+            </i:Interaction.Behaviors>
+            <ItemsControl.Template>
+                <ControlTemplate TargetType="ItemsControl">
+                    <ScrollViewer>
+                        <ItemsPresenter/>
+                    </ScrollViewer>
+                </ControlTemplate>
+            </ItemsControl.Template>
+        </ItemsControl>
+
+        <Border x:Name="BorderListUsers" Grid.Column="2" Grid.RowSpan="3" BorderThickness="0,0,1,0" SnapsToDevicePixels="True"
+                  Margin="10,10,10,0">
+            <ListBox     
+                     ItemsSource="{Binding ListChatUser}" 
+                     ItemTemplate="{DynamicResource ChatUsersDataTemplate}"
+                     ItemContainerStyle="{DynamicResource ChatUsersListBoxItemStyle}"
+                     SelectedItem="{Binding SelectedParticipant}"                     
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"  
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        </Border>
+    </Grid>
+</views:MvxWpfView>

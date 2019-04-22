@@ -44,6 +44,8 @@ namespace IllyaVirych.IOS.Views
             _buttonAdd.SetImage(UIImage.FromBundle("AddTaskIcon"), UIControlState.Normal);
             this.NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(_buttonAdd), false);
 
+            //set.Bind(_buttonAdd).To(vm => vm.TaskCreateCommand);
+
             _buttonMenu = new UIButton(UIButtonType.Custom);
             _buttonMenu.Frame = new CGRect(0, 0, 40, 40);
             _buttonMenu.SetImage(UIImage.FromBundle("MenuIcon"), UIControlState.Normal);
