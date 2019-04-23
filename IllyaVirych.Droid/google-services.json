@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "685666935482",
+    "firebase_url": "https://xamarinandroidmapss.firebaseio.com",
+    "project_id": "xamarinandroidmapss",
+    "storage_bucket": "xamarinandroidmapss.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:685666935482:android:be76f3d37297c0a0",
+        "android_client_info": {
+          "package_name": "IllyaVirych.Droid.IllyaVirych.Droid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "685666935482-0hvomrolsi8d56af4hbgm8dtklku45et.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-l1v1rA3YkDVrrs6TvnPz36Evi5otN2E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "685666935482-0hvomrolsi8d56af4hbgm8dtklku45et.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "685666935482-50k8iju5mko4bu8m2fbhvbdobf7s4htj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.companyname.IllyaVirych.IOS"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

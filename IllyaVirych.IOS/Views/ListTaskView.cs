@@ -1,9 +1,14 @@
 using CoreGraphics;
+using Foundation;
+using Google.MobileAds;
+using iAd;
 using IllyaVirych.Core.ViewModels;
 using IllyaVirych.IOS.Views.Cell;
+using MvvmCross.Base;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
+using MvvmCross.ViewModels;
 using System;
 using UIKit;
 using Xamarin.Essentials;
@@ -11,7 +16,7 @@ using Xamarin.Essentials;
 namespace IllyaVirych.IOS.Views
 {
     [MvxModalPresentation(WrapInNavigationController = true)]
-    public partial class ListTaskView : MvxViewController<ListTaskViewModel>
+    public partial class ListTaskView : MvxViewController<ListTaskViewModel>, IInterstitialDelegate
     {
         #region Variables
         private UIButton _buttonMenu, _buttonAdd;
@@ -22,6 +27,7 @@ namespace IllyaVirych.IOS.Views
         private UICollectionViewFlowLayout _listTaskCollectionViewFlowLayout;
         private TaskListCollectionViewSource _source;
         private MvxUIRefreshControl _refreshListTaskControl;
+        private Interstitial _adsInterstitial;
         #endregion
 
         #region Constructors
@@ -51,6 +57,12 @@ namespace IllyaVirych.IOS.Views
             _buttonMenu.SetImage(UIImage.FromBundle("MenuIcon"), UIControlState.Normal);
             this.NavigationItem.SetLeftBarButtonItem(new UIBarButtonItem(_buttonMenu), false);
 
+            _adsInterstitial = new Interstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910") {
+                Delegate = this
+            };
+            _adsInterstitial.LoadRequest(Google.MobileAds.Request.GetDefaultRequest());
+            //_adsInterstitial.Delegate = this;
+
             SetUpCollectionView();
 
             _buttonMenu.TouchUpInside += delegate
@@ -67,10 +79,41 @@ namespace IllyaVirych.IOS.Views
             set.Bind(_source).For(v => v.SelectionChangedCommand).To(vm => vm.TaskChangeCommand);
             set.Bind(_refreshListTaskControl).For(v => v.IsRefreshing).To(vm => vm.RefreshTaskCollection);
             set.Bind(_refreshListTaskControl).For(v => v.RefreshCommand).To(vm => vm.RefreshTaskCommand);
+            //Interaction
+            set.Bind(this).For(view => view.Interaction).To(viewModel => viewModel.Interaction).OneWay();
+            //
             set.Apply();
         }
-
         #endregion
+
+        private IMvxInteraction<object> _interaction;
+        public IMvxInteraction<object> Interaction
+        {
+            get => _interaction;
+            set
+            {
+                if (_interaction != null)
+                    _interaction.Requested -= OnInteractionRequested;
+
+                _interaction = value;
+                _interaction.Requested += OnInteractionRequested;
+            }
+        }
+
+        private void OnInteractionRequested(object sender, MvxValueEventArgs<object> eventArgs)
+        {
+            if (_adsInterstitial.IsReady)
+            {
+                var window = UIApplication.SharedApplication.KeyWindow;
+                var vc = window.RootViewController;
+                while (vc.PresentedViewController != null)
+                {
+                    vc = vc.PresentedViewController;
+                }
+                _adsInterstitial.PresentFromRootViewController(vc);
+                //_adsInterstitial.PresentFromRootViewController(rootViewController: this);
+            }
+        }
 
         #region Override 
         public override void ViewWillTransitionToSize(CGSize toSize, IUIViewControllerTransitionCoordinator coordinator)
@@ -162,6 +205,42 @@ namespace IllyaVirych.IOS.Views
             TaskListCollectionView.CollectionViewLayout = _listTaskCollectionViewFlowLayout;
             TaskListCollectionView.ReloadData();
         }
+
+        [Export("interstitialDidReceiveAd:")]
+        public void DidReceiveAd(Interstitial ad)
+        {
+        }
+
+        [Export("interstitial:didFailToReceiveAdWithError:")]
+        public void DidFailToReceiveAd(Interstitial sender, RequestError error)
+        {
+        }
+
+        [Export("interstitialWillPresentScreen:")]
+        public void WillPresentScreen(Interstitial ad)
+        {
+        }
+
+        [Export("interstitialDidFailToPresentScreen:")]
+        public void DidFailToPresentScreen(Interstitial ad)
+        {
+        }
+
+        [Export("interstitialWillDismissScreen:")]
+        public void WillDismissScreen(Interstitial ad)
+        {
+        }
+
+        [Export("interstitialDidDismissScreen:")]
+        public void DidDismissScreen(Interstitial ad)
+        {
+            //ViewModel.TaskChangeCommand.Execute(null);
+        }
+
+        [Export("interstitialWillLeaveApplication:")]
+        public void WillLeaveApplication(Interstitial ad)
+        {
+        }
         #endregion
-    }   
+    }
 }

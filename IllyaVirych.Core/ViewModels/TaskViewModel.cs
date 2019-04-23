@@ -284,8 +284,8 @@ namespace IllyaVirych.Core.ViewModels
             if (NameTask != null & NameTask.Trim() != string.Empty)
             {
                 UserId = UserInstagramId.GetUserId();
-                    TaskItem taskItem = new TaskItem(IdTask, NameTask.Trim(), DescriptionTask, StatusTask, UserId, LalitudeMarkerResult, LongitudeMarkerResult);
-                    await _webApiService.SaveTaskItem(taskItem, IdTask);
+                TaskItem taskItem = new TaskItem(IdTask, NameTask.Trim(), DescriptionTask, StatusTask, UserId, LalitudeMarkerResult, LongitudeMarkerResult);
+                await _webApiService.SaveTaskItem(taskItem, IdTask);
             }
             await _navigationService.Navigate<ListTaskViewModel>();
 

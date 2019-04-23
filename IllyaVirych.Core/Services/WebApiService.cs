@@ -15,7 +15,7 @@ namespace IllyaVirych.Core.Services
     {
         private ITaskService _taskService;        
         HttpClient _client;
-        private readonly string _wepApiAddressServer = "http://10.10.3.199:65015/api/task/";
+        private readonly string _wepApiAddressServer = "http://10.10.2.51:65015/api/task/";
 
         public WebApiService(ITaskService taskService)
         {
@@ -27,7 +27,7 @@ namespace IllyaVirych.Core.Services
         {
             List<TaskItem> items = null;
             var currentUserId = UserInstagramId.GetUserId();
-            var uri = new Uri(string.Format(_wepApiAddressServer + currentUserId));
+            var uri = new Uri(string.Format("{0}{1}",  _wepApiAddressServer, currentUserId));
             _taskService.DeleteAllUserTask(UserInstagramId.GetUserId());
             var response = await _client.GetAsync(uri);
             if (response.IsSuccessStatusCode)
@@ -41,7 +41,7 @@ namespace IllyaVirych.Core.Services
 
         public async Task SaveTaskItem(TaskItem item, int id)
         {
-            var uri = new Uri(string.Format(_wepApiAddressServer + id));
+            var uri = new Uri(string.Format("{0}{1}", _wepApiAddressServer, id));
             var json = JsonConvert.SerializeObject(item);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpResponseMessage response = null;
@@ -57,7 +57,7 @@ namespace IllyaVirych.Core.Services
 
         public async Task DeleteTaskItem(int id)
         {
-            var uri = new Uri(string.Format(_wepApiAddressServer + id));
+            var uri = new Uri(string.Format("{0}{1}", _wepApiAddressServer, id));
             var response = await _client.DeleteAsync(uri);
         }
     }

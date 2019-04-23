@@ -1,12 +1,16 @@
-﻿using Android.OS;
+﻿using Android.Gms.Ads;
+using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using IllyaVirych.Core.ViewModels;
 using IllyaVirych.Droid.ViewAdapter;
+using MvvmCross.Base;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
+using MvvmCross.ViewModels;
 using System;
 using Xamarin.Essentials;
 
@@ -18,7 +22,22 @@ namespace IllyaVirych.Droid.ViewModels
         #region Variables
         private MvxRecyclerView _recyclerView;
         private RecyclerView.LayoutManager _layoutManager;
+        private InterstitialAd _interstitialAd;
         #endregion
+
+        private IMvxInteraction<object> _interaction;
+        public IMvxInteraction<object> Interaction
+        {
+            get => _interaction;
+            set
+            {
+                if (_interaction != null)
+                    _interaction.Requested -= OnInteractionRequested;
+
+                _interaction = value;
+                _interaction.Requested += OnInteractionRequested;
+            }
+        }
 
         #region Lifecycle
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -34,6 +53,15 @@ namespace IllyaVirych.Droid.ViewModels
             ParentActivity.SetSupportActionBar(toolbar);
             ParentActivity.SupportActionBar.Title = "";
             ViewModel.ShowMenuViewModelCommand.Execute(null);
+
+            _interstitialAd = new InterstitialAd(view.Context);
+            _interstitialAd.AdUnitId = "ca-app-pub-3940256099942544/1033173712";
+            _interstitialAd.LoadAd(new AdRequest.Builder().Build());
+
+            var set = this.CreateBindingSet<ListTaskView, ListTaskViewModel>();
+            set.Bind(this).For(v => v.Interaction).To(viewModel => viewModel.Interaction).OneWay();
+            set.Apply();
+
             return view;
         }
         #endregion
@@ -41,5 +69,14 @@ namespace IllyaVirych.Droid.ViewModels
         #region Override
         protected override int FragmentId => Resource.Layout.ListTaskView;
         #endregion
+
+        private void OnInteractionRequested(object sender, MvxValueEventArgs<object> eventArgs)
+        {
+            //ViewModel.TaskChangeCommand.Execute(null);
+            if (_interstitialAd.IsLoaded)
+            {
+                _interstitialAd.Show();
+            }
+        }
     }
 }

@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\13185.ttf" />
+    <GoogleServicesJson Include="google-services.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml">
       <SubType>Designer</SubType>
@@ -153,6 +154,15 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
       <Version>1.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.Ads">
+      <Version>60.1142.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.Config">
+      <Version>60.1142.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.Core">
+      <Version>60.1142.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.GooglePlayServices.Base">
       <Version>60.1142.1</Version>

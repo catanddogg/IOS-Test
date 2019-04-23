@@ -17,9 +17,9 @@ namespace IllyaVirych.Droid.Services
         {
             _auth = new OAuth2Authenticator
                 (
-                clientId: "f0c8c1093c06475dbeadba39c6b3ac80",
+                clientId: "a418ad2a645c485cb534972d5b3d8715",
                 scope: "basic",
-                authorizeUrl: new Uri("https://www.instagram.com/oauth/authorize/?client_id=f0c8c1093c06475dbeadba39c6b3ac80&redirect"),
+                authorizeUrl: new Uri("https://www.instagram.com/oauth/authorize/?client_id=a418ad2a645c485cb534972d5b3d8715&redirect"),
                 redirectUrl: new Uri("https://www.google.com.ua/")
                 );
             _auth.ClearCookiesBeforeLogin = true;

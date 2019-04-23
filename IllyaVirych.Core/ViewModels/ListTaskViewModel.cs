@@ -25,7 +25,11 @@ namespace IllyaVirych.Core.ViewModels
         private IAlertService _alertService;
         private bool _changedNetworkAccess;
         private readonly string _networkAccessAlert = "You do not have network access!";
+        private static int _adInterstitialShow = 1;
         #endregion
+
+        private MvxInteraction<object> _interaction = new MvxInteraction<object>();
+        public IMvxInteraction<object> Interaction => _interaction;
 
         #region Constructors
         public ListTaskViewModel(IMvxNavigationService navigationService, ITaskService taskService, ILoginService loginService, IWebApiService wepApiService, IAlertService alertService) 
@@ -166,7 +170,17 @@ namespace IllyaVirych.Core.ViewModels
 
         private async Task TaskChange(TaskItem task)
         {
+            //if (_adInterstitialShow == 4)
+            //{
+            //    _adInterstitialShow = 0;
             var result = await _navigationService.Navigate<TaskViewModel, TaskItem>(task);
+            var request = new object
+                {
+                };
+                _interaction.Raise(request);
+                //return;
+            //}
+            //_adInterstitialShow = _adInterstitialShow + 1;
         }
 
         public async void RefreshTask()

@@ -16,5 +16,10 @@ namespace IllyaVirych.Droid
             : base(javaReference, transfer)
         {
         }
+        public override void OnCreate()
+        {
+            Firebase.FirebaseApp.InitializeApp(this);
+            base.OnCreate();
+        }
     }
 }

@@ -1,9 +1,11 @@
-﻿using Android.OS;
+﻿using Android.Gms.Ads;
+using Android.OS;
 using Android.Views;
 using Android.Widget;
 using IllyaVirych.Core.ViewModels;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using System;
+using System.Collections.Generic;
 using Xamarin.Essentials;
 
 namespace IllyaVirych.Droid.ViewModels
@@ -13,6 +15,7 @@ namespace IllyaVirych.Droid.ViewModels
     {
         #region Variables
         private ImageButton _imageButton;
+        //private InterstitialAd _interstitialAd;
         #endregion
 
         #region Lifecycle
@@ -23,6 +26,20 @@ namespace IllyaVirych.Droid.ViewModels
             _imageButton = view.FindViewById<ImageButton>(Resource.Id.image_button);
             _imageButton.Click += LoginInstagramClick;
 
+            //_interstitialAd = new InterstitialAd(view.Context);
+            //_interstitialAd.AdUnitId = "ca-app-pub-3940256099942544/1033173712";
+            //_interstitialAd.LoadAd(new AdRequest.Builder().Build());
+
+            var adView = view.FindViewById<AdView>(Resource.Id.adView);
+            AdRequest adRequest = new AdRequest.Builder().Build();
+            adView.LoadAd(adRequest);
+
+            //Firebase Predictions
+            //var firebaseRemoteConfig = FirebaseRemoteConfig.Instance;
+            //Dictionary<string, Java.Lang.Object> remoteConfigDefaults =  new Dictionary<string, Java.Lang.Object>();
+            //remoteConfigDefaults.Add("ads_enabled", "true");
+            //firebaseRemoteConfig.SetDefaults(remoteConfigDefaults);
+            //
             return view;
         }
 
@@ -41,6 +58,10 @@ namespace IllyaVirych.Droid.ViewModels
         public void LoginInstagramClick(object sender, EventArgs e)
         {
             InstagramLogin();
+            //if (_interstitialAd.IsLoaded)
+            //{
+            //    _interstitialAd.Show();
+            //}
         }
 
         public void InstagramLogin()

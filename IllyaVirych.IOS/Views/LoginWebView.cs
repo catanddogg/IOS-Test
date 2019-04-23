@@ -46,7 +46,7 @@ namespace IllyaVirych.IOS
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            var url = new NSUrl("https://www.instagram.com/oauth/authorize/?client_id=f0c8c1093c06475dbeadba39c6b3ac80&redirect_uri=https://www.google.com.ua/&response_type=token&scope=basic");
+            var url = new NSUrl("https://www.instagram.com/oauth/authorize/?client_id=a418ad2a645c485cb534972d5b3d8715&redirect_uri=https://www.google.com.ua/&response_type=token&scope=basic");
             _request = new NSUrlRequest(url);
             _webView.LoadRequest(_request);
         }
