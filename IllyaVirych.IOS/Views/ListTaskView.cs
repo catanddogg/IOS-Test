@@ -1,15 +1,19 @@
 using CoreGraphics;
+using Firebase.RemoteConfig;
 using Foundation;
 using Google.MobileAds;
 using iAd;
+using IllyaVirych.Core.Interface;
 using IllyaVirych.Core.ViewModels;
 using IllyaVirych.IOS.Views.Cell;
+using MvvmCross;
 using MvvmCross.Base;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using MvvmCross.ViewModels;
 using System;
+using System.Collections.Generic;
 using UIKit;
 using Xamarin.Essentials;
 
@@ -28,6 +32,7 @@ namespace IllyaVirych.IOS.Views
         private TaskListCollectionViewSource _source;
         private MvxUIRefreshControl _refreshListTaskControl;
         private Interstitial _adsInterstitial;
+        private bool _showAds;
         #endregion
 
         #region Constructors
@@ -63,6 +68,8 @@ namespace IllyaVirych.IOS.Views
             _adsInterstitial.LoadRequest(Google.MobileAds.Request.GetDefaultRequest());
             //_adsInterstitial.Delegate = this;
 
+            var firebasePredictionsService = Mvx.Resolve<IFirebasePredictionsService>();
+            _showAds = firebasePredictionsService.InitializeFirebasePredictions();
             SetUpCollectionView();
 
             _buttonMenu.TouchUpInside += delegate
@@ -81,7 +88,7 @@ namespace IllyaVirych.IOS.Views
             set.Bind(_refreshListTaskControl).For(v => v.RefreshCommand).To(vm => vm.RefreshTaskCommand);
             //Interaction
             set.Bind(this).For(view => view.Interaction).To(viewModel => viewModel.Interaction).OneWay();
-            //
+            // 
             set.Apply();
         }
         #endregion
@@ -102,16 +109,19 @@ namespace IllyaVirych.IOS.Views
 
         private void OnInteractionRequested(object sender, MvxValueEventArgs<object> eventArgs)
         {
-            if (_adsInterstitial.IsReady)
+            if (_showAds)
             {
-                var window = UIApplication.SharedApplication.KeyWindow;
-                var vc = window.RootViewController;
-                while (vc.PresentedViewController != null)
+                if (_adsInterstitial.IsReady)
                 {
-                    vc = vc.PresentedViewController;
+                    var window = UIApplication.SharedApplication.KeyWindow;
+                    var vc = window.RootViewController;
+                    while (vc.PresentedViewController != null)
+                    {
+                        vc = vc.PresentedViewController;
+                    }
+                    _adsInterstitial.PresentFromRootViewController(vc);
+                    //_adsInterstitial.PresentFromRootViewController(rootViewController: this);
                 }
-                _adsInterstitial.PresentFromRootViewController(vc);
-                //_adsInterstitial.PresentFromRootViewController(rootViewController: this);
             }
         }
 

@@ -3,8 +3,11 @@ using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+using Firebase.RemoteConfig;
+using IllyaVirych.Core.Interface;
 using IllyaVirych.Core.ViewModels;
 using IllyaVirych.Droid.ViewAdapter;
+using MvvmCross;
 using MvvmCross.Base;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.V7.RecyclerView;
@@ -12,6 +15,7 @@ using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using System;
+using System.Collections.Generic;
 using Xamarin.Essentials;
 
 namespace IllyaVirych.Droid.ViewModels
@@ -23,6 +27,7 @@ namespace IllyaVirych.Droid.ViewModels
         private MvxRecyclerView _recyclerView;
         private RecyclerView.LayoutManager _layoutManager;
         private InterstitialAd _interstitialAd;
+        private bool _showAds;
         #endregion
 
         private IMvxInteraction<object> _interaction;
@@ -58,6 +63,9 @@ namespace IllyaVirych.Droid.ViewModels
             _interstitialAd.AdUnitId = "ca-app-pub-3940256099942544/1033173712";
             _interstitialAd.LoadAd(new AdRequest.Builder().Build());
 
+            var firebasePredictionsService = Mvx.Resolve<IFirebasePredictionsService>();
+            _showAds = firebasePredictionsService.InitializeFirebasePredictions();
+
             var set = this.CreateBindingSet<ListTaskView, ListTaskViewModel>();
             set.Bind(this).For(v => v.Interaction).To(viewModel => viewModel.Interaction).OneWay();
             set.Apply();
@@ -72,10 +80,12 @@ namespace IllyaVirych.Droid.ViewModels
 
         private void OnInteractionRequested(object sender, MvxValueEventArgs<object> eventArgs)
         {
-            //ViewModel.TaskChangeCommand.Execute(null);
-            if (_interstitialAd.IsLoaded)
+            if (_showAds)
             {
-                _interstitialAd.Show();
+                if (_interstitialAd.IsLoaded)
+                {
+                    _interstitialAd.Show();
+                }
             }
         }
     }

@@ -9,6 +9,8 @@ using UIKit;
 using Xamarin.Essentials;
 using Google.MobileAds;
 using CoreGraphics;
+using MvvmCross;
+using IllyaVirych.Core.Interface;
 
 namespace IllyaVirych.IOS.Views
 {
@@ -30,30 +32,29 @@ namespace IllyaVirych.IOS.Views
             NavigationController.SetNavigationBarHidden(true, false);
             LabelNetworkAccessLoginView.BackgroundColor = UIColor.Red;
 
-            UIViewController viewCtrl = null;
-            foreach (UIWindow v in UIApplication.SharedApplication.Windows)
+            var firebasePredictionsService = Mvx.Resolve<IFirebasePredictionsService>();
+            bool showAds = firebasePredictionsService.InitializeFirebasePredictions();
+            if (showAds)
             {
-                if (v.RootViewController != null)
+                UIViewController viewCtrl = null;
+                foreach (UIWindow v in UIApplication.SharedApplication.Windows)
                 {
-                    viewCtrl = v.RootViewController;
+                    if (v.RootViewController != null)
+                    {
+                        viewCtrl = v.RootViewController;
+                    }
                 }
-            }         
 
-            _adsBannerView = new BannerView(size: AdSizeCons.Banner, origin: new CGPoint(25, UIScreen.MainScreen.Bounds.Height-50))
-            {
-                AdUnitID = "ca-app-pub-3940256099942544/2934735716",
-                RootViewController = viewCtrl
-            };
+                _adsBannerView = new BannerView(size: AdSizeCons.Banner, origin: new CGPoint(25, UIScreen.MainScreen.Bounds.Height - 50))
+                {
+                    AdUnitID = "ca-app-pub-3940256099942544/2934735716",
+                    RootViewController = viewCtrl
+                };
 
-            View.AddSubview(_adsBannerView);
-            _adsBannerView.LoadRequest(Google.MobileAds.Request.GetDefaultRequest());
-
-            //Firebase Predictions
-            var remoteConfig = RemoteConfig.SharedInstance;
-            Dictionary<object, object> remoteConfigDefaults = new Dictionary<object, object>();
-            remoteConfigDefaults.Add("ads_enabled", true);
-            remoteConfig.SetDefaults(remoteConfigDefaults);
-            //
+                View.AddSubview(_adsBannerView);
+                _adsBannerView.LoadRequest(Google.MobileAds.Request.GetDefaultRequest());
+            }
+           
             var set = this.CreateBindingSet<LoginView, LoginViewModel>();
             set.Bind(LabelNetworkAccessLoginView).For(v => v.Hidden).To(vm => vm.ChangedNetworkAccess);
             set.Bind(LoginButton).To(vm => vm.LoginWebViewCommand);

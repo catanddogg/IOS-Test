@@ -69,6 +69,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Services\AlertService.cs" />
+    <Compile Include="Services\FirebasePredictionsService.cs" />
     <Compile Include="Views\LoginWebView.cs" />
     <Compile Include="Views\LoginWebView.designer.cs">
       <DependentUpon>LoginWebView.cs</DependentUpon>
